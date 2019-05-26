@@ -1,0 +1,244 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<title>Adicionar Equipamento</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html,body {
+height:90%;
+font-family: Arial, Helvetica, sans-serif;
+padding: 5px;
+}
+
+
+header {
+  background-color: lightblue;
+  padding: 10px;
+  font-size: 15px;
+  color: white;
+  height: auto;
+}
+
+section:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+section.sec2 {
+  display: flex;
+  justify-content: flex-start;
+ background-color: #4d94ff;
+border-radius: 10px;
+}
+
+
+button {
+border-radius: 10px;
+margin: 10px;
+width:100px;
+height: 40px;
+text-align: center;
+border-color: Lightblue;
+background-color: lightblue;
+
+}
+
+header div a:hover,a:visited, a:link{
+  color: White ;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+header div a:active {
+  color: black;
+  background-color: lightblue;
+  text-decoration: none;
+  border-radius: 20px;
+  }
+
+
+
+input,select{
+margin-bottom:10px;
+border-radius:3px;
+height: 30px;
+width: 300px;
+font-size:15px;
+background-color: lightgray;
+border-style: groove;
+}
+
+form {
+text-align: left;
+width: 200px;
+
+
+}
+
+div.formu{
+  padding: 20px;
+  border-style: groove;
+  width: 100%;
+  background-color: #f1f1f1;
+  height:100%;
+}
+
+
+
+@media (max-width: 500px) {
+input,form,div.formu,input{
+width: 100%
+}
+}
+
+
+
+nav {
+  float: left;
+  width: 15%;
+  height:97%;
+  background: pink;
+  border-style: groove;
+}
+
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+
+}
+
+@media (max-width: 300px) {
+   article {
+    width: 100%;
+    height: 80%;
+    border-style: groove;
+  }
+}
+
+@media (max-width: 300px) {
+  nav {
+  border-style: groove;
+  text-align:center;
+   background: lightgreen;
+   padding: 5px;
+    width: 100%;
+   height:8%;
+  }
+}
+
+@media (max-width: 300px) {
+  section,ul,li{
+  display:inline;
+  justify-content: flex-start;
+  }
+}
+
+
+header div a:hover,a:visited, a:link{
+  color: White ;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+header div a:active {
+  color: black;
+  background-color: lightblue;
+  text-decoration: none;
+  border-radius: 6px;
+  }
+
+form {
+width:200px;
+height:auto;
+padding:10px;
+margin:10px;
+
+}
+
+@media (max-width: 300px) {
+form {
+width:auto;
+text-align:center;
+
+}
+}
+
+@media (max-width: 500px) {
+   article {
+    width: 100%;
+    height: 80%;
+    border-style: groove;
+  }
+}
+
+@media (max-width: 500px) {
+  section,ul,li{
+  display:inline;
+  justify-content: flex-start;
+  }
+}
+
+section.sec2 {
+  display: flex;
+  justify-content: flex-start;
+ background-color: #4d94ff;
+border-radius: 10px;
+}
+
+
+header div a:hover,a:visited, a:link{
+  color: White ;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+header div a:active {
+  color: black;
+  background-color: lightblue;
+  text-decoration: none;
+  border-radius: 20px;
+}
+
+
+</style>
+    <link href="{% static 'styles/bootstrap.css' %}" rel="stylesheet"/>
+    <link href="{% static 'styles/main.css' %}" rel="stylesheet"/>
+</head>
+<body>
+<header style="margin-top: -15px">
+		<div class="header" style="margin-bottom: 10px">
+            <ul class="nav nav-pills pull-right">
+                <li class=""><a href="{% url 'home' %}">NOME</a></li>
+                <li class=""><a href="/logout">Logout</a></li>
+             </ul>
+            <a href="{% url 'home' %}" >
+                <img src= "http://lims.ifpi.edu.br/images/logo.png" alt="some text" width=200 height=80>
+            </a>
+    </div>
+        <section class="sec2" style="height: auto">
+            <ul class="nav nav-pills pull-left">
+                <li class=""><a href="{% url 'equipamentos' %}" >Equipamentos </a> </li>
+                <li class=""><a href="{% url 'registros' %}" >Registros </a> </li>
+                <li class=""><a href="{% url 'ajuda' %}" >Ajuda </a> </li>
+            </ul>
+        </section>
+</header>
+<div class="formu" style="overflow-y:auto;">
+<h3 style="margin-left: 20px; font-weight: bold">Adicionar Usuario</h3>
+   <form action="." method="POST">
+    {% csrf_token %}
+    {{ form.as_p}}
+	<button type="submit" value="OK"> Adicionar</button>
+	</form>
+</div>
+
+</body>
+</html>
