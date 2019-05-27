@@ -163,7 +163,8 @@ a.nome:active{
 		<div class="header" style="margin-bottom: 10px">
             <ul class="nav nav-pills pull-right">
                 <li class=""><a href="{% url 'home' %}">NOME</a></li>
-                <li class=""><a href="/logout">Logout</a></li>
+                <li class=""><a href="{% url 'painel_admin' %}">Painel de controle</a></li>
+                <li class=""><a href="/logout">Sair</a></li>
              </ul>
              <a href="{% url 'home' %}" >
                  <img src= "http://lims.ifpi.edu.br/images/logo.png" alt="some text" width=200 height=80>
