@@ -35,3 +35,5 @@ class Emprestimo(models.Model):
     quantidade = models.IntegerField()
     data_emprestimo = models.DateField(auto_now_add=True)
     data_devolucao = models.DateField(null=True)
+
+

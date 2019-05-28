@@ -184,7 +184,9 @@ font-weight: bold;
   <h2 style="text-align:center">Todos os Equipamentos</h2>
         {% for item in itens %}
             <div class="card">
-              <img class="item" src="https://uploads.filipeflop.com/2017/07/1AC01-9-1.jpg" alt="Item">
+                <a href="{% url 'um_equipamento' equipamento.id %}">
+                    <img class="item" src="https://uploads.filipeflop.com/2017/07/1AC01-9-1.jpg" alt="Item">
+                </a>
               <p class="nome">{{item.nome}} </p>
               <p class="price">Quantidade: {{ item.quantidade }}</p>
               <p><button>Pegar</button></p>
