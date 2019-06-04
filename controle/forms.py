@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from controle.models import *
 
 
-class PostForm(ModelForm):
+class UserForm(ModelForm):
     class Meta:
         model = Usuario
         fields = ['nome', 'telefone', 'tipo']
