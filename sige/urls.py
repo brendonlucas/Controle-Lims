@@ -2,6 +2,9 @@ from django.contrib import admin
 from django.urls import path
 from controle import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
@@ -13,7 +16,8 @@ urlpatterns = [
     path('registros', views.exibir_registros, name='registros'),
     path('equipamentos', views.exibir_equipamentos, name='equipamentos'),
     path('logout', views.logout, name='logout'),
-    path('login', views.login, name='login'),
+    # path('login', views.login, name='login'),
     path('ajuda', views.exibir_ajuda, name='ajuda'),
+    path('login/',views.user_login, name='login'),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

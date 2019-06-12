@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load admin_urls %}
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -68,12 +69,13 @@ border-style: groove;
 background-color:White;
 width:100%;
 height:100%;
+padding: 20px;
 }
 
 .card {
   margin: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 200px;
+  width: 200px;
   height: 300px;
 
   float: left;
@@ -158,6 +160,7 @@ font-weight: bold;
 </style>
     <link href="{% static 'styles/bootstrap.css' %}" rel="stylesheet"/>
     <link href="{% static 'styles/main.css' %}" rel="stylesheet"/>
+
 </head>
 <body>
 <header style="margin-top: -15px">
@@ -185,7 +188,8 @@ font-weight: bold;
         {% for item in itens %}
             <div class="card">
                 <a href="{% url 'um_equipamento' item.id %}">
-                    <img class="item" src="https://uploads.filipeflop.com/2017/07/1AC01-9-1.jpg" alt="Item">
+
+                    <img class="item" src="{{ item.imagem.url }}" alt="{{ item.nome }}">
                 </a>
               <p class="nome">{{item.nome}} </p>
               <p class="price">Quantidade: {{ item.quantidade }}</p>

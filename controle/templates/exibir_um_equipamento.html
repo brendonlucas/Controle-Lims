@@ -131,9 +131,10 @@ font-weight: bold;
 
 </header>
 <div class="conteudo" style="overflow-y:auto; overflow-x:auto;">
-{{item.id}}
-{{item.nome}}
-{{item.quantidade}}
+    <img style="width: 300px; height: 200px" src="{{ item.imagem.url }}" alt="Item">
+    {{item.id}}
+    {{item.nome}}
+    {{item.quantidade}}
 
 </div>
 </body>

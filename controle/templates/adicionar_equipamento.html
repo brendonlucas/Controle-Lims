@@ -233,7 +233,7 @@ header div a:active {
 </header>
 <div class="formu" style="overflow-y:auto;">
 <h3 style="margin-left: 20px; font-weight: bold">Adicionar Equipamento</h3>
-   <form action="." method="POST">
+   <form action="." method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p}}
 	<button type="submit" value="OK"> Adicionar</button>

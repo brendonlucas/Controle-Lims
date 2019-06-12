@@ -13,7 +13,7 @@ div{
 border-radius: 6px;
 text-align: center;
 background-color: lightblue;
-height: 400px;
+height: auto;
 width: 320px;
 position: absolute;
 top: 50%;
@@ -29,14 +29,14 @@ width: 200px;
 }
 
 button{
-width:200px;
+width:100%;
 border-radius: 6px;
 padding: 15px; 
 border: 1px solid #eee; 
 background-color:#2eb8b8;
 font-size: 18px;
-margin: 20px;
-
+margin-bottom: 30px;
+margin-top: 10px;
 }
 input{
 border-radius: 10px;
@@ -46,19 +46,21 @@ font-size:15px;
 background-color: lightgray;
 }
 
+
 </style>
 <body>
 
 <div>
  <img src= "http://lims.ifpi.edu.br/images/logo.png  " alt="some text" width=200 height=80>
-  <form>
+  <form action="."  method="POST">
    <h1 style="text-align: center; color: black" > ENTRAR </h1>
-   <label for="usuario"> Usuario: </label>
-   <input id="usuario">
-   <label for="senha"> Senha: </label>
-   <input id="senha" type="password">
+    {{ form.as_p }}
+      {% csrf_token %}
+      <button type="submit" value="Entar">Entrar </button>
   </form>
- <footer> <button >Entrar</button> </footer>
+
+
+
  </div>
 
 </body>

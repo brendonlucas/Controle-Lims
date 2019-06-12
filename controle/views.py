@@ -1,3 +1,7 @@
+from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponse
+
 from controle.models import *
 from django.shortcuts import render, redirect
 from controle.forms import *
@@ -26,12 +30,13 @@ def add_user(request):
 def add_equipamento(request):
     form = ItemForm()
     if request.method == 'POST':
-        form = ItemForm(request.POST)
+        form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
             nome = form.cleaned_data['nome']
             qtd = form.cleaned_data['quantidade']
             tipo = form.cleaned_data['tipo']
-            new = Item(nome=nome, quantidade=qtd, tipo=tipo)
+            image = form.cleaned_data['imagem']
+            new = Item(nome=nome, quantidade=qtd, tipo=tipo, imagem=image)
             new.save()
             return redirect('equipamentos')
 
@@ -52,7 +57,7 @@ def opcoes_admin(request):
 
 
 def logout(request):
-    return render(request, 'login.html')
+    return user_login(request)
 
 
 def exibir_ajuda(request):
@@ -63,10 +68,19 @@ def editar_item(request):
     return None
 
 
-def login(request):
-    return render(request, 'login.html')
-
-
 def exibir_um_equipamento(request, item_id):
     item = Item.objects.get(id=item_id)
     return render(request, 'exibir_um_equipamento.html', {'item': item})
+
+
+def user_login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(username=cd['username'],password=cd['password'])
+
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form': form})
+
