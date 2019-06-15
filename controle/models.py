@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -25,6 +26,7 @@ class TipoUsuario(models.Model):
 
 
 class Usuario(models.Model):
+    # user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
     nome = models.CharField(max_length=255)
     nome_de_usuario = models.CharField(max_length=16)
     senha = models.CharField(max_length=16)

@@ -1,6 +1,8 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
+from django.urls import reverse_lazy
+from django.views.generic import UpdateView
 
 from controle.models import *
 from django.shortcuts import render, redirect
@@ -65,7 +67,7 @@ def exibir_ajuda(request):
 
 
 def editar_item(request):
-    return None
+    return render(request, 'listar_items_editar.html', {'itens': Item.objects.all()})
 
 
 def exibir_um_equipamento(request, item_id):
@@ -78,9 +80,22 @@ def user_login(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            user = authenticate(username=cd['username'],password=cd['password'])
+            user = authenticate(username=cd['username'], password=cd['password'])
 
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
+
+
+def eeditar(request, item_id):
+    item = Item.objects.get(id=item_id)
+    return render(request, 'editar_equipamento.html', {'item': item})
+
+
+class Editar(UpdateView):
+    template_name = "editar_equipamento.html"
+    model = Item
+    fields = '__all__'
+    context_object_name = 'item'
+    success_url = reverse_lazy("equipamentos")
 

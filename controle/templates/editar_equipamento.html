@@ -1,0 +1,195 @@
+{% load staticfiles %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<title>Painel de opções</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html,body {
+height:90%;
+  font-family: Arial, Helvetica, sans-serif;
+    padding: 5px;
+}
+
+
+header {
+  background-color: lightblue;
+  padding:10px;
+  font-size: 15px;
+  color: white;
+  height:auto;
+}
+
+@media (max-width: 300px) {
+  section,ul,li{
+  display:inline;
+  justify-content: flex-start;
+  }
+}
+
+header div a:hover,a:visited, a:link{
+  color: White ;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+header div a:active {
+  color: black;
+  background-color: lightblue;
+  text-decoration: none;
+  border-radius: 6px;
+  }
+
+
+div.conteudo{
+border-style: groove;
+background-color:#f1f1f1;
+width:100%;
+height:100%;
+padding: 20px;
+}
+
+
+
+@media (max-width: 500px) {
+  section,ul,li{
+  display:inline;
+  justify-content: flex-start;
+  }
+}
+
+section.sec2 {
+  display: flex;
+  justify-content: flex-start;
+ background-color: #4d94ff;
+border-radius: 10px;
+}
+
+
+form {
+text-align: left;
+width: 200px;
+
+
+}
+    form {
+width:200px;
+height:auto;
+padding:10px;
+margin:10px;
+
+}
+
+@media (max-width: 300px) {
+form {
+width:auto;
+text-align:center;
+
+}
+}
+
+input,select{
+margin-bottom:10px;
+border-radius:3px;
+height: 30px;
+width: 300px;
+font-size:15px;
+background-color: lightgray;
+border-style: groove;
+}
+
+label {
+margin-top: 10px;
+
+
+}
+
+button {
+border-radius: 10px;
+width:100px;
+height: 40px;
+text-align: center;
+border-color: Lightblue;
+background-color: lightblue;
+margin: 320px;
+}
+
+
+div form a:hover{
+  color: #5bc0de;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+div form a:visited{
+color: blue ;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+div form a :link{
+  color: blue ;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+div form a:active {
+  color: lightcoral;
+  background-color: black;
+  text-decoration: none;
+  border-radius: 6px;
+  }
+
+</style>
+    <link href="{% static 'styles/bootstrap.css' %}" rel="stylesheet"/>
+    <link href="{% static 'styles/main.css' %}" rel="stylesheet"/>
+</head>
+<body>
+<header style="margin-top: -15px">
+		<div class="header" style="margin-bottom: 10px">
+            <ul class="nav nav-pills pull-right">
+                <li class=""><a href="{% url 'home' %}">NOME</a></li>
+                <li class=""><a href="{% url 'logout' %}">Logout</a></li>
+             </ul>
+            <a href="{% url 'home' %}" >
+                <img src= "http://lims.ifpi.edu.br/images/logo.png" alt="some text" width=200 height=80>
+            </a>
+    </div>
+        <section class="sec2" style="height: auto">
+            <ul class="nav nav-pills pull-left">
+                <li class=""><a href="{% url 'equipamentos' %}" >Equipamentos </a> </li>
+                <li class=""><a href="{% url 'registros' %}" >Registros </a> </li>
+                <li class=""><a href="{% url 'ajuda' %}" >Ajuda </a> </li>
+            </ul>
+        </section>
+</header>
+<div class="conteudo" style="overflow-y:auto;">
+    <div class="formu">
+<h3 style="margin-left: 20px; font-weight: bold">Editar Equipamento</h3>
+   <form action="." method="POST" enctype="multipart/form-data">
+       {% csrf_token %}
+       <label> Nome: </label> <br>
+            {% render_field form.nome %}
+
+       <label> Quantidade:</label> <br>
+            {% render_field form.quantidade %}
+
+       <label> Tipo:</label> <br>
+            {% render_field form.tipo %}
+
+       <label> Imagem: </label> <br>
+
+            {% render_field form.imagem %}
+<br>
+	<button type="submit" value="OK"> Adicionar</button>
+	</form>
+    </div>
+</div>
+</body>
+</html>

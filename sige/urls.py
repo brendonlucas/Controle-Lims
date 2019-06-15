@@ -5,6 +5,8 @@ from controle import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+from controle.views import Editar
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
@@ -13,6 +15,7 @@ urlpatterns = [
     path('painel_admin/', views.opcoes_admin, name='painel_admin'),
     path('painel_admin/adicionar_equipamento/', views.add_equipamento, name='adicionar_equipamento'),
     path('painel_admin/editar_item/', views.editar_item, name='editar_item'),
+    path('painel_admin/<pk>/editar/', Editar.as_view(), name='editar'),
     path('registros', views.exibir_registros, name='registros'),
     path('equipamentos', views.exibir_equipamentos, name='equipamentos'),
     path('logout', views.logout, name='logout'),
