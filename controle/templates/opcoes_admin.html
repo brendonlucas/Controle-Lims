@@ -168,18 +168,18 @@ border-radius: 10px;
 <header style="margin-top: -15px">
 		<div class="header" style="margin-bottom: 10px">
             <ul class="nav nav-pills pull-right">
-                <li class=""><a href="{% url 'home' %}">NOME</a></li>
+                <li class=""><a href="{% url 'root' %}">NOME</a></li>
                 <li class=""><a href="/logout">Logout</a></li>
              </ul>
-            <a href="{% url 'home' %}" >
+            <a href="{% url 'root' %}" >
                 <img src= "http://lims.ifpi.edu.br/images/logo.png" alt="some text" width=200 height=80>
             </a>
     </div>
         <section class="sec2" style="height: auto">
             <ul class="nav nav-pills pull-left">
                 <li class=""><a href="{% url 'equipamentos' %}" >Equipamentos </a> </li>
-                <li class=""><a href="{% url 'registros' %}" >Registros </a> </li>
-                <li class=""><a href="{% url 'ajuda' %}" >Ajuda </a> </li>
+                <li class=""><a href="{% url 'emprestimos' %}" >emprestimos </a> </li>
+                <li class=""><a href="{% url 'root' %}" >Ajuda </a> </li>
             </ul>
         </section>
 </header>

@@ -50,8 +50,8 @@ def exibir_equipamentos(request):
     return render(request, 'listar_equipamentos.html', {'itens': Item.objects.all()})
 
 
-def exibir_registros(request):
-    return render(request, 'registros.html')
+def exibir_emprestimos(request):
+    return render(request, 'emprestimos.html')
 
 
 def opcoes_admin(request):
