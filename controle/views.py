@@ -43,11 +43,11 @@ def add_equipamento(request):
             return redirect('equipamentos')
 
     elif request.method == 'GET':
-        return render(request, 'adicionar_equipamento.html', {'form': form})
+        return render(request, 'equipamentos/adicionar.html', {'form': form})
 
 
 def exibir_equipamentos(request):
-    return render(request, 'listar_equipamentos.html', {'itens': Item.objects.all()})
+    return render(request, 'equipamentos/listar.html', {'itens': Item.objects.all()})
 
 
 def exibir_emprestimos(request):
@@ -67,12 +67,12 @@ def exibir_ajuda(request):
 
 
 def editar_item(request):
-    return render(request, 'listar_items_editar.html', {'itens': Item.objects.all()})
+    return render(request, 'equipamentos/editar.html', {'itens': Item.objects.all()})
 
 
 def exibir_um_equipamento(request, item_id):
     item = Item.objects.get(id=item_id)
-    return render(request, 'exibir_um_equipamento.html', {'item': item})
+    return render(request, 'equipamento/exibir.html', {'item': item})
 
 
 def user_login(request):
@@ -89,7 +89,7 @@ def user_login(request):
 
 def eeditar(request, item_id):
     item = Item.objects.get(id=item_id)
-    return render(request, 'editar_equipamento.html', {'item': item})
+    return render(request, 'equipamento/editar.html', {'item': item})
 
 
 class Editar(UpdateView):
