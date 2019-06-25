@@ -72,7 +72,7 @@ def editar_item(request):
 
 def exibir_um_equipamento(request, item_id):
     item = Item.objects.get(id=item_id)
-    return render(request, 'equipamento/exibir.html', {'item': item})
+    return render(request, 'equipamentos/exibir.html', {'item': item})
 
 
 def user_login(request):
@@ -93,7 +93,7 @@ def eeditar(request, item_id):
 
 
 class Editar(UpdateView):
-    template_name = "editar_equipamento.html"
+    template_name = "equipamentos/editar.html"
     model = Item
     fields = '__all__'
     context_object_name = 'item'
