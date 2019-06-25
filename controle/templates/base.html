@@ -6,110 +6,67 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-
-* {
-  box-sizing: border-box;
-}
-
-html,body {
-height:90%;
-font-family: Arial, Helvetica, sans-serif;
-padding: 5px;
-}
-
-
-header {
-  background-color: lightblue;
-  padding:10px;
-  font-size: 15px;
-  color: white;
-  height:auto;
-}
-
-section {
-height:100%;
-}
-
-nav ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-article {
-  float: left;
-  padding: 10px;
-  border-style: groove;
-  width: 85%;
-  background-color: #f1f1f1;
-  height:100%;
-}
-
-@media (max-width: 500px) {
-   article {
-    width: 100%;
-    height: 80%;
-    border-style: groove;
+  #sidebar {
+    background: #f2f2f2;
   }
-}
-
-@media (max-width: 500px) {
-  section,ul,li{
-  display:inline;
-  justify-content: flex-start;
-  }
-}
-
-section.sec2 {
-  display: flex;
-  justify-content: flex-start;
- background-color: #4d94ff;
-border-radius: 10px;
-}
-
-header div a:hover,a:visited, a:link{
-  color: White ;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-header div a:active {
-  color: black;
-  background-color: lightblue;
-  text-decoration: none;
-  border-radius: 20px;
-}
-
 </style>
-    <link href="{% static 'styles/bootstrap.css' %}" rel="stylesheet"/>
-    <link href="{% static 'styles/main.css' %}" rel="stylesheet"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<div >
-<header style="margin-top: -15px">
-		<div class="header" style="margin-bottom: 10px">
-            <ul class="nav nav-pills pull-right">
-                <li class=""><a href="{% url 'root' %}">NOME</a></li>
-                <li class=""><a href="/logout">Logout</a></li>
-             </ul>
-            <img src= "http://lims.ifpi.edu.br/images/logo.png" alt="some text" width=200 height=80>
+<header class="page-header">
+	<div class="">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <img src= "http://lims.ifpi.edu.br/images/logo.png" alt="some text" width=200 height=80>
+            </div>
+          </div>
     </div>
-        <section class="sec2" style="height: auto">
-            <ul class="nav nav-pills pull-left">
-                <li class=""><a href="{% url 'equipamentos' %}" >Equipamentos </a> </li>
-                <li class=""><a href="{% url 'emprestimos' %}" >emprestimos </a> </li>
-                <li class=""><a href="{% url 'root' %}" >Ajuda </a> </li>
-            </ul>
-        </section>
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <!-- <a class="navbar-brand" href="#">.</a> -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPrincipal" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarPrincipal">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'root' %}">NOME</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                          </li>
+                    </ul>
+                </div>
+              </nav>
+        </div>
+    </div>
+ </div>
 </header>
-<div style="height: 100%">
-    <div >
-        {% block y %}
-        {% endblock %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3" id="sidebar">
+            <ul class="nav flex-column nav-pills">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'equipamentos' %}" >Equipamentos </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'emprestimos' %}" > Emprestimos </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'root' %}" >Ajuda </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-9">
+            {% block 'content' %}
+            {% endblock %}
+        </div>
     </div>
-
 </div>
 
-</div>
 
 </body>
 </html>
