@@ -1,20 +1,11 @@
 {% extends 'base.html' %}
 {% block 'content' %}
   {% if itens %}
+  <ul class="list-unstyled">
     {% for item in itens %}
-        <div class="card">
-            <a href="{% url 'equipamento' item.id %}">
-                <img  src="{{ item.imagem.url }}" alt="{{ item.nome }}">
-            </a>
-          <p class="nome">{{item.nome}} </p>
-          <p class="price">Quantidade: {{ item.quantidade }}</p>
-            <a href="{% url 'editar_equipamento' pk=item.id %}"> <p><button class="pegar"  style="background-color: cornflowerblue; "> Editar</button></p></a>
-          <p><button class="excluir" style="background-color: #FF4D4D">Excluir</button></p>
-          <p>
-              <p><button class="pegar">Pegar</button></p>
-          </p>
-        </div>
+      {% include 'equipamentos/preview.html' with item=item %}
     {% endfor %}
+  </ul>
   {% else %}
     <p style="font-size: 30px; font-weight: bold; text-align:center">Nenhum item encontrado <br> :( </p>
   {% endif %}

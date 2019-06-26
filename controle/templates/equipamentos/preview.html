@@ -1,0 +1,14 @@
+<li class="media item-preview">
+    
+    <img  src="{{ item.imagem.url }}" alt="{{ item.nome }}" class="mr-3" width="100">
+    
+    <div class="media-body">
+    <h5 class="nome">{{item.nome}} </h5>
+    <p class="price">Quantidade: {{ item.quantidade }}</p>
+    <a class="btn btn-sm btn-primary"  href="{% url 'equipamento' item.id %}">Visualizar</a>
+    <a class="btn btn-sm btn-success" href=# class="pegar">Pegar</a>
+    <a class="btn btn-sm btn-light" href="{% url 'editar_equipamento' pk=item.id %}">Editar</a>
+    <a class="btn btn-sm btn-danger" href=#>Excluir</a>
+    
+  </div>
+</li>
