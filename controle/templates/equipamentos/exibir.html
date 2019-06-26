@@ -1,11 +1,35 @@
 {% extends 'base.html' %}
 {% block 'content' %}
-<div class="conteudo" style="overflow-y:auto; overflow-x:auto;">
+   <div class="page-header">
+    <div class="btn-group float-right">
+        <a class="btn btn-sm btn-success" href=# class="pegar">Pegar</a>
+        <a class="btn btn-sm btn-light" href="{% url 'editar_equipamento' pk=item.id %}">Editar</a>
+        <a class="btn btn-sm btn-danger" href=#>Excluir</a>
+    </div>
+    <span>Código: {{item.id}}</span>
+    <h2>{{item.nome}}</h2>
+   </div>
+    <table class="table">
+        <tr>
+            <td>
+                    Quantidade: 
+            </td>
+            <td>
+                    {{item.quantidade}}
+            </td>
+        </tr>
+        <tr>
+                <td>
+                        Tipo: 
+                </td>
+                <td>
+                        {{item.tipo}}
+                </td>
+            </tr>
+    </table>
+    <br>
     <img style="width: 300px; height: 200px" src="{{ item.imagem.url }}" alt="Item">
-    {{item.id}}
-    {{item.nome}}
-    {{item.quantidade}}
-
+    
 </div>
 </body>
 </html>
