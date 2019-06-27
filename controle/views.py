@@ -3,32 +3,25 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
-
+from django.contrib.auth.decorators import login_required
 from controle.models import *
 from django.shortcuts import render, redirect
 from controle.forms import *
+from controle.models import *
 
 
+# @login_required
 def home(request):
-    return render(request, 'home.html', {'emprestimos': Emprestimo.objects.all()})
+    return render(request, 'home.html',
+                  {'emprestimos': Emprestimo.objects.all(), 'user_logado': get_usuario_logado(request)})
 
 
-def add_user(request):
-    form = UserForm()
-    if request.method == 'POST':
-        form = UserForm(request.POST)
-        if form.is_valid():
-            user_nome = form.cleaned_data['nome']
-            user_telefone = form.cleaned_data['telefone']
-            user_tipo = form.cleaned_data['tipo']
-            new_post = Usuario(nome=user_nome, telefone=user_telefone, tipo=user_tipo)
-            new_post.save()
-            return redirect('painel_admin')
-
-    elif request.method == 'GET':
-        return render(request, 'adicionar_usuario.html', {'form': form})
+# @login_required
+def get_usuario_logado(request):
+    return request.user
 
 
+# @login_required
 def add_equipamento(request):
     form = ItemForm()
     if request.method == 'POST':
@@ -43,53 +36,41 @@ def add_equipamento(request):
             return redirect('equipamentos')
 
     elif request.method == 'GET':
-        return render(request, 'equipamentos/adicionar.html', {'form': form})
+        return render(request, 'equipamentos/adicionar.html',
+                      {'form': form, 'user_logado': get_usuario_logado(request)})
 
 
+# @login_required
 def exibir_equipamentos(request):
-    return render(request, 'equipamentos/listar.html', {'itens': Item.objects.all()})
+    return render(request, 'equipamentos/listar.html',
+                  {'itens': Item.objects.all(), 'user_logado': get_usuario_logado(request)})
 
 
+# @login_required
 def exibir_emprestimos(request):
-    return render(request, 'emprestimos.html')
+    return render(request, 'emprestimos.html', {'user_logado': get_usuario_logado(request)})
 
 
+# @login_required
 def opcoes_admin(request):
-    return render(request, 'opcoes_admin.html')
+    return render(request, 'opcoes_admin.html', {'user_logado': get_usuario_logado(request)})
 
 
-def logout(request):
-    return user_login(request)
-
-
+# @login_required
 def exibir_ajuda(request):
-    return render(request, 'ajuda.html')
+    return render(request, 'ajuda.html', {'user_logado': get_usuario_logado(request)})
 
 
+# @login_required
 def editar_item(request):
-    return render(request, 'equipamentos/editar.html', {'itens': Item.objects.all()})
+    return render(request, 'equipamentos/editar.html',
+                  {'itens': Item.objects.all(), 'user_logado': get_usuario_logado(request)})
 
 
+# @login_required
 def exibir_um_equipamento(request, item_id):
     item = Item.objects.get(id=item_id)
-    return render(request, 'equipamentos/exibir.html', {'item': item})
-
-
-def user_login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(username=cd['username'], password=cd['password'])
-
-    else:
-        form = LoginForm()
-    return render(request, 'login.html', {'form': form})
-
-
-def eeditar(request, item_id):
-    item = Item.objects.get(id=item_id)
-    return render(request, 'equipamento/editar.html', {'item': item})
+    return render(request, 'equipamentos/exibir.html', {'item': item,'user_logado': get_usuario_logado(request)})
 
 
 class Editar(UpdateView):
@@ -98,4 +79,3 @@ class Editar(UpdateView):
     fields = '__all__'
     context_object_name = 'item'
     success_url = reverse_lazy("equipamentos")
-

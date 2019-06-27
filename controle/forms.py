@@ -3,13 +3,6 @@ from controle.models import *
 from django import forms
 
 
-class UserForm(ModelForm):
-    class Meta:
-        model = Usuario
-        fields = ['nome', 'nome_de_usuario', 'email', 'senha', 'telefone', 'tipo']
-        widgets = {'senha': forms.PasswordInput, 'email': forms.EmailInput, 'telefone': forms.NumberInput}
-
-
 class ItemForm(ModelForm):
     class Meta:
         model = Item

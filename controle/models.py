@@ -26,13 +26,13 @@ class TipoUsuario(models.Model):
 
 
 class Usuario(models.Model):
-    # user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
-    nome = models.CharField(max_length=255)
-    nome_de_usuario = models.CharField(max_length=16)
-    senha = models.CharField(max_length=16)
+    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE, null=True)
     telefone = models.CharField(max_length=15)
-    email = models.EmailField(max_length=255, null=True)
     tipo = models.ForeignKey(TipoUsuario, on_delete=models.CASCADE)
+
+    @property
+    def email(self):
+        return self.user.email
 
 
 class Emprestimo(models.Model):
