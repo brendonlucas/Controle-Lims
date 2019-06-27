@@ -72,9 +72,11 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'emprestimos' %}" > Emprestimos </a>
                 </li>
+                {% if user_logado.is_superuser %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'root' %}" >Ajuda </a>
+                  <a class="nav-link" href="{% url 'painel_admin' %}" >Painel de controle </a>
                 </li>
+                {% endif %}
             </ul>
         </div>
         <div class="col-9" style="padding: 1em;">

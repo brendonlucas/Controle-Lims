@@ -2,9 +2,17 @@
 {% block 'content' %}
    <div class="page-header">
     <div class="btn-group float-right">
-        <a class="btn btn-sm btn-success" href=# class="pegar">Pegar</a>
-        <a class="btn btn-sm btn-light" href="{% url 'editar_equipamento' pk=item.id %}">Editar</a>
-        <a class="btn btn-sm btn-danger" href=#>Excluir</a>
+        <a class="btn btn-sm btn-success" href=# >Pegar</a>
+        {% if user_logado.is_superuser %}
+            <a class="btn btn-sm btn-light" href="{% url 'editar_equipamento' pk=item.id %}">Editar</a>
+            <a class="btn btn-sm btn-danger" href="" role="button" id="dropdownMenuLink"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Excluir</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'excluir' item.id %}">Sim</a>
+                <a class="dropdown-item" href="#">Não</a>
+            </div>
+        {% endif %}
+
     </div>
     <span>Código: {{item.id}}</span>
     <h2>{{item.nome}}</h2>

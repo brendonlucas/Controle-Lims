@@ -70,7 +70,14 @@ def editar_item(request):
 # @login_required
 def exibir_um_equipamento(request, item_id):
     item = Item.objects.get(id=item_id)
-    return render(request, 'equipamentos/exibir.html', {'item': item,'user_logado': get_usuario_logado(request)})
+    return render(request, 'equipamentos/exibir.html', {'item': item, 'user_logado': get_usuario_logado(request)})
+
+
+# @login_required
+def excluir_item(request, item_id):
+    item = Item.objects.get(id=item_id)
+    item.delete()
+    return redirect('equipamentos')
 
 
 class Editar(UpdateView):
