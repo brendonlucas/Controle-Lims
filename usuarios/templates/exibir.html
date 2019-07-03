@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+   <div class="page-header">
+    <div class="btn-group float-right">
+        {% if user_logado.is_superuser %}
+            <a class="btn btn-sm btn-danger" href="" role="button" id="dropdownMenuLink"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Excluir</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Sim</a>
+                <a class="dropdown-item" href="#">Não</a>
+            </div>
+        {% endif %}
+
+    </div>
+    <span>Usuario: {{usuario.user.username}}</span>
+    <h2>Nome: {{usuario.user.first_name}} {{ usuario.user.last_name }}</h2>
+   </div>
+    <table class="table">
+        <tr>
+            <td>
+                    Telefone:
+            </td>
+            <td>
+                    {{ usuario.telefone }}
+            </td>
+        </tr>
+        <tr>
+                <td>
+                        Tipo: 
+                </td>
+                <td>
+                        {{usuario.tipo.nome}}
+                </td>
+            </tr>
+    </table>
+    <br>
+
+{% endblock %}

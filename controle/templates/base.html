@@ -63,11 +63,14 @@
             <ul class="nav flex-column nav-pills">
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'equipamentos' %}" >Equipamentos</a>
-                  <ul class="nav flex-column nav-pills subnav">
-                      <li class="nav-item">
-                        <a class="nav-link" href="{% url 'adicionar_equipamento' %}">Adicionar</a>
-                      </li>
-                    </ul>
+                    {% if user_logado.is_superuser %}
+                      <ul class="nav flex-column nav-pills subnav">
+                          <li class="nav-item">
+
+                            <a class="nav-link" href="{% url 'adicionar_equipamento' %}">Adicionar</a>
+                          </li>
+                        </ul>
+                    {% endif %}
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'emprestimos' %}" > Emprestimos </a>
@@ -76,6 +79,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'painel_admin' %}" >Painel de controle </a>
                 </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'exibir_usuarios' %}" >Usuarios </a>
+                    </li>
                 {% endif %}
             </ul>
         </div>

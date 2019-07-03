@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+  {% if usuarios %}
+  <ul class="list-unstyled">
+    {% for usuario in usuarios %}
+      <li class="media item-preview">
+        <div class="media-body">
+        <h5 class="nome">{{usuario.user.first_name}} {{ usuario.user.last_name }} </h5>
+        <p class="price">Telefone: {{ usuario.telefone }}</p>
+        <a class="btn btn-sm btn-primary"  href="{% url 'exibe_um_usuario' usuario.id %}">Visualizar</a>
+
+        {% if user_logado.is_superuser %}
+
+            <a class="btn btn-sm btn-danger" href="#" role="button" id="dropdownMenuLink"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Excluir</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Sim</a>
+                <a class="dropdown-item" href="#">Não</a>
+            </div>
+        {% endif %}
+      </div>
+    </li>
+
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p style="font-size: 30px; font-weight: bold; text-align:center">Nenhum usuario encontrado <br> :( </p>
+  {% endif %}
+{% endblock %}
