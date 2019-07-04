@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block 'content' %}
-    <form>
+    <div>
         <p class="titulo"> Opções do Docente:<p>
         <a href="{% url 'adicionar_usuario' %}" > <button type="button"> Adicionar Usuario </button> </a>
         <a href="{% url 'adicionar_admin' %}" > <button type="button"> Adicionar Administrador </button> </a>
         <a href="{% url 'adicionar_equipamento' %}" > <button type="button"> Adicionar item</button> </a>
-    </form>
+    </div>
 
 {% endblock %}

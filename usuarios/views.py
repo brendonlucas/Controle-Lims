@@ -4,9 +4,10 @@ from django.shortcuts import *
 from django.utils.decorators import method_decorator
 from django.views.generic.base import View
 from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.hashers import make_password, check_password
 
 from controle.models import *
-from usuarios.forms import RegistrarUsuarioForm
+from usuarios.forms import *
 
 
 def get_usuario_logado(request):
@@ -72,11 +73,43 @@ class RegistrarUsuarioAdminView(View):
         return render(request, self.template_name, {'form': form})
 
 
+@login_required
 def exibir_usuarios(request):
     return render(request, 'exibir_usuarios.html',
                   {'user_logado': get_usuario_logado(request), 'usuarios': Usuario.objects.all()})
 
 
+@login_required
 def exibir_um_usuario(request, usuario_id):
     usuario = Usuario.objects.get(id=usuario_id)
     return render(request, 'exibir.html', {'usuario': usuario, 'user_logado': get_usuario_logado(request)})
+
+
+@login_required
+def exibir_perfil(request, usuario_id):
+    user_profile = Usuario.objects.get(user=usuario_id)
+    return render(request, 'my_profile.html',
+                  {'user_logado': get_usuario_logado(request), 'user_profile': user_profile})
+
+
+@method_decorator(login_required, name='dispatch')
+class TrocarSenhaUserView(View):
+    template_name = 'alterar_senha.html'
+
+    def get(self, request):
+        return render(request, self.template_name, {'user_logado': get_usuario_logado(request)})
+
+    def post(self, request):
+        form = TrocarSenhaUsuarioForm(request.POST)
+        if form.is_valid():
+            dados_form = form.data
+            nova_senha = dados_form['new_pass']
+            senha_atual = dados_form['current_pass']
+            if get_usuario_logado(request).check_password(senha_atual):
+                hashed_pwd = make_password(nova_senha)
+                user = get_usuario_logado(request)
+                user.password = hashed_pwd
+                user.save()
+
+            return redirect('exibe_meu_perfil', get_usuario_logado(request).id)
+        return render(request, self.template_name, {'form': form, 'user_logado': get_usuario_logado(request)})
