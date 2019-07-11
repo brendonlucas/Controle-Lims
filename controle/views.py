@@ -7,20 +7,20 @@ from django.contrib.auth.decorators import *
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
 from controle.forms import *
+from emprestimo.models import *
 from controle.models import *
 
-
+@login_required
 def home(request):
     return render(request, 'home.html',
                   {'emprestimos': Emprestimo.objects.all(), 'user_logado': get_usuario_logado(request)})
 
 
-# @login_required
 def get_usuario_logado(request):
     return request.user
 
 
-# @login_required
+@login_required
 def add_equipamento(request):
     if get_usuario_logado(request).is_superuser:
         form = ItemForm()
@@ -43,45 +43,37 @@ def add_equipamento(request):
                                                     'user_logado': get_usuario_logado(request)})
 
 
-# @login_required
+@login_required
 def exibir_equipamentos(request):
     return render(request, 'equipamentos/listar.html',
                   {'itens': Item.objects.all(), 'user_logado': get_usuario_logado(request)})
 
 
-# @login_required
-def exibir_emprestimos(request):
-    return render(request, 'emprestimos.html', {'user_logado': get_usuario_logado(request)})
-
-
-# @login_required
+@login_required
 def opcoes_admin(request):
     return render(request, 'opcoes_admin.html', {'user_logado': get_usuario_logado(request)})
 
 
-# @login_required
+@login_required
 def exibir_ajuda(request):
     return render(request, 'ajuda.html', {'user_logado': get_usuario_logado(request)})
 
 
-# @login_required
-def editar_item(request):
-    return render(request, 'equipamentos/editar.html',
-                  {'itens': Item.objects.all(), 'user_logado': get_usuario_logado(request)})
 
-
-# @login_required
+@login_required
 def exibir_um_equipamento(request, item_id):
     item = Item.objects.get(id=item_id)
     return render(request, 'equipamentos/exibir.html', {'item': item, 'user_logado': get_usuario_logado(request)})
 
 
-# @login_required
-# @method_decorator(permission_required('user.is_superuser'), name='dispatch')
+@method_decorator(permission_required('user.is_superuser'), name='dispatch')
 def excluir_item(request, item_id):
-    item = Item.objects.get(id=item_id)
-    item.delete()
-    return redirect('equipamentos')
+    if get_usuario_logado(request).is_superuser:
+        item = Item.objects.get(id=item_id)
+        item.delete()
+        return redirect('equipamentos')
+    else:
+        return redirect('emprestimos')
 
 
 @method_decorator(permission_required('user.is_superuser'), name='dispatch')

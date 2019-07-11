@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.hashers import make_password, check_password
 
 from controle.models import *
+from emprestimo.models import *
 from usuarios.forms import *
 
 
@@ -14,7 +15,7 @@ def get_usuario_logado(request):
     return request.user
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name='dispatch')
 class RegistrarUsuarioView(View):
     template_name = 'adicionar_usuario.html'
 
@@ -23,7 +24,7 @@ class RegistrarUsuarioView(View):
             return render(request, self.template_name, {'user_logado': get_usuario_logado(request)})
 
         else:
-            return render(request, 'emprestimos.html', {'emprestimos': Emprestimo.objects.all(),
+            return render(request, 'emprestimos.html', {'emprestimos': Emprestimo.objects.all().order_by('data_emprestimo'),
                                                         'user_logado': get_usuario_logado(request)})
 
     def post(self, request):
@@ -43,17 +44,14 @@ class RegistrarUsuarioView(View):
             return render(request, self.template_name, {'form': form, 'user_logado': get_usuario_logado(request)})
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name='dispatch')
 class RegistrarUsuarioAdminView(View):
     template_name = 'adicionar_usuario.html'
 
     def get(self, request):
-        if get_usuario_logado(request).is_superuser:
-            return render(request, self.template_name, {'user_logado': get_usuario_logado(request)})
+        return render(request, self.template_name, {'user_logado': get_usuario_logado(request)})
 
-        else:
-            return render(request, 'emprestimos.html', {'emprestimos': Emprestimo.objects.all(),
-                                                        'user_logado': get_usuario_logado(request)})
+
 
     def post(self, request):
         form = RegistrarUsuarioForm(request.POST)
@@ -82,14 +80,17 @@ def exibir_usuarios(request):
 @login_required
 def exibir_um_usuario(request, usuario_id):
     usuario = Usuario.objects.get(id=usuario_id)
-    return render(request, 'exibir.html', {'usuario': usuario, 'user_logado': get_usuario_logado(request)})
+    emprestimo = Emprestimo.objects.filter(solicitante=usuario_id).filter(tipo=2)
+    return render(request, 'exibir.html', {'emprestimos': emprestimo, 'usuario': usuario,
+                                           'user_logado': get_usuario_logado(request)})
 
 
 @login_required
-def exibir_perfil(request, usuario_id):
-    user_profile = Usuario.objects.get(user=usuario_id)
+def exibir_perfil(request):
+    user_profile = Usuario.objects.get(user=get_usuario_logado(request).id)
+    emprestimo = Emprestimo.objects.filter(solicitante=user_profile.id)
     return render(request, 'my_profile.html',
-                  {'user_logado': get_usuario_logado(request), 'user_profile': user_profile})
+                  {'emprestimos': emprestimo, 'user_logado': get_usuario_logado(request), 'user_profile': user_profile})
 
 
 @method_decorator(login_required, name='dispatch')
@@ -113,3 +114,4 @@ class TrocarSenhaUserView(View):
 
             return redirect('exibe_meu_perfil', get_usuario_logado(request).id)
         return render(request, self.template_name, {'form': form, 'user_logado': get_usuario_logado(request)})
+

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+    <div>
+        <p>Solicitante: <b style="font-size: 20px;">{{ emprestimo.solicitante.user.first_name }} {{ emprestimo.solicitante.user.last_name }}</b> </p>
+        <p> Equipamento: <b style="font-size: 20px;">{{ emprestimo.equipamento.nome }}</b></p>
+        <form method="post" action="{% url 'rejeita_solicitacao' emprestimo.id %}">
+            {% csrf_token %}
+            <label for="id_txt_area"> Comentario:</label><br>
+            <textarea id="id_txt_area" name="comentario" maxlength="200" minlength="10" style="min-width: 200px; max-width: 400px; max-height: 100px;" required> </textarea><br>
+            <button class="btn-danger" type="submit"> Confirmar </button>
+        </form>
+        {% if messages %}
+            <ul style="background-color: #ff786e; padding: 5px" >
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %} style="display: inline">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+{% endblock %}

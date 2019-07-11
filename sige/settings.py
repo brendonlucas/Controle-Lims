@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'controle',
     'usuarios',
+    'emprestimo',
 ]
 
 MIDDLEWARE = [

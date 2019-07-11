@@ -1,15 +1,28 @@
 {% extends 'base.html' %}
 {% block 'content' %}
+    <style>
+    table {
+        border-collapse: collapse;
+         width: 100%;
+    }
+
+    th, td {
+          text-align: left;
+          padding: 8px;
+    }
+
+    tr:nth-child(even){
+        background-color: #f2f2f2
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+    </style>
    <div class="page-header">
     <div class="btn-group float-right">
-        {% if user_logado.is_superuser %}
-            <a class="btn btn-sm btn-danger" href="" role="button" id="dropdownMenuLink"
-           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Excluir</a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Sim</a>
-                <a class="dropdown-item" href="#">Não</a>
-            </div>
-        {% endif %}
+
 
     </div>
     <span>Usuario: {{usuario.user.username}}</span>
@@ -17,22 +30,48 @@
    </div>
     <table class="table">
         <tr>
-            <td>
-                    Telefone:
-            </td>
-            <td>
-                    {{ usuario.telefone }}
-            </td>
+            <td>Telefone:</td>
+            <td>{{ usuario.telefone }}</td>
         </tr>
         <tr>
-                <td>
-                        Tipo: 
-                </td>
-                <td>
-                        {{usuario.tipo.nome}}
-                </td>
-            </tr>
+            <td>Tipo:</td>
+            <td>{{usuario.tipo.nome}}</td>
+        </tr>
     </table>
-    <br>
+
+    <hr>
+    <div style="overflow-y:auto; overflow-x:auto;">
+    {% if emprestimos %}
+      <table>
+            <tr>
+                <th >Nome</th>
+                <th >Item</th>
+                <th >Quantidade</th>
+                <th >Data Pedido</th>
+                <th >Data Devolução</th>
+                <th >Ação</th>
+
+
+            </tr>
+
+          {% for emprestimo in emprestimos %}
+              <tr>
+                    <td> <a href="{% url 'exibe_um_usuario' emprestimo.solicitante.id %}"> {{emprestimo.solicitante.user.first_name }} {{emprestimo.solicitante.user.last_name}} </a> </td>
+                  <td> <a href="{% url 'equipamento' emprestimo.equipamento.id %}">{{emprestimo.equipamento.nome}}</a></td>
+                    <td>{{emprestimo.quantidade}}</td>
+                    <td>{{emprestimo.data_emprestimo}}</td>
+                    <td>{% if emprestimo.data_devolucao == none %}
+                           Não Devolvido
+                        {% else %}
+                            {{emprestimo.data_devolucao}}
+                        {% endif %} </td>
+                    <td> <a class="btn btn-sm btn-primary" href="{% url 'exibir_detalhes_solicitacao' emprestimo.id %}" >Visualizar</a></td>
+            </tr>
+            {%endfor%}
+      </table>
+    {% else %}
+        <p style="font-size: 20px; font-weight: bold; text-align:center">Não fez solicitações <br> :( </p>
+    {% endif %}
+  </div>
 
 {% endblock %}

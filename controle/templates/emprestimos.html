@@ -1,5 +1,25 @@
 {% extends 'base.html' %}
 {% block 'content' %}
+    <style>
+    table {
+        border-collapse: collapse;
+         width: 100%;
+    }
+
+    th, td {
+          text-align: left;
+          padding: 8px;
+    }
+
+    tr:nth-child(even){
+        background-color: #f2f2f2
+    }
+
+    th {
+        background-color: #4bc7c9;
+        color: white;
+    }
+    </style>
     {% if emprestimos %}
       <table>
             <tr>
@@ -11,11 +31,17 @@
             </tr>
           {% for emprestimo in emprestimos %}
               <tr>
-                    <td> <a href="#" class="nome" > {{emprestimo.usuario.nome}} </a> </td>
-                    <td>{{emprestimo.item.nome}}</td>
+                    <td> <a href="{% url 'exibe_um_usuario' emprestimo.solicitante.id %}"> {{emprestimo.solicitante.user.first_name }} {{emprestimo.solicitante.user.last_name}} </a> </td>
+                  <td> <a href="{% url 'equipamento' emprestimo.equipamento.id %}">{{emprestimo.equipamento.nome}}</a></td>
                     <td>{{emprestimo.quantidade}}</td>
                     <td>{{emprestimo.data_emprestimo}}</td>
-                    <td>{{emprestimo.data_devolucao}}</td>
+                    <td>
+                        {% if emprestimo.data_devolucao == none %}
+                            Ainda não devolvido
+                        {% else %}
+                            {{emprestimo.data_devolucao}}
+                        {% endif %}
+                    </td>
             </tr>
             {%endfor%}
       </table>

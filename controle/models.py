@@ -35,9 +35,16 @@ class Usuario(models.Model):
         return self.user.email
 
 
-class Emprestimo(models.Model):
+class Emprestimo2(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     quantidade = models.IntegerField()
     data_emprestimo = models.DateField(auto_now_add=True)
     data_devolucao = models.DateField(null=True)
+
+
+# t = TipoUsuario(nome='Normal', descricao='Usuario com acesso limitado')
+# t = TipoUsuario(nome='Administrador', descricao='Usuario com acesso total ao sistema')
+
+# e = TipoEquipamento(nome='Consumivel', descricao='Item do tipo consumivel que pode sofrer perda')
+# e = TipoEquipamento(nome='Permanente', descricao='Item do tipo Permanente que caso aja perda, medidas serão tomadas')
