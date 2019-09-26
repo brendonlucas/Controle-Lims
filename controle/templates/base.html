@@ -27,7 +27,7 @@
 <body>
 <header class="page-header">
 	<div class="">
-    <div class="container-fluid">
+    <div class="container-fluid" >
         <div class="row">
             <div class="col-12">
                 <img src= "http://lims.ifpi.edu.br/images/logo.png" alt="some text" width=200 height=80>
@@ -35,15 +35,15 @@
           </div>
     </div>
     <br>
-    <div class="row">
-        <div class="col-12">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="row" >
+        <div class="col-12" >
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" >
                 <!-- <a class="navbar-brand" href="#">.</a> -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPrincipal" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarPrincipal">
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto" >
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'exibe_meu_perfil' %}">{{ user_logado.username }}</a>
                           </li>
@@ -62,15 +62,17 @@
         <div class="col-3" id="sidebar">
             <ul class="nav flex-column nav-pills">
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'equipamentos' %}" >Equipamentos</a>
-                    {% if user_logado.is_superuser %}
-                      <ul class="nav flex-column nav-pills subnav">
-                          <li class="nav-item">
-
-                            <a class="nav-link" href="{% url 'adicionar_equipamento' %}">Adicionar</a>
-                          </li>
-                        </ul>
-                    {% endif %}
+                    <a class="nav-link" href="{% url 'equipamentos' %}" >Equipamentos</a>
+                        {% if user_logado.is_superuser %}
+                            <ul class="nav flex-column nav-pills subnav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'adicionar_equipamento' %}">Adicionar</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'itens_excluidos' %}">Excluidos</a>
+                                </li>
+                            </ul>
+                        {% endif %}
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'emprestimos' %}" > Emprestimos </a>
@@ -88,9 +90,10 @@
                 {% endif %}
             </ul>
         </div>
-        <div class="col-9" style="padding: 1em;">
+        <div class="col-9" style="padding: 1em; ">
             {% block 'content' %}
             {% endblock %}
+
         </div>
     </div>
 </div>

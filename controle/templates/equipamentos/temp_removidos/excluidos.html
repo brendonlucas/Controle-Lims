@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+  {% if itens %}
+  <ul class="list-unstyled" style="">
+    {% for item in itens %}
+      {% include 'equipamentos/temp_removidos/preview.html' with item=item %}
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p style="font-size: 30px; font-weight: bold; text-align:center">Nenhum item encontrado <br> :( </p>
+  {% endif %}
+{% endblock %}

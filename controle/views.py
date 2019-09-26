@@ -45,8 +45,9 @@ def add_equipamento(request):
 
 @login_required
 def exibir_equipamentos(request):
+    itens = Item.objects.filter(excluido=False)
     return render(request, 'equipamentos/listar.html',
-                  {'itens': Item.objects.all(), 'user_logado': get_usuario_logado(request)})
+                  {'itens': itens, 'user_logado': get_usuario_logado(request)})
 
 
 @login_required
@@ -65,12 +66,15 @@ def exibir_um_equipamento(request, item_id):
     item = Item.objects.get(id=item_id)
     return render(request, 'equipamentos/exibir.html', {'item': item, 'user_logado': get_usuario_logado(request)})
 
-
-@method_decorator(permission_required('user.is_superuser'), name='dispatch')
+@login_required
 def excluir_item(request, item_id):
     if get_usuario_logado(request).is_superuser:
+        print("achooooo")
         item = Item.objects.get(id=item_id)
-        item.delete()
+        item.excluido = True
+        print("mandou")
+        item.save()
+        print("salvou")
         return redirect('equipamentos')
     else:
         return redirect('emprestimos')
@@ -84,3 +88,8 @@ class Editar(UpdateView):
     context_object_name = 'item'
     success_url = reverse_lazy("equipamentos")
 
+
+def exibe_excluidos(request):
+    if get_usuario_logado(request).is_superuser:
+        itens = Item.objects.filter(excluido=True)
+        return render(request, 'equipamentos/temp_removidos/excluidos.html', {'user_logado': get_usuario_logado(request), 'itens': itens})
