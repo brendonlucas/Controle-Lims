@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 from django.shortcuts import *
 from django.utils.decorators import method_decorator
 from django.views.generic.base import View
@@ -22,10 +23,10 @@ class RegistrarUsuarioView(View):
     def get(self, request):
         if get_usuario_logado(request).is_superuser:
             return render(request, self.template_name, {'user_logado': get_usuario_logado(request)})
-
         else:
-            return render(request, 'emprestimos.html', {'emprestimos': Emprestimo.objects.all().order_by('data_emprestimo'),
-                                                        'user_logado': get_usuario_logado(request)})
+            return render(request, 'emprestimos.html',
+                          {'emprestimos': Emprestimo.objects.all().order_by('data_emprestimo'),
+                           'user_logado': get_usuario_logado(request)})
 
     def post(self, request):
         if get_usuario_logado(request).is_superuser:
@@ -51,8 +52,6 @@ class RegistrarUsuarioAdminView(View):
     def get(self, request):
         return render(request, self.template_name, {'user_logado': get_usuario_logado(request)})
 
-
-
     def post(self, request):
         form = RegistrarUsuarioForm(request.POST)
         if form.is_valid():
@@ -67,14 +66,17 @@ class RegistrarUsuarioAdminView(View):
 
             usuario_dados.save()
             return redirect('root')
-
         return render(request, self.template_name, {'form': form})
 
 
 @login_required
 def exibir_usuarios(request):
+    usuarios = Usuario.objects.all().order_by('-user__first_name')
+    paginator = Paginator(usuarios, 8)
+    page = request.GET.get('page')
+    usuarios = paginator.get_page(page)
     return render(request, 'exibir_usuarios.html',
-                  {'user_logado': get_usuario_logado(request), 'usuarios': Usuario.objects.all()})
+                  {'user_logado': get_usuario_logado(request), 'usuarios': usuarios})
 
 
 @login_required
@@ -114,4 +116,3 @@ class TrocarSenhaUserView(View):
 
             return redirect('exibe_meu_perfil', get_usuario_logado(request).id)
         return render(request, self.template_name, {'form': form, 'user_logado': get_usuario_logado(request)})
-

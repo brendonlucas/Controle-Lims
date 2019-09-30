@@ -1,5 +1,6 @@
 from datetime import date
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
@@ -45,11 +46,16 @@ def solicitar_item(request, item_id):
 @login_required
 def exibe_solicitacoes(request):
     if get_usuario_logado(request).is_superuser:
-        solicitacoes = Emprestimo.objects.filter(tipo=1)
-        return render(request, 'pag_solicitacoes.html', {'emprestimos': solicitacoes.order_by('data_emprestimo'),
+        solicitacoes = Emprestimo.objects.filter(tipo=1).order_by('data_emprestimo')
+        paginator = Paginator(solicitacoes, 8)
+
+        page = request.GET.get('page')
+        solicitacoes = paginator.get_page(page)
+        return render(request, 'pag_solicitacoes.html', {'emprestimos': solicitacoes,
                                                          'user_logado': get_usuario_logado(request)})
     else:
         redirect('emprestimos')
+
 
 
 @login_required
@@ -90,9 +96,13 @@ def rejeita_solicitacao(request, solicitacao_id):
 
 @login_required
 def exibir_emprestimos(request):
-    emprestimos_ativos = Emprestimo.objects.filter(tipo=2)
+    emprestimos_ativos = Emprestimo.objects.filter(tipo=2).order_by('-data_emprestimo')
+    paginator = Paginator(emprestimos_ativos, 8)
+
+    page = request.GET.get('page')
+    emprestimos_ativos = paginator.get_page(page)
     return render(request, 'emprestimos.html',
-                  {'emprestimos': emprestimos_ativos.order_by('-data_emprestimo'),
+                  {'emprestimos': emprestimos_ativos,
                    'user_logado': get_usuario_logado(request)})
 
 

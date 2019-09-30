@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth import authenticate, login
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
@@ -46,6 +47,9 @@ def add_equipamento(request):
 @login_required
 def exibir_equipamentos(request):
     itens = Item.objects.filter(excluido=False)
+    paginator = Paginator(itens, 8)
+    page = request.GET.get('page')
+    itens = paginator.get_page(page)
     return render(request, 'equipamentos/listar.html',
                   {'itens': itens, 'user_logado': get_usuario_logado(request)})
 

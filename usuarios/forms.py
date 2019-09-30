@@ -8,7 +8,7 @@ class RegistrarUsuarioForm(forms.Form):
     last_name = forms.CharField(required=True)
     email = forms.EmailField(required=True)
     senha = forms.CharField(required=True)
-    telefone = forms.CharField(required=True)
+    telefone = forms.IntegerField(required=True)
 
     def is_valid(self):
         valid = True

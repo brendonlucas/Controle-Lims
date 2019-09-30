@@ -8,6 +8,13 @@ class ItemForm(ModelForm):
         model = Item
         fields = ['nome', 'quantidade', 'tipo', 'imagem']
 
+        widgets = {
+            'nome': forms.TextInput(attrs={'class': 'form-control'}),
+            'quantidade': forms.NumberInput(attrs={'class': 'form-control'}),
+            'tipo': forms.Select(attrs={'class': 'form-control'}),
+            'imagem': forms.FileInput(attrs={'class': 'form-control','id':'validatedCustomFile'}),
+        }
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='Nome', max_length=16)

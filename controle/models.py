@@ -28,7 +28,7 @@ class TipoUsuario(models.Model):
 
 class Usuario(models.Model):
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE, null=True)
-    telefone = models.CharField(max_length=15)
+    telefone = models.IntegerField(max_length=15)
     tipo = models.ForeignKey(TipoUsuario, on_delete=models.CASCADE)
 
     @property
