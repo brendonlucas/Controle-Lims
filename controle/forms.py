@@ -4,6 +4,8 @@ from django import forms
 
 
 class ItemForm(ModelForm):
+    imagem = forms.FileField(label='Imagem', required=False)
+
     class Meta:
         model = Item
         fields = ['nome', 'quantidade', 'tipo', 'imagem']
@@ -12,7 +14,7 @@ class ItemForm(ModelForm):
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
             'quantidade': forms.NumberInput(attrs={'class': 'form-control'}),
             'tipo': forms.Select(attrs={'class': 'form-control'}),
-            'imagem': forms.FileInput(attrs={'class': 'form-control','id':'validatedCustomFile'}),
+            'imagem': forms.FileInput(attrs={'class': 'form-control'}),
         }
 
 

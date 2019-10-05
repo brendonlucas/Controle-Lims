@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block 'content' %}
   {% if itens %}
-  <ul class="list-unstyled">
+  <ul class="card-deck" >
     {% for item in itens %}
       {% include 'equipamentos/preview.html' with item=item %}
     {% endfor %}

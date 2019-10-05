@@ -5,19 +5,15 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/adicionar_usuario.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/adicionar_usuario.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/templates/emprestimos.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/emprestimos.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/adicionar.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/adicionar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/listar.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/listar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/opcoes_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/opcoes_admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/preview.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/preview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_detalhes.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_detalhes.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_solicitacoes.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_solicitacoes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/templates/exibir_usuarios.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/templates/exibir_usuarios.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -163,7 +159,8 @@
       <workItem from="1562813629825" duration="2666000" />
       <workItem from="1569502629752" duration="4807000" />
       <workItem from="1569717251138" duration="409000" />
-      <workItem from="1569851154246" duration="8168000" />
+      <workItem from="1569851154246" duration="8539000" />
+      <workItem from="1570241850775" duration="14349000" />
     </task>
     <servers />
   </component>

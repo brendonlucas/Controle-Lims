@@ -6,10 +6,11 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 from django.contrib.auth.decorators import *
 from django.utils.decorators import method_decorator
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from controle.forms import *
 from emprestimo.models import *
 from controle.models import *
+
 
 @login_required
 def home(request):
@@ -32,6 +33,8 @@ def add_equipamento(request):
                 qtd = form.cleaned_data['quantidade']
                 tipo = form.cleaned_data['tipo']
                 image = form.cleaned_data['imagem']
+                if image is None:
+                    image = 'documents/1111/sem_foto.jpg'
                 new = Item(nome=nome, quantidade=qtd, tipo=tipo, imagem=image)
                 new.save()
                 return redirect('equipamentos')
@@ -64,26 +67,23 @@ def exibir_ajuda(request):
     return render(request, 'ajuda.html', {'user_logado': get_usuario_logado(request)})
 
 
-
 @login_required
 def exibir_um_equipamento(request, item_id):
     item = Item.objects.get(id=item_id)
     return render(request, 'equipamentos/exibir.html', {'item': item, 'user_logado': get_usuario_logado(request)})
 
+
 @login_required
 def excluir_item(request, item_id):
     if get_usuario_logado(request).is_superuser:
-        print("achooooo")
         item = Item.objects.get(id=item_id)
         item.excluido = True
-        print("mandou")
         item.save()
-        print("salvou")
         return redirect('equipamentos')
     else:
         return redirect('emprestimos')
 
-
+# remover
 @method_decorator(permission_required('user.is_superuser'), name='dispatch')
 class Editar(UpdateView):
     template_name = "equipamentos/editar.html"
@@ -96,4 +96,18 @@ class Editar(UpdateView):
 def exibe_excluidos(request):
     if get_usuario_logado(request).is_superuser:
         itens = Item.objects.filter(excluido=True)
-        return render(request, 'equipamentos/temp_removidos/excluidos.html', {'user_logado': get_usuario_logado(request), 'itens': itens})
+        return render(request, 'equipamentos/temp_removidos/excluidos.html',
+                      {'user_logado': get_usuario_logado(request), 'itens': itens})
+
+
+def item_editar(request, pk):
+    item = get_object_or_404(Item, pk=pk)
+    if request.method == "POST":
+        form = ItemForm(request.POST, request.FILES, instance=item)
+        if form.is_valid():
+            item = form.save(commit=False)
+            item.save()
+            return redirect('equipamentos')
+    else:
+        form = ItemForm(instance=item)
+    return render(request, 'equipamentos/adicionar.html', {'form': form, 'user_logado': get_usuario_logado(request)})
