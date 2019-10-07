@@ -53,8 +53,13 @@
                         {% endif %}
                     </div>
                 </div>
-            <a class="nav-item nav-link" href="{% url 'emprestimos' %}" > Emprestimos </a>
-
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Emprestimos</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'emprestimos' %}" >Emprestimos</a>
+                    <a class="dropdown-item" href="{% url 'emprestimos_finalizados' %}">Finalizados</a>
+                </div>
+        </div>
             {% if user_logado.is_superuser %}
                 <a class="nav-item nav-link" href="{% url 'exibir_solicitacoes' %}" >Solicitações </a>
                 <a class="nav-item nav-link" href="{% url 'exibir_usuarios' %}" >Usuarios </a>

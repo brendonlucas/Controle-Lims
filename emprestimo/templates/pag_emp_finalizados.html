@@ -28,9 +28,6 @@
                 <th>Quantidade</th>
                 <th>Data Emprestimo</th>
                 <th>Data Devolução</th>
-                {% if user_logado.is_superuser %}
-                    <th>Devolução</th>
-                {% endif %}
             </tr>
           {% for emprestimo in emprestimos %}
               <tr>
@@ -38,26 +35,7 @@
                   <td> <a href="{% url 'equipamento' emprestimo.equipamento.id %}">{{emprestimo.equipamento.nome}}</a></td>
                   <td>{{emprestimo.quantidade}}</td>
                   <td>{{emprestimo.data_emprestimo}}</td>
-                  <td>
-                      {% if emprestimo.data_devolucao == none %}
-                          Aguardando...
-                      {% else %}
-                          {{emprestimo.data_devolucao}}
-                      {% endif %}
-                  </td>
-
-              {% if user_logado.is_superuser %}
-                  <td>
-                      {% if emprestimo.data_devolucao == none %}
-                      <a class="btn btn-sm btn-danger" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Devolvido</a>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                          <a class="dropdown-item" href="{% url 'item_devolvido' emprestimo.id %}">Sim</a>
-                          <a class="dropdown-item" href="#">Não</a>
-                      </div>
-                      {% endif %}
-                  </td>
-
-              {% endif %}
+                  <td>{{emprestimo.data_devolucao}}</td>
                 </tr>
             {%endfor%}
       </table>

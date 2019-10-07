@@ -6,8 +6,8 @@
         <form method="post" action="{% url 'rejeita_solicitacao' emprestimo.id %}">
             {% csrf_token %}
             <label for="id_txt_area"> Comentario:</label><br>
-            <textarea id="id_txt_area" name="comentario" maxlength="200" minlength="10" style="min-width: 200px; max-width: 400px; max-height: 100px;" required> </textarea><br>
-            <button class="btn-danger" type="submit"> Confirmar </button>
+            <textarea class="form-control" id="id_txt_area" name="comentario" maxlength="200" minlength="10" style="min-width: 200px; max-width: 400px; max-height: 100px; min-height: 100px" required> </textarea><br>
+            <button class="btn btn-danger" type="submit"> Confirmar </button>
         </form>
         {% if messages %}
             <ul style="background-color: #ff786e; padding: 5px" >

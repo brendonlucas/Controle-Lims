@@ -57,7 +57,6 @@ def exibe_solicitacoes(request):
         redirect('emprestimos')
 
 
-
 @login_required
 def aceita_solicitacao(request, solicitacao_id):
     if get_usuario_logado(request).is_superuser:
@@ -91,14 +90,13 @@ def rejeita_solicitacao(request, solicitacao_id):
             return render(request, 'pag_rejeitar.html',
                           {'form': form, 'emprestimo': solicitacao, 'user_logado': get_usuario_logado(request)})
     else:
-        return render(request,'emprestimos.html')
+        return render(request, 'emprestimos.html')
 
 
 @login_required
 def exibir_emprestimos(request):
     emprestimos_ativos = Emprestimo.objects.filter(tipo=2).order_by('-data_emprestimo')
     paginator = Paginator(emprestimos_ativos, 8)
-
     page = request.GET.get('page')
     emprestimos_ativos = paginator.get_page(page)
     return render(request, 'emprestimos.html',
@@ -111,3 +109,22 @@ def exibir_detalhes(request, solicitacao_id):
     solicitacao = Emprestimo.objects.get(id=solicitacao_id)
     return render(request, 'pag_detalhes.html',
                   {'user_logado': get_usuario_logado(request), 'solicitacao': solicitacao})
+
+
+@login_required
+def fazer_devolucao(request, emprestimo_id):
+    if get_usuario_logado(request).is_superuser:
+        emprestimo = Emprestimo.objects.get(id=emprestimo_id)
+        emprestimo.data_devolucao = date.today()
+        emprestimo.tipo_id = 4
+        emprestimo.save()
+        return redirect('emprestimos')
+
+
+def exibir_emprestimos_finalizados(request):
+    emprestimos_finalizados = Emprestimo.objects.filter(tipo=4).order_by('-data_devolucao')
+    paginator = Paginator(emprestimos_finalizados, 8)
+    page = request.GET.get('page')
+    emprestimos_finalizados = paginator.get_page(page)
+    return render(request, 'pag_emp_finalizados.html',
+                  {'emprestimos': emprestimos_finalizados, 'user_logado': get_usuario_logado(request)})

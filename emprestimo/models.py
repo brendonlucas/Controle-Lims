@@ -10,6 +10,7 @@ class TipoEstadoEmprestimo(models.Model):
     # t = TipoEstadoEmprestimo(nome='Solicitacao', descricao='Pedido no estado de solicitação')
     # t = TipoEstadoEmprestimo(nome='Aceito', descricao='Pedido foi aceito')
     # t = TipoEstadoEmprestimo(nome='Rejeitado', descricao='Pedido está rejeitado')
+    # t = TipoEstadoEmprestimo(nome='Finalizado', descricao='Emprestimo está finalizado')
 
 
 class Emprestimo(models.Model):

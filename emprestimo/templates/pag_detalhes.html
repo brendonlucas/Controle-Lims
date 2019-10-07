@@ -24,11 +24,12 @@
             <td>{{solicitacao.quantidade}}</td>
         </tr>
     </table>
+    <hr>
     <h5> Descrição:</h5>
     <h6> {{ solicitacao.descricao }}</h6>
     <br>
     {% if solicitacao.mensagem_rejeitado != none %}
-        <h5> Mensagem de Rejeitado:</h5>
+        <h5> Mensagem Rejeitada:</h5>
         <h6> {{ solicitacao.mensagem_rejeitado }}</h6>
         <br>
     {% endif %}

@@ -6,10 +6,10 @@
         <form method="post" action=".">
             {% csrf_token %}
             <label for="qtd_item"> Quantidade:</label><br>
-            <input id="qtd_item" type="number" name="quantidade" required minlength="1"><br>
+            <input class="form-control" id="qtd_item" type="number" name="quantidade" required minlength="1" style="max-width: 400px"><br>
             <label for="txt-area"> Descição:</label><br>
-            <textarea id="txt-area" name="descicao" maxlength="255" minlength="10" style="min-width: 200px; max-width: 400px; max-height: 100px" required> </textarea><br>
-            <button class="btn-success" type="submit"> Solicitar </button>
+            <textarea class="form-control" id="txt-area" name="descicao" maxlength="255" minlength="10" style="min-width: 20px; max-width: 400px; max-height: 100px; min-height: 100px" required> </textarea><br>
+            <button class="btn btn-success" type="submit"> Solicitar </button>
         </form>
         {% if messages %}
         <ul style="background-color: #ff786e; padding: 5px" >
