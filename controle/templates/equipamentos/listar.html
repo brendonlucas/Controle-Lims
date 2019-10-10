@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block 'content' %}
   {% if itens %}
-  <ul class="card-deck" >
+  <ul class="card-deck" style="padding-left: 17px">
     {% for item in itens %}
       {% include 'equipamentos/preview.html' with item=item %}
     {% endfor %}
@@ -11,7 +11,8 @@
   {% endif %}
 
     {% if itens.paginator.count > 8 %}
-  <ul class="pagination" style="padding-bottom: -5px; margin-bottom: 0;">
+  <ul class="pagination" style="padding-bottom: -5px; margin-bottom: 0; margin: auto;
+  width: 50%;">
     {% if itens.has_previous %}
       <li class="page-item">
         <a class="page-link" href="?page={{ itens.previous_page_number }}" tabindex="-1"> Anterior</a>

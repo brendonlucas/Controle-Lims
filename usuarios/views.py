@@ -82,8 +82,11 @@ def exibir_usuarios(request):
 @login_required
 def exibir_um_usuario(request, usuario_id):
     usuario = Usuario.objects.get(id=usuario_id)
-    emprestimo = Emprestimo.objects.filter(solicitante=usuario_id).filter(tipo=2)
-    return render(request, 'exibir.html', {'emprestimos': emprestimo, 'usuario': usuario,
+    emprestimos = Emprestimo.objects.filter(solicitante=usuario_id).exclude(tipo=1).order_by('-data_emprestimo')
+    paginator = Paginator(emprestimos, 8)
+    page = request.GET.get('page')
+    emprestimos = paginator.get_page(page)
+    return render(request, 'exibir.html', {'emprestimos': emprestimos, 'usuario': usuario,
                                            'user_logado': get_usuario_logado(request)})
 
 

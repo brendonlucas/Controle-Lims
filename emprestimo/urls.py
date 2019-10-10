@@ -11,5 +11,7 @@ urlpatterns = [
     path('emprestimo/<int:emprestimo_id>/devolucao/', views.fazer_devolucao, name="item_devolvido"),
     path('emprestimos/finalizados', views.exibir_emprestimos_finalizados, name="emprestimos_finalizados"),
     path('emprestimos', views.exibir_emprestimos, name='emprestimos'),
+    path('erro', views.pag_falha, name='pag_falha'),
+
 
 ]

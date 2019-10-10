@@ -2,18 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a845b8-77f1-4301-9d0b-f0a6d8da5335" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/emprestimo/templates/pag_emp_finalizados.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controle/templates/pag_falha.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/emprestimos.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/emprestimos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/listar.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/listar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_detalhes.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_detalhes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_emprestimo.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_emprestimo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_rejeitar.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_rejeitar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/emprestimo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/emprestimo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/templates/my_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/templates/my_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/templates/exibir.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/templates/exibir.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +46,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/controle/templates/equipamentos/temp_removidos" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -161,7 +159,11 @@
       <workItem from="1569717251138" duration="409000" />
       <workItem from="1569851154246" duration="8539000" />
       <workItem from="1570241850775" duration="15047000" />
-      <workItem from="1570461441387" duration="4200000" />
+      <workItem from="1570461441387" duration="4751000" />
+      <workItem from="1570542465779" duration="5000" />
+      <workItem from="1570664105380" duration="526000" />
+      <workItem from="1570059884929" duration="189000" />
+      <workItem from="1569800917396" duration="285000" />
     </task>
     <servers />
   </component>

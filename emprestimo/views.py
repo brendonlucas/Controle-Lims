@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.utils.decorators import method_decorator
 from controle.models import Item
+
 from emprestimo.forms import *
 from emprestimo.models import *
 
@@ -62,8 +63,17 @@ def aceita_solicitacao(request, solicitacao_id):
     if get_usuario_logado(request).is_superuser:
         solicitacao = Emprestimo.objects.get(id=solicitacao_id)
         solicitacao.tipo = TipoEstadoEmprestimo.objects.get(id=2)
-        solicitacao.save()
-        return redirect('exibir_solicitacoes')
+        item = Item.objects.get(id=solicitacao.equipamento.id)
+        qtd = item.quantidade
+        if qtd > solicitacao.quantidade:
+            item.quantidade = qtd - solicitacao.quantidade
+            item.save()
+            solicitacao.save()
+            return redirect('exibir_solicitacoes')
+        else:
+            messages.error(request, 'A quantidade de itens do pedido é maior que a disponivel:')
+            return redirect('pag_falha')
+
     else:
         redirect('emprestimos')
 
@@ -91,6 +101,10 @@ def rejeita_solicitacao(request, solicitacao_id):
                           {'form': form, 'emprestimo': solicitacao, 'user_logado': get_usuario_logado(request)})
     else:
         return render(request, 'emprestimos.html')
+
+@login_required
+def pag_falha(request):
+    return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 
 @login_required
