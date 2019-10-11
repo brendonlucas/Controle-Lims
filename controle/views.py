@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator
@@ -43,13 +44,13 @@ def add_equipamento(request):
             return render(request, 'equipamentos/adicionar.html',
                           {'form': form, 'user_logado': get_usuario_logado(request)})
     else:
-        return render(request, 'emprestimos.html', {'emprestimos': Emprestimo.objects.all(),
-                                                    'user_logado': get_usuario_logado(request)})
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 
 @login_required
 def exibir_equipamentos(request):
-    itens = Item.objects.filter(excluido=False)
+    itens = Item.objects.filter(excluido=False).exclude(quantidade=0)
     paginator = Paginator(itens, 8)
     page = request.GET.get('page')
     itens = paginator.get_page(page)
@@ -59,8 +60,11 @@ def exibir_equipamentos(request):
 
 @login_required
 def opcoes_admin(request):
-    return render(request, 'opcoes_admin.html', {'user_logado': get_usuario_logado(request)})
-
+    if get_usuario_logado(request).is_superuser:
+        return render(request, 'opcoes_admin.html', {'user_logado': get_usuario_logado(request)})
+    else:
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 @login_required
 def exibir_ajuda(request):
@@ -81,33 +85,34 @@ def excluir_item(request, item_id):
         item.save()
         return redirect('equipamentos')
     else:
-        return redirect('emprestimos')
-
-# remover
-@method_decorator(permission_required('user.is_superuser'), name='dispatch')
-class Editar(UpdateView):
-    template_name = "equipamentos/editar.html"
-    model = Item
-    fields = '__all__'
-    context_object_name = 'item'
-    success_url = reverse_lazy("equipamentos")
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 
+@login_required
 def exibe_excluidos(request):
     if get_usuario_logado(request).is_superuser:
         itens = Item.objects.filter(excluido=True)
         return render(request, 'equipamentos/temp_removidos/excluidos.html',
                       {'user_logado': get_usuario_logado(request), 'itens': itens})
-
-
-def item_editar(request, pk):
-    item = get_object_or_404(Item, pk=pk)
-    if request.method == "POST":
-        form = ItemForm(request.POST, request.FILES, instance=item)
-        if form.is_valid():
-            item = form.save(commit=False)
-            item.save()
-            return redirect('equipamentos')
     else:
-        form = ItemForm(instance=item)
-    return render(request, 'equipamentos/adicionar.html', {'form': form, 'user_logado': get_usuario_logado(request)})
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+
+
+@login_required
+def item_editar(request, pk):
+    if get_usuario_logado(request).is_superuser:
+        item = get_object_or_404(Item, pk=pk)
+        if request.method == "POST":
+            form = ItemForm(request.POST, request.FILES, instance=item)
+            if form.is_valid():
+                item = form.save(commit=False)
+                item.save()
+                return redirect('equipamentos')
+        else:
+            form = ItemForm(instance=item)
+        return render(request, 'equipamentos/adicionar.html', {'form': form, 'user_logado': get_usuario_logado(request)})
+    else:
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})

@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
@@ -24,9 +25,8 @@ class RegistrarUsuarioView(View):
         if get_usuario_logado(request).is_superuser:
             return render(request, self.template_name, {'user_logado': get_usuario_logado(request)})
         else:
-            return render(request, 'emprestimos.html',
-                          {'emprestimos': Emprestimo.objects.all().order_by('data_emprestimo'),
-                           'user_logado': get_usuario_logado(request)})
+            messages.error(request, 'Acesso negado!')
+            return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
     def post(self, request):
         if get_usuario_logado(request).is_superuser:
@@ -50,7 +50,11 @@ class RegistrarUsuarioAdminView(View):
     template_name = 'adicionar_usuario.html'
 
     def get(self, request):
-        return render(request, self.template_name, {'user_logado': get_usuario_logado(request)})
+        if get_usuario_logado(request).is_superuser:
+            return render(request, self.template_name, {'user_logado': get_usuario_logado(request)})
+        else:
+            messages.error(request, 'Acesso negado!')
+            return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
     def post(self, request):
         form = RegistrarUsuarioForm(request.POST)
@@ -71,13 +75,16 @@ class RegistrarUsuarioAdminView(View):
 
 @login_required
 def exibir_usuarios(request):
-    usuarios = Usuario.objects.all().order_by('-user__first_name')
-    paginator = Paginator(usuarios, 8)
-    page = request.GET.get('page')
-    usuarios = paginator.get_page(page)
-    return render(request, 'exibir_usuarios.html',
-                  {'user_logado': get_usuario_logado(request), 'usuarios': usuarios})
-
+    if get_usuario_logado(request).is_superuser:
+        usuarios = Usuario.objects.all().order_by('-user__first_name')
+        paginator = Paginator(usuarios, 8)
+        page = request.GET.get('page')
+        usuarios = paginator.get_page(page)
+        return render(request, 'exibir_usuarios.html',
+                      {'user_logado': get_usuario_logado(request), 'usuarios': usuarios})
+    else:
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 @login_required
 def exibir_um_usuario(request, usuario_id):

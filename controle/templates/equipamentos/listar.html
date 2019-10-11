@@ -3,7 +3,9 @@
   {% if itens %}
   <ul class="card-deck" style="padding-left: 17px">
     {% for item in itens %}
+    {% if item.quantidade > 0 %}
       {% include 'equipamentos/preview.html' with item=item %}
+    {% endif %}
     {% endfor %}
   </ul>
   {% else %}

@@ -65,7 +65,7 @@ def aceita_solicitacao(request, solicitacao_id):
         solicitacao.tipo = TipoEstadoEmprestimo.objects.get(id=2)
         item = Item.objects.get(id=solicitacao.equipamento.id)
         qtd = item.quantidade
-        if qtd > solicitacao.quantidade:
+        if  qtd >= solicitacao.quantidade:
             item.quantidade = qtd - solicitacao.quantidade
             item.save()
             solicitacao.save()
@@ -102,6 +102,7 @@ def rejeita_solicitacao(request, solicitacao_id):
     else:
         return render(request, 'emprestimos.html')
 
+
 @login_required
 def pag_falha(request):
     return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
@@ -134,7 +135,7 @@ def fazer_devolucao(request, emprestimo_id):
         emprestimo.save()
         return redirect('emprestimos')
 
-
+@login_required
 def exibir_emprestimos_finalizados(request):
     emprestimos_finalizados = Emprestimo.objects.filter(tipo=4).order_by('-data_devolucao')
     paginator = Paginator(emprestimos_finalizados, 8)
@@ -142,3 +143,38 @@ def exibir_emprestimos_finalizados(request):
     emprestimos_finalizados = paginator.get_page(page)
     return render(request, 'pag_emp_finalizados.html',
                   {'emprestimos': emprestimos_finalizados, 'user_logado': get_usuario_logado(request)})
+
+@login_required
+def reservar_equipamento(request, item_id):
+    if get_usuario_logado(request).is_superuser:
+        form = FormQuantidade()
+        item = Item.objects.get(id=item_id)
+        if request.method == 'POST':
+            form = FormQuantidade(request.POST, request.FILES)
+            if form.is_valid():
+                qtd = form.cleaned_data['quantidade']
+                descricao = form.cleaned_data['descicao']
+                usuario = Usuario.objects.get(user=get_usuario_logado(request).id)
+                if qtd <= item.quantidade:
+                    tipo = TipoEstadoEmprestimo.objects.get(id=2)
+                    item.quantidade = item.quantidade - qtd
+                    data_atual = date.today()
+                    emprestimo = Emprestimo(equipamento=item, solicitante=usuario, data_emprestimo=data_atual,
+                                            tipo=tipo,
+                                            descricao=descricao, quantidade=qtd)
+                    emprestimo.save()
+                    item.save()
+                    return redirect('equipamentos')
+                else:
+                    messages.error(request, 'Quantidade maior que a disponivel')
+                    return redirect('solicitar_emprestimo', item_id)
+            else:
+                messages.error(request, 'Prencha todos os campos!')
+                return redirect('solicitar_emprestimo', item_id)
+
+        elif request.method == 'GET':
+            return render(request, 'pag_emprestimo.html',
+                          {'form': form, 'user_logado': get_usuario_logado(request), 'item': item})
+    else:
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
