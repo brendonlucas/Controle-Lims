@@ -23,5 +23,6 @@ class Emprestimo(models.Model):
     data_emprestimo = models.DateField(null=False)
     data_devolucao = models.DateField(null=True)
     mensagem_rejeitado = models.CharField(max_length=255, null=True)
+    mensagem_devolucao = models.CharField(max_length=255, null=True)
 
 

@@ -51,8 +51,8 @@
                       {% if emprestimo.data_devolucao == none %}
                       <a class="btn btn-sm btn-danger" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Devolvido</a>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                          <a class="dropdown-item" href="{% url 'item_devolvido' emprestimo.id %}">Sim</a>
-                          <a class="dropdown-item" href="#">Não</a>
+                          <a class="dropdown-item" href="{% url 'item_devolvido' emprestimo.id %}">Normal</a>
+                          <a class="dropdown-item" href="{% url 'item_devolvido_parcial' emprestimo.id %}">Parcial</a>
                       </div>
                       {% endif %}
                   </td>
@@ -90,5 +90,7 @@
         </li>
       {% endif %}
   </ul>
+        <br>
+        <br>
 {% endif %}
 {% endblock %}

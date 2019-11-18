@@ -23,7 +23,7 @@ def solicitar_item(request, item_id):
         form = FormQuantidade(request.POST, request.FILES)
         if form.is_valid():
             qtd = form.cleaned_data['quantidade']
-            descricao = form.cleaned_data['descicao']
+            descricao = form.cleaned_data['descricao']
             usuario = Usuario.objects.get(user=get_usuario_logado(request).id)
             if qtd <= item.quantidade:
                 tipo = TipoEstadoEmprestimo.objects.get(id=1)
@@ -127,13 +127,50 @@ def exibir_detalhes(request, solicitacao_id):
 
 
 @login_required
-def fazer_devolucao(request, emprestimo_id):
+def fazer_devolucao_normal(request, emprestimo_id):
     if get_usuario_logado(request).is_superuser:
         emprestimo = Emprestimo.objects.get(id=emprestimo_id)
+        equipamento = Item.objects.get(id=emprestimo.equipamento.id)
+        equipamento.quantidade = equipamento.quantidade + emprestimo.quantidade
+        equipamento.save()
         emprestimo.data_devolucao = date.today()
         emprestimo.tipo_id = 4
         emprestimo.save()
         return redirect('emprestimos')
+
+
+@login_required
+def fazer_devolucao_parcial(request, emprestimo_id):
+    if get_usuario_logado(request).is_superuser:
+        form = FormQuantidade()
+        emprestimo = Emprestimo.objects.get(id=emprestimo_id)
+
+        if request.method == 'GET':
+            return render(request, 'pag_devolucao_parcial.html',
+                          {'form': form, 'user_logado': get_usuario_logado(request), 'emprestimo': emprestimo})
+
+        elif request.method == 'POST':
+            form = FormQuantidade(request.POST)
+            if form.is_valid():
+                equipamento = Item.objects.get(id=emprestimo.equipamento.id)
+                qtd = form.cleaned_data['quantidade']
+
+                descricao = form.cleaned_data['descricao']
+                if qtd <= emprestimo.quantidade:
+                    equipamento.quantidade = equipamento.quantidade + qtd
+                    equipamento.save()
+                    emprestimo.mensagem_devolucao = descricao
+                    emprestimo.data_devolucao = date.today()
+                    emprestimo.tipo_id = 4
+                    emprestimo.save()
+                    return redirect('emprestimos')
+                else:
+                    messages.error(request, 'Quantidade maior que a disponivel no pedido')
+                    return redirect('item_devolvido_parcial', emprestimo_id)
+            else:
+                messages.error(request, 'Prencha todos os campos!')
+                return redirect('item_devolvido_parcial', emprestimo_id)
+
 
 @login_required
 def exibir_emprestimos_finalizados(request):
@@ -153,7 +190,7 @@ def reservar_equipamento(request, item_id):
             form = FormQuantidade(request.POST, request.FILES)
             if form.is_valid():
                 qtd = form.cleaned_data['quantidade']
-                descricao = form.cleaned_data['descicao']
+                descricao = form.cleaned_data['descricao']
                 usuario = Usuario.objects.get(user=get_usuario_logado(request).id)
                 if qtd <= item.quantidade:
                     tipo = TipoEstadoEmprestimo.objects.get(id=2)
