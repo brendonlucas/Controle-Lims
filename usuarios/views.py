@@ -19,7 +19,7 @@ def get_usuario_logado(request):
 
 @method_decorator(login_required, name='dispatch')
 class RegistrarUsuarioView(View):
-    template_name = 'adicionar_usuario.html'
+    template_name = 'add_usuario.html'
 
     def get(self, request):
         if get_usuario_logado(request).is_superuser:
@@ -47,7 +47,7 @@ class RegistrarUsuarioView(View):
 
 @method_decorator(login_required, name='dispatch')
 class RegistrarUsuarioAdminView(View):
-    template_name = 'adicionar_usuario.html'
+    template_name = 'add_usuario.html'
 
     def get(self, request):
         if get_usuario_logado(request).is_superuser:
@@ -124,5 +124,5 @@ class TrocarSenhaUserView(View):
                 user.password = hashed_pwd
                 user.save()
 
-            return redirect('exibe_meu_perfil', get_usuario_logado(request).id)
+            return redirect('exibe_meu_perfil')
         return render(request, self.template_name, {'form': form, 'user_logado': get_usuario_logado(request)})

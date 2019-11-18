@@ -55,7 +55,8 @@ def exibe_solicitacoes(request):
         return render(request, 'pag_solicitacoes.html', {'emprestimos': solicitacoes,
                                                          'user_logado': get_usuario_logado(request)})
     else:
-        redirect('emprestimos')
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 
 @login_required
@@ -65,7 +66,7 @@ def aceita_solicitacao(request, solicitacao_id):
         solicitacao.tipo = TipoEstadoEmprestimo.objects.get(id=2)
         item = Item.objects.get(id=solicitacao.equipamento.id)
         qtd = item.quantidade
-        if  qtd >= solicitacao.quantidade:
+        if qtd >= solicitacao.quantidade:
             item.quantidade = qtd - solicitacao.quantidade
             item.save()
             solicitacao.save()
@@ -73,9 +74,9 @@ def aceita_solicitacao(request, solicitacao_id):
         else:
             messages.error(request, 'A quantidade de itens do pedido é maior que a disponivel:')
             return redirect('pag_falha')
-
     else:
-        redirect('emprestimos')
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 
 @login_required
@@ -100,7 +101,8 @@ def rejeita_solicitacao(request, solicitacao_id):
             return render(request, 'pag_rejeitar.html',
                           {'form': form, 'emprestimo': solicitacao, 'user_logado': get_usuario_logado(request)})
     else:
-        return render(request, 'emprestimos.html')
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 
 @login_required
@@ -137,6 +139,9 @@ def fazer_devolucao_normal(request, emprestimo_id):
         emprestimo.tipo_id = 4
         emprestimo.save()
         return redirect('emprestimos')
+    else:
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 
 @login_required
@@ -144,11 +149,9 @@ def fazer_devolucao_parcial(request, emprestimo_id):
     if get_usuario_logado(request).is_superuser:
         form = FormQuantidade()
         emprestimo = Emprestimo.objects.get(id=emprestimo_id)
-
         if request.method == 'GET':
             return render(request, 'pag_devolucao_parcial.html',
                           {'form': form, 'user_logado': get_usuario_logado(request), 'emprestimo': emprestimo})
-
         elif request.method == 'POST':
             form = FormQuantidade(request.POST)
             if form.is_valid():
@@ -170,6 +173,9 @@ def fazer_devolucao_parcial(request, emprestimo_id):
             else:
                 messages.error(request, 'Prencha todos os campos!')
                 return redirect('item_devolvido_parcial', emprestimo_id)
+    else:
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 
 @login_required
@@ -180,6 +186,7 @@ def exibir_emprestimos_finalizados(request):
     emprestimos_finalizados = paginator.get_page(page)
     return render(request, 'pag_emp_finalizados.html',
                   {'emprestimos': emprestimos_finalizados, 'user_logado': get_usuario_logado(request)})
+
 
 @login_required
 def reservar_equipamento(request, item_id):

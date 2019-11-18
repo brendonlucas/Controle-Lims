@@ -43,9 +43,15 @@ class Emprestimo2(models.Model):
     data_emprestimo = models.DateField(auto_now_add=True)
     data_devolucao = models.DateField(null=True)
 
+# from emprestimo.models import *
+# from controle.models import *
+# t = TipoUsuario(nome='Normal', descricao='Usuario com acesso limitado').save()
+# t = TipoUsuario(nome='Administrador', descricao='Usuario com acesso total ao sistema').save()
 
-# t = TipoUsuario(nome='Normal', descricao='Usuario com acesso limitado')
-# t = TipoUsuario(nome='Administrador', descricao='Usuario com acesso total ao sistema')
+# e = TipoEquipamento(nome='Consumivel', descricao='Item do tipo consumivel que pode sofrer perda').save()
+# e = TipoEquipamento(nome='Permanente', descricao='Item do tipo Permanente que caso aja perda, medidas serão tomadas').save()
 
-# e = TipoEquipamento(nome='Consumivel', descricao='Item do tipo consumivel que pode sofrer perda')
-# e = TipoEquipamento(nome='Permanente', descricao='Item do tipo Permanente que caso aja perda, medidas serão tomadas')
+# t = TipoEstadoEmprestimo(nome='Solicitacao', descricao='Pedido no estado de solicitação').save()
+# t = TipoEstadoEmprestimo(nome='Aceito', descricao='Pedido foi aceito').save()
+# t = TipoEstadoEmprestimo(nome='Rejeitado', descricao='Pedido está rejeitado').save()
+# t = TipoEstadoEmprestimo(nome='Finalizado', descricao='Emprestimo está finalizado').save()

@@ -3,15 +3,15 @@
     <form method="post" action=".">
     {% csrf_token %}
         <label for="id_your_user"> Seu usuario: </label><br>
-        <input id="id_your_user" name="your_user" placeholder="Seu username" required autofocus><br><br>
+        <input class="form-control" id="id_your_user" name="your_user" placeholder="Seu username" required autofocus><br><br>
 
         <label for="id_pass_current"> Senha Atual: </label><br>
-        <input type="password" id="id_pass_current" name="current_pass" placeholder="Senha atual" required autofocus><br><br>
+        <input class="form-control" type="password" id="id_pass_current" name="current_pass" placeholder="Senha atual" required autofocus><br><br>
 
         <label for="id_pass_new"> Nova Senha: </label><br>
-        <input type="password" id="id_pass_new" placeholder="Senha Nova" name="new_pass" required autofocus><br><br>
+        <input class="form-control" type="password" id="id_pass_new" placeholder="Senha Nova" name="new_pass" required autofocus><br><br>
 
-        <button type="submit">Enviar</button>
+        <button type="submit" class="btn btn-success">Enviar</button>
     </form>
     {% if form.errors %}
             <div class="alert alert-danger">

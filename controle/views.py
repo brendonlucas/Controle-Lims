@@ -66,6 +66,7 @@ def opcoes_admin(request):
         messages.error(request, 'Acesso negado!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
+
 @login_required
 def exibir_ajuda(request):
     return render(request, 'ajuda.html', {'user_logado': get_usuario_logado(request)})
