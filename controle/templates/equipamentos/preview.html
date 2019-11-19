@@ -1,13 +1,24 @@
-
-<li class="media item-preview " style="width: 100%; max-width: 560px; min-width: 420px; " onMouseOver="this.style.backgroundColor='#f0f0f0'" onMouseOut="this.style.backgroundColor='#0000'">
-    
+{% if item.quantidade > 0 %}
+        <li class="media item-preview " style="width: 100%; max-width: 560px; min-width: 420px; " onMouseOver="this.style.backgroundColor='#f0f0f0'" onMouseOut="this.style.backgroundColor='#0000'">
+    {% else %}
+        <li class="media item-preview " style="background-color: #f0f0f0; width: 100%; max-width: 560px; min-width: 420px; " onMouseOver="this.style.backgroundColor='#ffe8ed'" onMouseOut="this.style.backgroundColor='#f0f0f0'">
+    {% endif %}
     <img  src="{{ item.imagem.url }}" alt="{{ item.nome }}" class="mr-3" width="100">
-    
     <div class="media-body">
     <h5 class="nome">{{item.nome}} </h5>
-    <p class="price">Quantidade: {{ item.quantidade }}</p>
+    {% if item.quantidade > 0 %}
+        <p class="price">Quantidade: {{ item.quantidade }}</p>
+    {% else %}
+        <p class="price">Indisponivel</p>
+    {% endif %}
+
     <a class="btn btn-sm btn-primary"  href="{% url 'equipamento' item.id %}">Visualizar</a>
-    <a class="btn btn-sm btn-success" href="{% url 'solicitar_emprestimo' item.id %}" >Pegar</a>
+    {% if item.quantidade > 0 %}
+        <a class="btn btn-sm btn-success" href="{% url 'solicitar_emprestimo' item.id %}" >Pegar</a>
+        {% if user_logado.is_superuser %}
+        <a class="btn btn-sm btn-info" href="{% url 'reservar_equipamento' item.id %}">Reservar</a>
+        {% endif %}
+    {% endif %}
     {% if user_logado.is_superuser %}
         <a class="btn btn-sm btn-light" href="{% url 'editar_equipamento' pk=item.id %}">Editar</a>
         <a class="btn btn-sm btn-danger" href="" role="button" id="dropdownMenuLink"
@@ -16,7 +27,7 @@
             <a class="dropdown-item" href="{% url 'excluir' item.id %}">Sim</a>
             <a class="dropdown-item" href="#">Não</a>
         </div>
-        <a class="btn btn-sm btn-info" href="{% url 'reservar_equipamento' item.id %}">Reservar</a>
+
     {% endif %}
   </div>
 </li>

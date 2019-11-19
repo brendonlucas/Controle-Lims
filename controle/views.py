@@ -50,7 +50,12 @@ def add_equipamento(request):
 
 @login_required
 def exibir_equipamentos(request):
+
     itens = Item.objects.filter(excluido=False).exclude(quantidade=0)
+    itens2 = Item.objects.filter(quantidade=0)
+
+    itens = itens.union(itens2, all=True)
+
     paginator = Paginator(itens, 8)
     page = request.GET.get('page')
     itens = paginator.get_page(page)

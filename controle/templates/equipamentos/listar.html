@@ -5,6 +5,8 @@
     {% for item in itens %}
     {% if item.quantidade > 0 %}
       {% include 'equipamentos/preview.html' with item=item %}
+    {% else %}
+        {% include 'equipamentos/preview.html' with item=item %}
     {% endif %}
     {% endfor %}
   </ul>

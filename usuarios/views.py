@@ -118,11 +118,18 @@ class TrocarSenhaUserView(View):
             dados_form = form.data
             nova_senha = dados_form['new_pass']
             senha_atual = dados_form['current_pass']
-            if get_usuario_logado(request).check_password(senha_atual):
-                hashed_pwd = make_password(nova_senha)
-                user = get_usuario_logado(request)
-                user.password = hashed_pwd
-                user.save()
-
-            return redirect('exibe_meu_perfil')
+            name_user = dados_form['your_user']
+            if name_user == get_usuario_logado(request).username:
+                if get_usuario_logado(request).check_password(senha_atual):
+                    hashed_pwd = make_password(nova_senha)
+                    user = get_usuario_logado(request)
+                    user.password = hashed_pwd
+                    user.save()
+                    return redirect('exibe_meu_perfil')
+                else:
+                    messages.error(request, 'Senha atual incorreta!')
+                    redirect('mudar_senha')
+            else:
+                messages.error(request, 'Username incorreto!')
+                redirect('mudar_senha')
         return render(request, self.template_name, {'form': form, 'user_logado': get_usuario_logado(request)})

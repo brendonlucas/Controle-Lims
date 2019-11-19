@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% block 'content' %}
-    <div>
-        <p class="titulo"> Opções do Docente:<p>
-        <a class="btn btn-lg btn-primary" href="{% url 'adicionar_usuario' %}" >  Adicionar Usuario </a>
-        <a class="btn btn-lg btn-primary" href="{% url 'adicionar_admin' %}" >  Adicionar Administrador </a>
-        <a class="btn btn-lg btn-primary" href="{% url 'adicionar_equipamento' %}" >  Adicionar Equipamento </a>
+    <div class="#">
+        <h4 style="font-weight: bold"> Opções do Docente:</h4>
+        <a style="margin: 5px; width: 100%" class="btn btn-lg btn-primary" href="{% url 'adicionar_usuario' %}" >  Adicionar Usuario </a>
+        <a style="margin: 5px; width: 100% " class="btn btn-lg btn-primary" href="{% url 'adicionar_admin' %}" >  Adicionar Administrador </a>
+        <a style="margin: 5px; width: 100%" class="btn btn-lg btn-primary" href="{% url 'adicionar_equipamento' %}" >  Adicionar Equipamento </a>
+        <a style="margin: 5px; width: 100%" class="btn btn-lg btn-primary" href="#" >  Relatórios </a>
     </div>
 
 {% endblock %}
