@@ -3,15 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b0a845b8-77f1-4301-9d0b-f0a6d8da5335" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/listar.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/listar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/preview.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/preview.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/opcoes_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/opcoes_admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_devolucao_parcial.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_devolucao_parcial.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/templates/alterar_senha.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/templates/alterar_senha.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_solicitacoes.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_solicitacoes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/templates/my_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/templates/my_profile.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -167,7 +162,8 @@
       <workItem from="1569800917396" duration="285000" />
       <workItem from="1574109602254" duration="88000" />
       <workItem from="1574109712042" duration="6974000" />
-      <workItem from="1574116725346" duration="6751000" />
+      <workItem from="1574116725346" duration="7604000" />
+      <workItem from="1574133888643" duration="2207000" />
     </task>
     <servers />
   </component>
