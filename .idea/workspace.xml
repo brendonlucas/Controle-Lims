@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a845b8-77f1-4301-9d0b-f0a6d8da5335" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/usuarios/templates/pag_ajuda.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_solicitacoes.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_solicitacoes.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usuarios/templates/my_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/templates/my_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,6 +35,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="InvalidFacetManager">
+    <ignored-facets>
+      <facet id="sige/invalid/Django" />
+    </ignored-facets>
+  </component>
   <component name="ProjectId" id="1RNLVAmJg4QWNJ1tShOjIOKjMj7" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -41,7 +48,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/usuarios/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -163,7 +170,8 @@
       <workItem from="1574109602254" duration="88000" />
       <workItem from="1574109712042" duration="6974000" />
       <workItem from="1574116725346" duration="7604000" />
-      <workItem from="1574133888643" duration="2207000" />
+      <workItem from="1574133888643" duration="2437000" />
+      <workItem from="1574212220038" duration="3000" />
     </task>
     <servers />
   </component>

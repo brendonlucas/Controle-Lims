@@ -86,6 +86,7 @@ def exibir_usuarios(request):
         messages.error(request, 'Acesso negado!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
+
 @login_required
 def exibir_um_usuario(request, usuario_id):
     usuario = Usuario.objects.get(id=usuario_id)
@@ -133,3 +134,8 @@ class TrocarSenhaUserView(View):
                 messages.error(request, 'Username incorreto!')
                 redirect('mudar_senha')
         return render(request, self.template_name, {'form': form, 'user_logado': get_usuario_logado(request)})
+
+
+@login_required
+def exibir_ajuda(request):
+    return render(request, 'pag_ajuda.html', {'user_logado': get_usuario_logado(request)})

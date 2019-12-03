@@ -10,13 +10,13 @@ from emprestimo.views import exibir_emprestimos
 
 urlpatterns = [
     path('', exibir_emprestimos, name='root'),
-    path('equipamento', views.exibir_equipamentos, name='equipamentos'),
+    path('equipamento/', views.exibir_equipamentos, name='equipamentos'),
     path('equipamento/novo/', views.add_equipamento, name='adicionar_equipamento'),
-    path('equipamento/<int:item_id>', views.exibir_um_equipamento, name='equipamento'),
+    path('equipamento/<int:item_id>/', views.exibir_um_equipamento, name='equipamento'),
     path('equipamento/<pk>/editar/', views.item_editar, name='editar_equipamento'),
     path('equipamento/<int:item_id>/excluir/',views.excluir_item, name='excluir'),
-    path('equipamento/excluidos',views.exibe_excluidos, name='itens_excluidos'),
-    path('painel_administração/', views.opcoes_admin, name='painel_admin'),
+    path('equipamento/excluidos/',views.exibe_excluidos, name='itens_excluidos'),
+    path('painel_administracao/', views.opcoes_admin, name='painel_admin'),
     path('registrar/', RegistrarUsuarioView.as_view(), name="adicionar_usuario"),
     path('registrar_administrador/', RegistrarUsuarioAdminView.as_view(), name="adicionar_admin"),
     path('login/', v.LoginView.as_view(template_name='login.html'), name='login'),
