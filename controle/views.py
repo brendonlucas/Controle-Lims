@@ -52,7 +52,7 @@ def add_equipamento(request):
 def exibir_equipamentos(request):
 
     itens = Item.objects.filter(excluido=False).exclude(quantidade=0)
-    itens2 = Item.objects.filter(quantidade=0)
+    itens2 = Item.objects.filter(quantidade=0).exclude(excluido=True)
 
     itens = itens.union(itens2, all=True)
 
