@@ -13,6 +13,7 @@ from emprestimo.models import *
 from controle.models import *
 
 
+
 @login_required
 def home(request):
     return render(request, 'home.html',
@@ -50,7 +51,6 @@ def add_equipamento(request):
 
 @login_required
 def exibir_equipamentos(request):
-
     itens = Item.objects.filter(excluido=False).exclude(quantidade=0)
     itens2 = Item.objects.filter(quantidade=0).exclude(excluido=True)
 
@@ -118,7 +118,11 @@ def item_editar(request, pk):
                 return redirect('equipamentos')
         else:
             form = ItemForm(instance=item)
-        return render(request, 'equipamentos/adicionar.html', {'form': form, 'user_logado': get_usuario_logado(request)})
+        return render(request, 'equipamentos/adicionar.html',
+                      {'form': form, 'user_logado': get_usuario_logado(request)})
     else:
         messages.error(request, 'Acesso negado!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+
+
+

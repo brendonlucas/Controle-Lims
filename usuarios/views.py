@@ -8,6 +8,9 @@ from django.views.generic.base import View
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.hashers import make_password, check_password
 
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+
 from controle.models import *
 from emprestimo.models import *
 from usuarios.forms import *
@@ -139,3 +142,9 @@ class TrocarSenhaUserView(View):
 @login_required
 def exibir_ajuda(request):
     return render(request, 'pag_ajuda.html', {'user_logado': get_usuario_logado(request)})
+
+
+def handler404(request, exception, template_name="page_404.html"):
+    response = render_to_response("page_404.html")
+    response.status_code = 404
+    return response
