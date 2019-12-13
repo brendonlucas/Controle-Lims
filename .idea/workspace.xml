@@ -2,38 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a845b8-77f1-4301-9d0b-f0a6d8da5335" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/controle/migrations/0029_delete_emprestimo2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controle/migrations/0030_item_quantidade_emprestada.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/adicionar_usuario.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/adicionar_usuario.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/ajuda.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/emprestimos.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/emprestimos.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/adicionar.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/adicionar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/editar.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/editar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/exibir.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/exibir.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/listar.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/listar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/preview.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/preview.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/temp_removidos/excluidos.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/temp_removidos/excluidos.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/temp_removidos/preview.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/temp_removidos/preview.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/opcoes_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/opcoes_admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/pag_falha.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/pag_falha.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_detalhes.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_detalhes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_devolucao_parcial.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_devolucao_parcial.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_emp_finalizados.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_emp_finalizados.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_emprestimo.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_emprestimo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sige/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/sige/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sige/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/sige/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/templates/my_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/templates/my_profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/templates/pag_ajuda.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/templates/pag_ajuda.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
