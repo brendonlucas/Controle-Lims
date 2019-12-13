@@ -2,24 +2,24 @@
 {% load widget_tweaks %}
 {% block 'content' %}
 <div class="formu">
-<h3 style="margin-left: 20px; font-weight: bold">Editar Equipamento</h3>
-   <form action="." method="POST" enctype="multipart/form-data">
-       {% csrf_token %}
-       <label> Nome: </label> <br>
-            {% render_field form.nome %}
+    <h3 style="margin-left: 20px; font-weight: bold">Editar Equipamento</h3>
+    <form action="." method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label> Nome: </label> <br>
+        {% render_field form.nome %}
 
-       <label> Quantidade:</label> <br>
-            {% render_field form.quantidade %}
+        <label> Quantidade:</label> <br>
+        {% render_field form.quantidade %}
 
-       <label> Tipo:</label> <br>
-            {% render_field form.tipo %}
+        <label> Tipo:</label> <br>
+        {% render_field form.tipo %}
 
-       <label> Imagem: </label> <br>
+        <label> Imagem: </label> <br>
 
-            {% render_field form.imagem %}
-<br>
-	<button type="submit" value="OK"> Adicionar</button>
-	</form>
+        {% render_field form.imagem %}
+        <br>
+        <button type="submit" value="OK"> Adicionar</button>
+    </form>
 </div>
 
 {% endblock %}

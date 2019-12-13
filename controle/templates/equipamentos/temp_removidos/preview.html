@@ -1,8 +1,9 @@
 <li class="media item-preview" style="max-width: 500px; min-width: 300px ">
-    <img  src="{{ item.imagem.url }}" alt="{{ item.nome }}" class="mr-3" width="100">
+    <img src="{{ item.imagem.url }}" alt="{{ item.nome }}" class="mr-3" width="100">
     <div class="media-body">
-    <h5 class="nome">{{item.nome}} </h5>
-    <p class="price">Quantidade: {{ item.quantidade }}</p>
+        <h5 class="nome">{{item.nome}} </h5>
+        <p class="price">Quantidade: {{ item.quantidade }}</p>
+        <a class="btn btn-sm btn-success" href="{% url 'restaurar_item' item.id %}">Restaurar</a>
         <!--
     {% if user_logado.is_superuser %}
         <a class="btn btn-sm btn-danger" href="" role="button" id="dropdownMenuLink"
@@ -13,5 +14,5 @@
         </div>
     {% endif %}
     -->
-  </div>
+    </div>
 </li>

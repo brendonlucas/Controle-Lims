@@ -1,23 +1,9 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate
-from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator
-from django.http import HttpResponse
-from django.urls import reverse_lazy
-from django.views.generic import UpdateView
 from django.contrib.auth.decorators import *
-from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect, get_object_or_404
 from controle.forms import *
-from emprestimo.models import *
 from controle.models import *
-
-
-
-@login_required
-def home(request):
-    return render(request, 'home.html',
-                  {'emprestimos': Emprestimo.objects.all(), 'user_logado': get_usuario_logado(request)})
 
 
 def get_usuario_logado(request):
@@ -73,11 +59,6 @@ def opcoes_admin(request):
 
 
 @login_required
-def exibir_ajuda(request):
-    return render(request, 'ajuda.html', {'user_logado': get_usuario_logado(request)})
-
-
-@login_required
 def exibir_um_equipamento(request, item_id):
     item = Item.objects.get(id=item_id)
     return render(request, 'equipamentos/exibir.html', {'item': item, 'user_logado': get_usuario_logado(request)})
@@ -125,4 +106,13 @@ def item_editar(request, pk):
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 
-
+@login_required
+def restaurar_item(request, item_id):
+    if get_usuario_logado(request).is_superuser:
+        item = Item.objects.get(id=item_id)
+        item.excluido = False
+        item.save()
+        return redirect('itens_excluidos')
+    else:
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})

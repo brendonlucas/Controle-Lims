@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block 'content' %}
-  {% if itens %}
-  <ul class="card-deck" style="padding-left: 17px">
+{% if itens %}
+<ul class="card-deck" style="padding-left: 17px">
     {% for item in itens %}
-      {% include 'equipamentos/temp_removidos/preview.html' with item=item %}
+    {% include 'equipamentos/temp_removidos/preview.html' with item=item %}
     {% endfor %}
-  </ul>
-  {% else %}
-    <p style="font-size: 30px; font-weight: bold; text-align:center">Nenhum item encontrado <br> :( </p>
-  {% endif %}
+</ul>
+{% else %}
+<p style="font-size: 30px; font-weight: bold; text-align:center">Nenhum item encontrado <br> :( </p>
+{% endif %}
 {% endblock %}

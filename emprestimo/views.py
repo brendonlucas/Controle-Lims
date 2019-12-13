@@ -1,11 +1,9 @@
 from datetime import date
 from django.contrib import messages
 from django.core.paginator import Paginator
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.utils.decorators import method_decorator
-from controle.models import Item
+
 
 from emprestimo.forms import *
 from emprestimo.models import *
@@ -68,6 +66,7 @@ def aceita_solicitacao(request, solicitacao_id):
         qtd = item.quantidade
         if qtd >= solicitacao.quantidade:
             item.quantidade = qtd - solicitacao.quantidade
+            item.quantidade_emprestada = item.quantidade_emprestada + solicitacao.quantidade
             item.save()
             solicitacao.save()
             return redirect('exibir_solicitacoes')
@@ -124,8 +123,9 @@ def exibir_emprestimos(request):
 @login_required
 def exibir_detalhes(request, solicitacao_id):
     solicitacao = Emprestimo.objects.get(id=solicitacao_id)
-    return render(request, 'pag_detalhes.html',
-                  {'user_logado': get_usuario_logado(request), 'solicitacao': solicitacao})
+    if solicitacao.estado == 1:
+        return render(request, 'pag_detalhes.html',
+                      {'user_logado': get_usuario_logado(request), 'solicitacao': solicitacao})
 
 
 @login_required
@@ -134,6 +134,7 @@ def fazer_devolucao_normal(request, emprestimo_id):
         emprestimo = Emprestimo.objects.get(id=emprestimo_id)
         equipamento = Item.objects.get(id=emprestimo.equipamento.id)
         equipamento.quantidade = equipamento.quantidade + emprestimo.quantidade
+        equipamento.quantidade_emprestada = equipamento.quantidade_emprestada - emprestimo.quantidade
         equipamento.save()
         emprestimo.data_devolucao = date.today()
         emprestimo.tipo_id = 4
@@ -161,6 +162,7 @@ def fazer_devolucao_parcial(request, emprestimo_id):
                 descricao = form.cleaned_data['descricao']
                 if qtd <= emprestimo.quantidade:
                     equipamento.quantidade = equipamento.quantidade + qtd
+                    equipamento.quantidade_emprestada = equipamento.quantidade_emprestada - emprestimo.quantidade
                     equipamento.save()
                     emprestimo.mensagem_devolucao = descricao
                     emprestimo.data_devolucao = date.today()
@@ -202,6 +204,8 @@ def reservar_equipamento(request, item_id):
                 if qtd <= item.quantidade:
                     tipo = TipoEstadoEmprestimo.objects.get(id=2)
                     item.quantidade = item.quantidade - qtd
+                    item.quantidade_emprestada = item.quantidade_emprestada + qtd
+
                     data_atual = date.today()
                     emprestimo = Emprestimo(equipamento=item, solicitante=usuario, data_emprestimo=data_atual,
                                             tipo=tipo,

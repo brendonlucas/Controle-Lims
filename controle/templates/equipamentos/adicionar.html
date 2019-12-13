@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block 'content' %}
-    {% load widget_tweaks %}
+{% load widget_tweaks %}
 <div class="formu" style="overflow-y:auto;">
-<h3 style="margin-left: 20px; font-weight: bold">Dados do Equipamento</h3>
-   <form action="." method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p}}
-	<button class="btn btn-primary" type="submit" value="OK"> Adicionar</button>
-	</form>
+    <h3 style="margin-left: 20px; font-weight: bold">Dados do Equipamento</h3>
+    <form action="." method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button class="btn btn-primary" type="submit" value="OK"> Adicionar</button>
+    </form>
 </div>
 {% endblock %}

@@ -1,46 +1,43 @@
 {% extends 'base.html' %}
 {% block 'content' %}
-   <div class="page-header">
+<div class="page-header">
     <div class="btn-group float-right">
         {% if item.quantidade > 0 %}
-        <a class="btn btn-sm btn-success" href=# >Pegar</a>
+        <a class="btn btn-sm btn-success" href="{% url 'solicitar_emprestimo' item.id %}">Pegar</a>
         {% endif %}
         {% if user_logado.is_superuser %}
-            <a class="btn btn-sm btn-light" href="{% url 'editar_equipamento' pk=item.id %}">Editar</a>
-            <a class="btn btn-sm btn-danger" href="" role="button" id="dropdownMenuLink"
+        <a class="btn btn-sm btn-light" href="{% url 'editar_equipamento' pk=item.id %}">Editar</a>
+        <a class="btn btn-sm btn-danger" href="" role="button" id="dropdownMenuLink"
            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Excluir</a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="{% url 'excluir' item.id %}">Sim</a>
-                <a class="dropdown-item" href="#">Não</a>
-            </div>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'excluir' item.id %}">Sim</a>
+            <a class="dropdown-item" href="#">Não</a>
+        </div>
         {% endif %}
 
     </div>
     <span>Código: {{item.id}}</span>
     <h2>{{item.nome}}</h2>
-   </div>
-    <table class="table">
-        <tr>
-            <td>
-                    Quantidade: 
-            </td>
-            <td>
-                    {{item.quantidade}}
-            </td>
-        </tr>
-        <tr>
-                <td>
-                        Tipo: 
-                </td>
-                <td>
-                        {{item.tipo}}
-                </td>
-            </tr>
-    </table>
-    <br>
-    <img style="width: 300px; height: 200px" src="{{ item.imagem.url }}" alt="Item">
-    
 </div>
-</body>
-</html>
+<table class="table">
+    <tr>
+        <td>
+            Quantidade:
+        </td>
+        <td>
+            {{item.quantidade}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Tipo:
+        </td>
+        <td>
+            {{item.tipo}}
+        </td>
+    </tr>
+</table>
+<br>
+<img style="width: 300px; height: 200px" src="{{ item.imagem.url }}" alt="Item">
+
 {% endblock %}

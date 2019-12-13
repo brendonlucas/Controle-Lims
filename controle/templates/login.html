@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Entrar</title>
 </head>
-<style >
+<style>
 body {
 background-color: gray;
 }
@@ -47,26 +47,28 @@ background-color: lightgray;
 }
 
 
+
+
 </style>
 <body style="overflow-y: auto">
 <div class="box">
-    <img src= "http://lims.ifpi.edu.br/images/logo.png  " alt="some text" width=200 height=80>
-    <form action="{% url 'login' %}"  method="POST">
-        <h1 style="text-align: center; color: black" > ENTRAR </h1>
+    <img src="http://lims.ifpi.edu.br/images/logo.png  " alt="some text" width=200 height=80>
+    <form action="{% url 'login' %}" method="POST">
+        <h1 style="text-align: center; color: black"> ENTRAR </h1>
         {% csrf_token %}
         <label for="user">Usuario:</label>
         <input id="user" name="username" type="text" placeholder="Usuario" required autofocus>
         <br><br>
         <label for="senha">Senha:</label>
         <input id="senha" type="password" name="password" placeholder="Senha" required>
-        <button class="entrar" type="submit" value="Entar">Entrar </button>
+        <button class="entrar" type="submit" value="Entar">Entrar</button>
     </form>
     {% if form.errors %}
-            <div style="padding: 5px; background-color: #ff6d70">
-                <p >Por favor, verifique o Email e/ou Senha informados </p>
-            </div>
+    <div style="padding: 5px; background-color: #ff6d70">
+        <p>Por favor, verifique o Email e/ou Senha informados </p>
+    </div>
     {% endif %}
 
- </div>
+</div>
 </body>
 </html>

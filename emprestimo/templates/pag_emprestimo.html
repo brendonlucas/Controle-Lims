@@ -1,23 +1,26 @@
 {% extends 'base.html' %}
 {% block 'content' %}
-    <div>
-        <p>Solicitando equipamento: <b style="font-size: 20px;">{{ item.nome }}</b> </p>
-        <p> Quantidade disponivel: <b style="font-size: 20px;">{{ item.quantidade }}</b></p>
-        <form method="post" action=".">
-            {% csrf_token %}
-            <label for="qtd_item"> Quantidade:</label><br>
-            <input class="form-control" id="qtd_item" type="number" name="quantidade" required minlength="1" style="max-width: 400px"><br>
-            <label for="txt-area"> Descrição:</label><br>
-            <textarea class="form-control" id="txt-area" name="descricao" maxlength="255" minlength="10" style="min-width: 20px; max-width: 400px; max-height: 100px; min-height: 100px" required> </textarea><br>
-            <button class="btn btn-success" type="submit"> Solicitar </button>
-        </form>
-        {% if messages %}
-        <ul style="background-color: #ff786e; padding: 5px" >
-            {% for message in messages %}
-                <li {% if message.tags %} class="{{ message.tags }}"{% endif %} style="display: inline">{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-    </div>
+<div>
+    <p>Solicitando equipamento: <b style="font-size: 20px;">{{ item.nome }}</b></p>
+    <p> Quantidade disponivel: <b style="font-size: 20px;">{{ item.quantidade }}</b></p>
+    <form method="post" action=".">
+        {% csrf_token %}
+        <label for="qtd_item"> Quantidade:</label><br>
+        <input class="form-control" id="qtd_item" type="number" name="quantidade" required minlength="1"
+               style="max-width: 400px"><br>
+        <label for="txt-area"> Descrição:</label><br>
+        <textarea class="form-control" id="txt-area" name="descricao" maxlength="255" minlength="10"
+                  style="min-width: 20px; max-width: 400px; max-height: 100px; min-height: 100px"
+                  required> </textarea><br>
+        <button class="btn btn-success" type="submit"> Solicitar</button>
+    </form>
+    {% if messages %}
+    <ul style="background-color: #ff786e; padding: 5px">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %} style="display: inline">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
 
 {% endblock %}

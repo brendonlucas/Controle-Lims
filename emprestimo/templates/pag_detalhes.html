@@ -1,37 +1,59 @@
 {% extends 'base.html' %}
 {% block 'content' %}
-   <div class="page-header">
+<style>
+    .box-info{
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #e3e3e3;
+    }
+
+
+
+</style>
+<div class="page-header">
     <div class="btn-group float-right">
         {% if user_logado.is_superuser %}
-            {% if solicitacao.tipo.id == 1 %}
-             <a class="btn btn-sm btn-primary" href="{% url 'aceita_solicitacao' solicitacao.id %}" >Aceitar</a>
-            <a class="btn btn-sm btn-danger" href="{% url 'rejeita_solicitacao' solicitacao.id %}" >Rejeitar</a>
+        {% if solicitacao.tipo.id == 1 %}
+        <a class="btn btn-sm btn-primary" href="{% url 'aceita_solicitacao' solicitacao.id %}">Aceitar</a>
+        <a class="btn btn-sm btn-danger" href="{% url 'rejeita_solicitacao' solicitacao.id %}">Rejeitar</a>
 
-            {% endif %}
+        {% endif %}
         {% endif %}
 
     </div>
     <span>Código: {{solicitacao.id}}</span>
     <h2>{{solicitacao.solicitante.user.first_name}} {{solicitacao.solicitante.user.last_name}}</h2>
-   </div>
-    <table class="table">
-        <tr>
-            <td>Equipamento:</td>
-            <td>{{solicitacao.equipamento.nome}}</td>
-        </tr>
-        <tr>
-            <td>Quantidade:</td>
-            <td>{{solicitacao.quantidade}}</td>
-        </tr>
-    </table>
-    <hr>
+</div>
+<table class="table">
+    <tr>
+        <td>Equipamento:</td>
+        <td>{{solicitacao.equipamento.nome}}</td>
+    </tr>
+    <tr>
+        <td>Quantidade:</td>
+        <td>{{solicitacao.quantidade}}</td>
+    </tr>
+</table>
+<hr>
+<div class="box-info">
     <h5> Descrição:</h5>
     <h6> {{ solicitacao.descricao }}</h6>
-    <br>
+</div>
+<br>
+
+<div class="box-info">
     {% if solicitacao.mensagem_rejeitado != none %}
-        <h5> Mensagem Rejeitada:</h5>
-        <h6> {{ solicitacao.mensagem_rejeitado }}</h6>
-        <br>
-    {% endif %}
+    <h5> Mensagem Rejeitada:</h5>
+    <h6> {{ solicitacao.mensagem_rejeitado }}</h6>
+</div>
+<br>
+{% endif %}
+
+{% if solicitacao.mensagem_devolucao != none %}
+<div class="box-info">
+    <h5> Mensagem De Devolução Parcial:</h5>
+    <h6> {{ solicitacao.mensagem_devolucao }}</h6>
+</div>
+{% endif %}
 
 {% endblock %}

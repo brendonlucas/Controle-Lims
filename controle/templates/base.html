@@ -1,11 +1,13 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="pt" >
-<head >
-<title>Inicio</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, user-scalable=no">
-<style>
+<html lang="pt">
+<head>
+    <title>Lims</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
   #sidebar {
     background: #f2f2f2;
   }
@@ -21,76 +23,84 @@
     border-left: 1px solid gray;
   }
 
-</style>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    </style>
 </head>
-<body >
-<header class="page-header" >
-	<div class="">
-    <div class="container-fluid" >
+<body>
+<header class="page-header">
+    <div class="">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <img src="http://lims.ifpi.edu.br/images/logo.png" alt="some text" width=200 height=80>
+                </div>
+            </div>
+        </div>
+        <br>
         <div class="row">
             <div class="col-12">
-                <img src= "http://lims.ifpi.edu.br/images/logo.png" alt="some text" width=200 height=80>
-            </div>
-          </div>
-    </div>
-    <br>
-    <div class="row" >
-        <div class="col-12" >
-            <nav class="navbar navbar-expand-sm navbar-light bg-light">
-
-    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button>
-
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav">
-        <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Equipamentos</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'equipamentos' %}" >Equipamentos </a>
-                        {% if user_logado.is_superuser %}
-                        <a class="dropdown-item" href="{% url 'adicionar_equipamento' %}">Adicionar</a>
-                        <a class="dropdown-item" href="{% url 'itens_excluidos' %}">Excluidos</a>
-                        {% endif %}
+                <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav">
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Equipamentos</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{% url 'equipamentos' %}">Equipamentos </a>
+                                    {% if user_logado.is_superuser %}
+                                    <a class="dropdown-item" href="{% url 'adicionar_equipamento' %}">Adicionar</a>
+                                    <a class="dropdown-item" href="{% url 'itens_excluidos' %}">Excluidos</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Emprestimos</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{% url 'emprestimos' %}">Emprestimos</a>
+                                    <a class="dropdown-item" href="{% url 'emprestimos_finalizados' %}">Finalizados</a>
+                                </div>
+                            </div>
+                            {% if user_logado.is_superuser %}
+                            <a class="nav-item nav-link" href="{% url 'exibir_solicitacoes' %}">Solicitações </a>
+                            <a class="nav-item nav-link" href="{% url 'exibir_usuarios' %}">Usuarios </a>
+                            <a class="nav-item nav-link" href="{% url 'painel_admin' %}">Painel </a>
+                            {% endif %}
+                        </div>
+                        <div class="navbar-nav dropdown ml-auto">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                {{ user_logado.username }}</a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="{% url 'exibe_meu_perfil' %}">Meu perfil</a>
+                                <a class="dropdown-item" href="{% url 'mudar_senha' %}">Trocar senha</a>
+                                <a class="dropdown-item" href="{% url 'exibir_ajuda' %}">Ajuda</a>
+                                <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-        <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Emprestimos</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'emprestimos' %}" >Emprestimos</a>
-                    <a class="dropdown-item" href="{% url 'emprestimos_finalizados' %}">Finalizados</a>
-                </div>
-        </div>
-            {% if user_logado.is_superuser %}
-                <a class="nav-item nav-link" href="{% url 'exibir_solicitacoes' %}" >Solicitações </a>
-                <a class="nav-item nav-link" href="{% url 'exibir_usuarios' %}" >Usuarios </a>
-                <a class="nav-item nav-link" href="{% url 'painel_admin' %}" >Painel </a>
-            {% endif %}
-
-        </div>
-        <div class="navbar-nav ml-auto">
-            <a class="nav-item nav-link" href="{% url 'exibe_meu_perfil' %}">{{ user_logado.username }}</a>
-            <a class="nav-item nav-link" href="{% url 'logout' %}">Sair</a>
+                </nav>
+            </div>
         </div>
     </div>
-</nav>
-        </div>
-    </div>
- </div>
 </header>
-
-<div class="container-fluid" >
+<div class="container-fluid">
     <div class="">
-
         <div class="" style=" ">
             {% block 'content' %}
             {% endblock %}
-
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>

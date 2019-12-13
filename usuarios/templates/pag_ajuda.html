@@ -2,79 +2,76 @@
 {% block 'content' %}
 <style>
   img{
-  text-align: center;
+    text-align: center;
   }
 
 </style>
 
-
 <div>
+    <ul style="min-width: 570px">
+        <li><p style="font-size:23px; font-weight: bold"> Como fazer o pedido de emprestimo? </p>
+            <p style="font-size:18px;"> 1- Encontre o que deseja e clique em Pegar! </p>
+            <img src="https://i.ibb.co/2sZVfn7/equipamentos-2.png" width="500" height="auto" alt="equipamentos">
+            <p style="font-size:18px;"> 2- Complete o Formulario e clique em solicitar! </p>
+            <img src="https://i.ibb.co/VtYPysj/inserir-dados-para-solicitar-item-2.png" width="500" height="auto"
+                 alt="solicitar-item">
+        </li>
 
-<ul>
-  <li> <p style="font-size:23px; font-weight: bold"> Como fazer o pedido de emprestimo? </p>
-    <p style="font-size:18px;"> 1- Encontre o que deseja e clique em Pegar! </p>
-    <img src="https://i.ibb.co/2sZVfn7/equipamentos-2.png" width="500" height="auto" alt="equipamentos">
-    <p style="font-size:18px;"> 2- Complete o Formulario e clique em solicitar! </p>
-    <img src="https://i.ibb.co/VtYPysj/inserir-dados-para-solicitar-item-2.png" width="500" height="auto" alt="solicitar-item">
-  </li>
+        <li><p style="font-size:23px; font-weight: bold"> Como alterar minha senha? </p>
+            <p style="font-size:18px;"> 1- No menu de opções, clique em Trocar senha! </p>
+            <img src="https://i.ibb.co/XSWwBQr/trocar-senha.png" width="500" height="auto" alt="alt">
+            <p style="font-size:18px;"> 2- Complete os campos pedidos e clique em enviar! </p>
+            <img src="https://i.ibb.co/5WhpYjb/trocar-senha-2.png" width="500" height="auto" alt="alt">
+        </li>
 
-  <li> <p style="font-size:23px; font-weight: bold"> Como alterar minha senha? </p>
-    <p style="font-size:18px;"> 1- Vá até seu perfil e clique em Alterar senha! </p>
-    <img src="https://i.ibb.co/8sb8YVC/perfil-user-senha.png" width="500" height="auto" alt="alt">
-    <p style="font-size:18px;"> 2- Complete os campos pedidos e clique em enviar! </p>
-    <img src="https://i.ibb.co/5WhpYjb/trocar-senha-2.png" width="500" height="auto" alt="alt">
-  </li>
+        {% if user_logado.is_superuser %}
+        <li><p style="font-size:23px; font-weight: bold"> Como Adicionar um Equipamento? </p>
+            <p style="font-size:18px;"> 1- Vá até o painel de controle e clique em Adicionar equipamento! </p>
+            <img src="https://i.ibb.co/tCxL2Np/options-admin.png" width="500" height="auto" alt="alt">
+            <p style="font-size:18px;"> 2- Preenha todos os campos e clique em Adicionar! </p>
+            <img src="https://i.ibb.co/jLqVkmZ/Adcicionar-equipamento-2.png" width="500" height="auto" alt="alt">
+            <br>
+            <br>
+            <br>
+        </li>
 
-  {% if user_logado.is_superuser %}
-    <li> <p style="font-size:23px; font-weight: bold"> Como Adicionar um Equipamento? </p>
-      <p style="font-size:18px;"> 1- Vá até o painel de controle e clique em Adicionar equipamento! </p>
-      <img src="https://i.ibb.co/GcYsJrs/painel-de-administra-o.png" width="500" height="auto" alt="alt">
-      <p style="font-size:18px;"> 2- Preenha todos os campos e clique em Adicionar! </p>
-      <img src="https://i.ibb.co/jLqVkmZ/Adcicionar-equipamento-2.png" width="500" height="auto" alt="alt">
-      <br>
-    <br>
-    <br>
-    </li>
+        <li><p style="font-size:23px; font-weight: bold"> Rejeiando e aceitando Solicitação. </p>
+            <p style="font-size:18px;"> 1- Vá até o as Solicitações! </p>
+            <p> Sera exibida três opções ao lado direito Visualisar, aceitar e rejeitar! </p>
+            <img src="https://i.ibb.co/smCqv9m/Solicita-es-list.png" width="500" height="auto" alt="alt">,
 
-    <li> <p style="font-size:23px; font-weight: bold"> Rejeiando e aceitando Solicitação. </p>
-      <p style="font-size:18px;"> 1- Vá até o as Solicitações! </p>
-      <p> Sera exibida três opções ao lado direito Visualisar, aceitar e rejeitar! </p>
-      <img src="https://i.ibb.co/smCqv9m/Solicita-es-list.png" width="500" height="auto" alt="alt">,
+            <p style="font-size:18px;"> Em Aceitar, a solicitação sera aceita! </p>
 
-      <p style="font-size:18px;"> Em Aceitar, a solicitação sera aceita! </p>
+            <br>
+            <p style="font-size:18px;"> Em Visualizar, exibirá as informações da Solicitação! </p>
+            <img src="https://i.ibb.co/hdbFnLC/detalhes-solicita-o.png" width="500" height="auto" alt="alt">
 
-      <br>
-      <p style="font-size:18px;"> Em Visualizar, exibirá as informações da Solicitação! </p>
-      <img src="https://i.ibb.co/hdbFnLC/detalhes-solicita-o.png" width="500" height="auto" alt="alt">
+            <br>
+            <br>
+            <br>
+            <p style="font-size:18px;"> Em Rejeitar, exibirá campos para inserir a justificativa! </p>
+            <img src="https://i.ibb.co/Nsf75tP/Negar-solicita-o-2.png" width="500" height="auto" alt="alt">
+            <br>
+        </li>
 
-      <br>
-      <br>
-      <br>
-      <p style="font-size:18px;"> Em Rejeitar, exibirá campos para inserir a justificativa! </p>
-      <img src="https://i.ibb.co/Nsf75tP/Negar-solicita-o-2.png" width="500" height="auto" alt="alt">
-      <br>
-    </li>
-
-    <li> <p style="font-size:23px; font-weight: bold"> Confirmar uma devolução? </p>
-      <p style="font-size:18px;"> 1- Vá até a listagem dos emprestimos e clique em Devolvido! </p>
-      <p style="font-size:18px;"> Será exibido duas opções. Normal e Parcial. </p>
-      <p style="font-size:18px;"> Normal significa que todos os itens foram devolvidos. </p>
-      <p style="font-size:18px;"> Parcial significa que somente alguns serão devolvidos por um motivo. Que deve ser descrito. </p>
-      <img src="https://i.ibb.co/QNGHNf4/emprestimos-ativos.png" width="500" height="auto" alt="alt">
-      <p style="font-size:18px;"> 2- Caso a devolução seja parcial, deve-se informar o motivo! </p>
-      <img src="https://i.ibb.co/d00mRC2/Dados-devolu-o-parcial-2.png" width="500" height="auto" alt="alt">
-      <br>
-    <br>
-    <br>
-    </li>
-
-
-
+        <li><p style="font-size:23px; font-weight: bold"> Confirmar uma devolução? </p>
+            <p style="font-size:18px;"> 1- Vá até a listagem dos emprestimos e clique em Devolvido! </p>
+            <p style="font-size:18px;"> Será exibido duas opções. Normal e Parcial. </p>
+            <p style="font-size:18px;"> Normal significa que todos os itens foram devolvidos. </p>
+            <p style="font-size:18px;"> Parcial significa que somente alguns serão devolvidos por um motivo. Que deve
+                ser descrito. </p>
+            <img src="https://i.ibb.co/QNGHNf4/emprestimos-ativos.png" width="500" height="auto" alt="alt">
+            <p style="font-size:18px;"> 2- Caso a devolução seja parcial, deve-se informar o motivo! </p>
+            <img src="https://i.ibb.co/d00mRC2/Dados-devolu-o-parcial-2.png" width="500" height="auto" alt="alt">
+            <br>
+            <br>
+            <br>
+        </li>
 
 
-  {% endif %}
+        {% endif %}
 
-</ul>
+    </ul>
 
 
 </div>

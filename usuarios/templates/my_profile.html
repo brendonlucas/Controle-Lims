@@ -19,49 +19,45 @@
         background-color: #3276B1;
         color: white;
     }
-    </style>
-    <h5> Opções</h5><br>
-    <div class="#">
-        <a class="btn btn-primary" href="{% url 'mudar_senha' %}" style="padding: 10px; text-decoration: none"> Alterar senha</a>
-        <a class="btn btn-primary" href="{% url 'exibir_ajuda' %}" style="padding: 10px; text-decoration: none"> Ajuda</a>
-    </div>
 
 
-    <br>
-    <hr>
-    <div style=" ">
+</style>
+<br>
+<p style="font-size: 30px;"> Seus Pedidos </p>
+<hr>
+<div style=" ">
     {% if emprestimos %}
-      <table style="min-width: 700px">
-            <tr>
-                <th >Nome</th>
-                <th >Item</th>
-                <th >Quantidade</th>
-                <th >Data Pedido</th>
-                <th >Data Devolução</th>
-                <th >Situação</th>
-                <th >Ação</th>
-
-
-            </tr>
-
-          {% for emprestimo in emprestimos %}
-              <tr>
-                    <td> <a href="{% url 'exibe_um_usuario' emprestimo.solicitante.id %}"> {{emprestimo.solicitante.user.first_name }} {{emprestimo.solicitante.user.last_name}} </a> </td>
-                  <td> <a href="{% url 'equipamento' emprestimo.equipamento.id %}">{{emprestimo.equipamento.nome}}</a></td>
-                    <td>{{emprestimo.quantidade}}</td>
-                    <td>{{emprestimo.data_emprestimo}}</td>
-                    <td>{% if emprestimo.data_devolucao == none %}
-                           Não Devolvido
-                        {% else %}
-                            {{emprestimo.data_devolucao}}
-                        {% endif %} </td>
-                    <td>{{emprestimo.tipo.nome}}</td>
-                    <td> <a class="btn btn-sm btn-primary" href="{% url 'exibir_detalhes_solicitacao' emprestimo.id %}" >Visualizar</a></td>
-            </tr>
-            {%endfor%}
-      </table>
+    <table style="min-width: 700px">
+        <tr>
+            <th>Nome</th>
+            <th>Item</th>
+            <th>Quantidade</th>
+            <th>Data Pedido</th>
+            <th>Data Devolução</th>
+            <th>Situação</th>
+            <th>Ação</th>
+        </tr>
+        {% for emprestimo in emprestimos %}
+        <tr>
+            <td><a href="{% url 'exibe_um_usuario' emprestimo.solicitante.id %}">
+                {{emprestimo.solicitante.user.first_name }} {{emprestimo.solicitante.user.last_name}} </a></td>
+            <td><a href="{% url 'equipamento' emprestimo.equipamento.id %}">{{emprestimo.equipamento.nome}}</a></td>
+            <td>{{emprestimo.quantidade}}</td>
+            <td>{{emprestimo.data_emprestimo}}</td>
+            <td>{% if emprestimo.data_devolucao == none %}
+                Não Devolvido
+                {% else %}
+                {{emprestimo.data_devolucao}}
+                {% endif %}
+            </td>
+            <td>{{emprestimo.tipo.nome}}</td>
+            <td><a class="btn btn-sm btn-primary" href="{% url 'exibir_detalhes_solicitacao' emprestimo.id %}">Visualizar</a>
+            </td>
+        </tr>
+        {%endfor%}
+    </table>
     {% else %}
-        <p style="font-size: 20px; font-weight: bold; text-align:center">Voce não fez solicitações <br> :( </p>
+    <p style="font-size: 20px; font-weight: bold; text-align:center">Voce não fez solicitações <br> :( </p>
     {% endif %}
-  </div>
+</div>
 {% endblock %}

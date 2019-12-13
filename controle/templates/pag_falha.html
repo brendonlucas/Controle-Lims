@@ -1,15 +1,13 @@
 {% extends 'base.html' %}
 {% block 'content' %}
-<style>
-
-</style>
 
 <div style="text-align: center">
     {% if messages %}
-    <img src="https://uploaddeimagens.com.br/images/002/409/359/full/oie_transparent.png?1570677638" width="200px" height="200px">
+    <img src="https://uploaddeimagens.com.br/images/002/409/359/full/oie_transparent.png?1570677638" width="200px"
+         height="200px">
     <div class="messages">
         {% for message in messages %}
-        <p style="color: red; font-size: 30px; font-weight: bold;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }} </p>
+        <p style="color: red; font-size: 30px; font-weight: bold;" class="{{ message.tags }}">{{ message }} </p>
         {% endfor %}
     </div>
     {% endif %}

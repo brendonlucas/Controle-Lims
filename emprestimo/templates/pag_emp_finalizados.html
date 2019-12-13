@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block 'content' %}
-    <style>
+<style>
     table {
         border-collapse: collapse;
          width: 100%;
@@ -19,56 +19,59 @@
         background-color: #4bc7c9;
         color: white;
     }
-    </style>
-    {% if emprestimos %}
-        <table class="table table-hover">
-            <tr>
-                <th>Nome</th>
-                <th>Item</th>
-                <th>Quantidade</th>
-                <th>Data Emprestimo</th>
-                <th>Data Devolução</th>
-            </tr>
-          {% for emprestimo in emprestimos %}
-              <tr>
-                  <td> <a href="{% url 'exibe_um_usuario' emprestimo.solicitante.id %}"> {{emprestimo.solicitante.user.first_name }} {{emprestimo.solicitante.user.last_name}} </a> </td>
-                  <td> <a href="{% url 'equipamento' emprestimo.equipamento.id %}">{{emprestimo.equipamento.nome}}</a></td>
-                  <td>{{emprestimo.quantidade}}</td>
-                  <td>{{emprestimo.data_emprestimo}}</td>
-                  <td>{{emprestimo.data_devolucao}}</td>
-                </tr>
-            {%endfor%}
-      </table>
-    {% else %}
-        <p style="font-size: 30px; font-weight: bold; text-align:center">Nenhum emprestimo encontrado <br> :( </p>
-    {% endif %}
+
+</style>
+{% if emprestimos %}
+<table class="table table-hover">
+    <tr>
+        <th>Nome</th>
+        <th>Item</th>
+        <th>Quantidade</th>
+        <th>Data Emprestimo</th>
+        <th>Data Devolução</th>
+    </tr>
+    {% for emprestimo in emprestimos %}
+    <tr>
+        <td><a href="{% url 'exibe_um_usuario' emprestimo.solicitante.id %}">
+            {{emprestimo.solicitante.user.first_name }} {{emprestimo.solicitante.user.last_name}}
+        </a></td>
+        <td><a href="{% url 'equipamento' emprestimo.equipamento.id %}">{{emprestimo.equipamento.nome}}</a></td>
+        <td>{{emprestimo.quantidade}}</td>
+        <td>{{emprestimo.data_emprestimo}}</td>
+        <td>{{emprestimo.data_devolucao}}</td>
+    </tr>
+    {%endfor%}
+</table>
+{% else %}
+<p style="font-size: 30px; font-weight: bold; text-align:center">Nenhum emprestimo encontrado <br> :( </p>
+{% endif %}
 
 <br>
-    {% if emprestimos.paginator.count > 8 %}
-  <ul class="pagination" style="padding-bottom: -5px; margin-bottom: 0;">
+{% if emprestimos.paginator.count > 8 %}
+<ul class="pagination" style="padding-bottom: -5px; margin-bottom: 0;">
     {% if emprestimos.has_previous %}
-      <li class="page-item">
+    <li class="page-item">
         <a class="page-link" href="?page={{ emprestimos.previous_page_number }}" tabindex="-1"> Anterior</a>
-      </li>
+    </li>
     {% endif %}
 
     {% for num in emprestimos.paginator.page_range %}
-      {% if emprestimos.number == num %}
-        <li class="page-item active">
-          <a class="page-link" href="#">{{ num }} <span class="sr-only">(current)</span></a>
-        </li>
-        {% elif num > emprestimos.number|add:'-3' and num < emprestimos.number|add:3 %}
-          <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-        {% endif %}
-      {% endfor %}
+    {% if emprestimos.number == num %}
+    <li class="page-item active">
+        <a class="page-link" href="#">{{ num }} <span class="sr-only">(current)</span></a>
+    </li>
+    {% elif num > emprestimos.number|add:'-3' and num < emprestimos.number|add:3 %}
+    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+    {% endif %}
+    {% endfor %}
 
-      {% if emprestimos.has_next %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ emprestimos.next_page_number }}">Próximo</a>
-        </li>
-      {% endif %}
-  </ul>
-        <br>
-        <br>
+    {% if emprestimos.has_next %}
+    <li class="page-item">
+        <a class="page-link" href="?page={{ emprestimos.next_page_number }}">Próximo</a>
+    </li>
+    {% endif %}
+</ul>
+<br>
+<br>
 {% endif %}
 {% endblock %}

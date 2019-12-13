@@ -1,25 +1,28 @@
 {% if item.quantidade > 0 %}
-        <li class="media item-preview " style="width: 100%; max-width: 560px; min-width: 420px; " onMouseOver="this.style.backgroundColor='#f0f0f0'" onMouseOut="this.style.backgroundColor='#0000'">
+<li class="media item-preview " style="width: 100%; max-width: 560px; min-width: 420px; "
+    onMouseOver="this.style.backgroundColor='#f0f0f0'" onMouseOut="this.style.backgroundColor='#0000'">
     {% else %}
-        <li class="media item-preview " style="background-color: #f0f0f0; width: 100%; max-width: 560px; min-width: 420px; " onMouseOver="this.style.backgroundColor='#ffe8ed'" onMouseOut="this.style.backgroundColor='#f0f0f0'">
+<li class="media item-preview " style="background-color: #f0f0f0; width: 100%; max-width: 560px; min-width: 420px; "
+    onMouseOver="this.style.backgroundColor='#ffe8ed'" onMouseOut="this.style.backgroundColor='#f0f0f0'">
     {% endif %}
-    <img  src="{{ item.imagem.url }}" alt="{{ item.nome }}" class="mr-3" width="100">
+    <img src="{{ item.imagem.url }}" alt="{{ item.nome }}" class="mr-3" width="100">
     <div class="media-body">
-    <h5 class="nome">{{item.nome}} </h5>
-    {% if item.quantidade > 0 %}
-        <p class="price">Quantidade: {{ item.quantidade }}</p>
-    {% else %}
+        <h5 class="nome">{{item.nome}} </h5>
+        {% if item.quantidade > 0 %}
+        <p class="price">Disponivel: {{ item.quantidade }} </p>
+        {% else %}
         <p class="price">Indisponivel</p>
-    {% endif %}
+        {% endif %}
+        <p class="price">Emprestados: {{ item.quantidade_emprestada }} </p>
 
-    <a class="btn btn-sm btn-primary"  href="{% url 'equipamento' item.id %}">Visualizar</a>
-    {% if item.quantidade > 0 %}
-        <a class="btn btn-sm btn-success" href="{% url 'solicitar_emprestimo' item.id %}" >Pegar</a>
+        <a class="btn btn-sm btn-primary" href="{% url 'equipamento' item.id %}">Visualizar</a>
+        {% if item.quantidade > 0 %}
+        <a class="btn btn-sm btn-success" href="{% url 'solicitar_emprestimo' item.id %}">Pegar</a>
         {% if user_logado.is_superuser %}
         <a class="btn btn-sm btn-info" href="{% url 'reservar_equipamento' item.id %}">Reservar</a>
         {% endif %}
-    {% endif %}
-    {% if user_logado.is_superuser %}
+        {% endif %}
+        {% if user_logado.is_superuser %}
         <a class="btn btn-sm btn-light" href="{% url 'editar_equipamento' pk=item.id %}">Editar</a>
         <a class="btn btn-sm btn-danger" href="" role="button" id="dropdownMenuLink"
            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Excluir</a>
@@ -28,6 +31,6 @@
             <a class="dropdown-item" href="#">Não</a>
         </div>
 
-    {% endif %}
-  </div>
+        {% endif %}
+    </div>
 </li>
