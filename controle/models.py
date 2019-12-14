@@ -42,7 +42,7 @@ class Usuario(models.Model):
 # t = TipoUsuario(nome='Administrador', descricao='Usuario com acesso total ao sistema').save()
 
 # TipoEquipamento(nome='Consumivel', descricao='Item do tipo consumivel que pode sofrer perda').save()
-# TipoEquipamento(nome='Permanente', descricao='Item do tipo Permanente que caso aja perda, medidas serão tomadas').save()
+# TipoEquipamento(nome='Permanente', descricao='Item do tipo Permanente que caso haja perda, medidas serão tomadas').save()
 
 # t = TipoEstadoEmprestimo(nome='Solicitacao', descricao='Pedido no estado de solicitação').save()
 # t = TipoEstadoEmprestimo(nome='Aceito', descricao='Pedido foi aceito').save()

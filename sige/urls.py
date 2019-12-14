@@ -12,6 +12,7 @@ handler404 = 'usuarios.views.handler404'
 handler500 = 'usuarios.views.handler500'
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', include(urls)),
     path('', include('usuarios.urls')),
     path('', include('emprestimo.urls')),
