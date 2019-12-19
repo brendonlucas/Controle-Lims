@@ -120,12 +120,39 @@ def exibir_emprestimos(request):
                    'user_logado': get_usuario_logado(request)})
 
 
+
 @login_required
-def exibir_detalhes(request, solicitacao_id):
-    solicitacao = Emprestimo.objects.get(id=solicitacao_id)
-    if solicitacao.estado == 1:
+def exibir_detalhes_solicitacao(request, solicitacao_id):
+    try:
+        solicitacao = Emprestimo.objects.get(id=solicitacao_id)
+
+    except Emprestimo.DoesNotExist:
+        messages.error(request, 'Não encontrado!!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+
+    if solicitacao.tipo.id == 1:
         return render(request, 'pag_detalhes.html',
                       {'user_logado': get_usuario_logado(request), 'solicitacao': solicitacao})
+    else:
+        messages.error(request, 'Não encontrado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+
+
+@login_required
+def exibir_detalhes(request, emprestimo_id):
+    try:
+        solicitacao = Emprestimo.objects.get(id=emprestimo_id)
+
+    except Emprestimo.DoesNotExist:
+        messages.error(request, 'Não encontrado!!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+
+    if solicitacao.tipo.id != 1:
+        return render(request, 'pag_detalhes.html',
+                      {'user_logado': get_usuario_logado(request), 'solicitacao': solicitacao})
+    else:
+        messages.error(request, 'Não encontrado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 
 @login_required

@@ -41,8 +41,8 @@
 </div>
 <br>
 
+{% if solicitacao.mensagem_rejeitado != none %}
 <div class="box-info">
-    {% if solicitacao.mensagem_rejeitado != none %}
     <h5> Mensagem Rejeitada:</h5>
     <h6> {{ solicitacao.mensagem_rejeitado }}</h6>
 </div>

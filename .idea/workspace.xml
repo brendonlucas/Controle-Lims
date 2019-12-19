@@ -3,13 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="b0a845b8-77f1-4301-9d0b-f0a6d8da5335" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/documents/2019/06/11/kk.png.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/documents/2019/06/11/sem-imagem.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/documents/2019/06/15/1Pos-PQ45AU.jpg.71012cb05e045740ecc530ed3387f102.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/documents/2019/06/15/impressora-3d-bivolt-velocidade-de-impresso-120-mms-D_NQ_NP_682437-_0NYShyS.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sige/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/sige/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_detalhes.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_detalhes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_solicitacoes.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_solicitacoes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emprestimo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emprestimo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sige/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/sige/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/templates/exibir.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/templates/exibir.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/templates/my_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/templates/my_profile.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

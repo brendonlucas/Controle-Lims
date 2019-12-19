@@ -7,9 +7,12 @@ urlpatterns = [
     path('solicitacoes/', views.exibe_solicitacoes, name="exibir_solicitacoes"),
     path('solicitacoes/<int:solicitacao_id>/aceitar/', views.aceita_solicitacao, name="aceita_solicitacao"),
     path('solicitacoes/<int:solicitacao_id>/rejeitar/', views.rejeita_solicitacao, name="rejeita_solicitacao"),
-    path('solicitacoes/<int:solicitacao_id>/detalhes/', views.exibir_detalhes, name="exibir_detalhes_solicitacao"),
+    path('solicitacoes/<int:solicitacao_id>/detalhes/', views.exibir_detalhes_solicitacao, name="exibir_detalhes_solicitacao"),
     path('emprestimos/<int:emprestimo_id>/devolucao/', views.fazer_devolucao_normal, name="item_devolvido"),
     path('emprestimos/<int:emprestimo_id>/devolucao-parcial/', views.fazer_devolucao_parcial, name="item_devolvido_parcial"),
+
+    path('emprestimos/<int:emprestimo_id>/detalhes/', views.exibir_detalhes, name="exibir_detalhes_emprestimo"),
+
     path('emprestimos/finalizados/', views.exibir_emprestimos_finalizados, name="emprestimos_finalizados"),
     path('emprestimos/', views.exibir_emprestimos, name='emprestimos'),
     path('reservar/<int:item_id>/', views.reservar_equipamento, name='reservar_equipamento'),

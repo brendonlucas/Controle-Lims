@@ -23,7 +23,7 @@ def add_equipamento(request):
                 image = form.cleaned_data['imagem']
                 if image is None:
                     image = 'documents/1111/sem_foto.jpg'
-                new = Item(nome=nome, quantidade=qtd, tipo=tipo, imagem=image)
+                new = Item(nome=nome, quantidade=qtd, tipo=tipo, imagem=image, quantidade_emprestada=0)
                 new.save()
                 return redirect('equipamentos')
 

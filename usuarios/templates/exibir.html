@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block 'content' %}
-    <style>
+<style>
     table {
         border-collapse: collapse;
          width: 100%;
@@ -19,87 +19,93 @@
         background-color: #4CAF50;
         color: white;
     }
-    </style>
-   <div class="page-header">
+
+</style>
+<div class="page-header">
     <div class="btn-group float-right">
 
 
     </div>
     <span>Usuario: {{usuario.user.username}}</span>
     <h2>Nome: {{usuario.user.first_name}} {{ usuario.user.last_name }}</h2>
-   </div>
-    <table class="table">
-        <tr>
-            <td>Telefone:</td>
-            <td>{{ usuario.telefone }}</td>
-        </tr>
-        <tr>
-            <td>Tipo:</td>
-            <td>{{usuario.tipo.nome}}</td>
-        </tr>
-    </table>
+</div>
+<table class="table">
+    <tr>
+        <td>Telefone:</td>
+        <td>{{ usuario.telefone }}</td>
+    </tr>
+    <tr>
+        <td>Tipo:</td>
+        <td>{{usuario.tipo.nome}}</td>
+    </tr>
+</table>
 
-    <hr>
-    <div style="overflow-y:auto; overflow-x:auto;">
+<hr>
+<div style="overflow-y:auto; overflow-x:auto;">
     {% if emprestimos %}
-      <table>
-            <tr>
-                <th >Nome</th>
-                <th >Item</th>
-                <th >Quantidade</th>
-                <th >Data Pedido</th>
-                <th >Data Devolução</th>
-                <th >Ação</th>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Item</th>
+            <th>Quantidade</th>
+            <th>Data Pedido</th>
+            <th>Data Devolução</th>
+            <th>Ação</th>
 
 
-            </tr>
+        </tr>
 
-          {% for emprestimo in emprestimos %}
-              <tr>
-                    <td> <a href="{% url 'exibe_um_usuario' emprestimo.solicitante.id %}"> {{emprestimo.solicitante.user.first_name }} {{emprestimo.solicitante.user.last_name}} </a> </td>
-                  <td> <a href="{% url 'equipamento' emprestimo.equipamento.id %}">{{emprestimo.equipamento.nome}}</a></td>
-                    <td>{{emprestimo.quantidade}}</td>
-                    <td>{{emprestimo.data_emprestimo}}</td>
-                    <td>{% if emprestimo.data_devolucao == none %}
-                           Não Devolvido
-                        {% else %}
-                            {{emprestimo.data_devolucao}}
-                        {% endif %} </td>
-                    <td> <a class="btn btn-sm btn-primary" href="{% url 'exibir_detalhes_solicitacao' emprestimo.id %}" >Visualizar</a></td>
-            </tr>
-            {%endfor%}
-      </table>
+        {% for emprestimo in emprestimos %}
+
+        <tr>
+            <td><a href="{% url 'exibe_um_usuario' emprestimo.solicitante.id %}">
+                {{emprestimo.solicitante.user.first_name }} {{emprestimo.solicitante.user.last_name}} </a></td>
+            <td><a href="{% url 'equipamento' emprestimo.equipamento.id %}">{{emprestimo.equipamento.nome}}</a></td>
+            <td>{{emprestimo.quantidade}}</td>
+            <td>{{emprestimo.data_emprestimo}}</td>
+            <td>{% if emprestimo.data_devolucao == none %}
+                Aguardando...
+                {% else %}
+                {{emprestimo.data_devolucao}}
+                {% endif %}
+            </td>
+            <td><a class="btn btn-sm btn-primary"
+                   href="{% url 'exibir_detalhes_emprestimo' emprestimo.id %}">Visualizar</a></td>
+        </tr>
+
+        {% endfor %}
+    </table>
     {% else %}
-        <p style="font-size: 20px; font-weight: bold; text-align:center">Não fez solicitações <br> :( </p>
+    <p style="font-size: 20px; font-weight: bold; text-align:center">Não fez Emprestimos </p>
     {% endif %}
-  </div>
+</div>
 
 {% if emprestimos.paginator.count > 8 %}
-  <ul class="pagination" style="padding-bottom: -5px; margin-bottom: 0">
+<ul class="pagination" style="padding-bottom: -5px; margin-bottom: 0">
     {% if emprestimos.has_previous %}
-      <li class="page-item">
+    <li class="page-item">
         <a class="page-link" href="?page={{ emprestimos.previous_page_number }}" tabindex="-1"> Anterior</a>
-      </li>
+    </li>
     {% endif %}
 
     {% for num in emprestimos.paginator.page_range %}
-      {% if emprestimos.number == num %}
-        <li class="page-item active">
-          <a class="page-link" href="#">{{ num }} <span class="sr-only">(current)</span></a>
-        </li>
-        {% elif num > emprestimos.number|add:'-3' and num < emprestimos.number|add:3 %}
-          <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-        {% endif %}
-      {% endfor %}
+    {% if emprestimos.number == num %}
+    <li class="page-item active">
+        <a class="page-link" href="#">{{ num }} <span class="sr-only">(current)</span></a>
+    </li>
+    {% elif num > emprestimos.number|add:'-3' and num < emprestimos.number|add:3 %}
+    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+    {% endif %}
+    {% endfor %}
 
-      {% if emprestimos.has_next %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ emprestimos.next_page_number }}">Próximo</a>
-        </li>
-          <br>
-        <br>
-      {% endif %}
-  </ul>
+    {% if emprestimos.has_next %}
+    <li class="page-item">
+        <a class="page-link" href="?page={{ emprestimos.next_page_number }}">Próximo</a>
+    </li>
+    <br>
+    <br>
+    {% endif %}
+</ul>
 {% endif %}
 
 {% endblock %}
