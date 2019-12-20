@@ -11,9 +11,11 @@ class TipoEquipamento(models.Model):
 
 
 class Item(models.Model):
-    nome = models.CharField(max_length=50)
+    nome = models.CharField(max_length=100)
     quantidade = models.IntegerField()
-    quantidade_emprestada = models.IntegerField()
+    quantidade_emprestada = models.IntegerField(default=0)
+    quantidade_descartada = models.IntegerField(default=0)
+    codigo_tombamento = models.CharField(max_length=100, null=True)
     tipo = models.ForeignKey(TipoEquipamento, on_delete=models.CASCADE)
     imagem = models.FileField(upload_to='documents/%Y/%m/%d', default='documents/1111/sem_foto.jpg')
     excluido = models.BooleanField(default=False)

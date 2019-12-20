@@ -3,15 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="b0a845b8-77f1-4301-9d0b-f0a6d8da5335" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/adicionar.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/adicionar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/editar.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/editar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/preview.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/preview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/templates/opcoes_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/opcoes_admin.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_detalhes.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_detalhes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_solicitacoes.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_solicitacoes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sige/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/sige/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/templates/exibir.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/templates/exibir.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/templates/my_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/templates/my_profile.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +50,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="ToolWindowStructure.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/sige" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -57,19 +58,19 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Brendon\Controle-Lims\sige" />
-      <recent name="C:\Users\Brendon\Controle-Lims\usuarios" />
-      <recent name="C:\Users\Brendon\Controle-Lims\controle\static\img" />
-      <recent name="C:\Users\Brendon\Controle-Lims\usuarios\templates" />
-      <recent name="C:\Users\Brendon\Controle-Lims\controle\templates\equipamentos\temp_removidos" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Brendon\Controle-Lims\controle\static\styles" />
       <recent name="C:\Users\Brendon\Controle-Lims\controle\templates\equipamentos\temp_removidos" />
       <recent name="C:\Users\Brendon\PycharmProjects\sige\media\documents\1111" />
       <recent name="C:\Users\Brendon\PycharmProjects\sige\media\documents\padrao" />
       <recent name="C:\Users\Brendon\PycharmProjects\sige\sige" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Brendon\Controle-Lims\sige" />
+      <recent name="C:\Users\Brendon\Controle-Lims\usuarios" />
+      <recent name="C:\Users\Brendon\Controle-Lims\controle\static\img" />
+      <recent name="C:\Users\Brendon\Controle-Lims\usuarios\templates" />
+      <recent name="C:\Users\Brendon\Controle-Lims\controle\templates\equipamentos\temp_removidos" />
     </key>
   </component>
   <component name="RunDashboard">

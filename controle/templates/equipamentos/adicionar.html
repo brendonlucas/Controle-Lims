@@ -1,12 +1,90 @@
 {% extends 'base.html' %}
 {% block 'content' %}
 {% load widget_tweaks %}
+
+<style>
+    #botao{ text-align: center }
+    .botaoEnviar{
+    width: 200px;
+    text-align: center;
+    padding: 15px 20px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    font-size: 18px;
+}
+</style>
 <div class="formu" style="overflow-y:auto;">
-    <h3 style="margin-left: 20px; font-weight: bold">Dados do Equipamento</h3>
     <form action="." method="POST" enctype="multipart/form-data">
+        <h3 style="margin-left: 20px; font-weight: bold">Dados do Equipamento</h3>
         {% csrf_token %}
-        {{ form.as_p}}
-        <button class="btn btn-primary" type="submit" value="OK"> Adicionar</button>
+        <label for="id_nome"> Nome do Equipamento * </label>
+        <input class="form-control" type="text" id="id_nome" name="nome" maxlength="100" required>
+        <br>
+
+        <label for="quantidade_item"> Quantidade * </label>
+        <input class="form-control" type="number" id="quantidade_item" name="quantidade" required>
+        <br>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <label for="sel_tipo"> Tipo * </label>
+        <select class="form-control" name="tipo" id="sel_tipo" required>
+            <option>Consumivel</option>
+            <option>Permanente</option>
+        </select>
+        <br>
+
+        <div id="inputOculto">
+            <label for="codigo_tombamento"> Codigo de Tombamento - (Obrigatorio para itens Permanentes) </label>
+            <input class="form-control" type="text" name="codigo_tombamento" id="codigo_tombamento" maxlength="100">
+            <br>
+        </div>
+
+        <label> Imagem </label>
+        <div class="input-group">
+            <span class="input-group-btn">
+            <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Buscar</span>
+            <input name="imagem"
+                   onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());"
+                   style="display: none;" type="file">
+            </span>
+            <span class="form-control"></span>
+        </div>
+        <br>
+        <div id="botao">
+        <button class="btn btn-primary botaoEnviar" type="submit" value="OK"> Adicionar</button>
+            </div>
+
+
     </form>
+    <br>
+    <br>
+
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#inputOculto').hide();
+  $('#sel_tipo').change(function() {
+    if ($('#sel_tipo').val() == 'Permanente') {
+      $('#inputOculto').show();
+    } else {
+      $('#inputOculto').hide();
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
+</script>
 {% endblock %}
+
+
+
+

@@ -8,12 +8,14 @@
     <img src="{{ item.imagem.url }}" alt="{{ item.nome }}" class="mr-3" width="100">
     <div class="media-body">
         <h5 class="nome">{{item.nome}} </h5>
-        {% if item.quantidade > 0 %}
-        <p class="price">Disponivel: {{ item.quantidade }} </p>
-        {% else %}
-        <p class="price">Indisponivel</p>
-        {% endif %}
-        <p class="price">Emprestados: {{ item.quantidade_emprestada }} </p>
+
+        <p class="price">Disponivel: {{ item.quantidade }} / Emprestados: {{ item.quantidade_emprestada }} <br>
+            Descartados: 0
+        </p>
+
+
+
+
 
         <a class="btn btn-sm btn-primary" href="{% url 'equipamento' item.id %}">Visualizar</a>
         {% if item.quantidade > 0 %}
@@ -24,13 +26,14 @@
         {% endif %}
         {% if user_logado.is_superuser %}
         <a class="btn btn-sm btn-light" href="{% url 'editar_equipamento' pk=item.id %}">Editar</a>
+
         <a class="btn btn-sm btn-danger" href="" role="button" id="dropdownMenuLink"
            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Excluir</a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item" href="{% url 'excluir' item.id %}">Sim</a>
             <a class="dropdown-item" href="#">Não</a>
         </div>
-
+        <a class="btn btn-sm btn-info" href="">+</a>
         {% endif %}
     </div>
 </li>

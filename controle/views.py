@@ -19,7 +19,7 @@ def add_equipamento(request):
             if form.is_valid():
                 nome = form.cleaned_data['nome']
                 qtd = form.cleaned_data['quantidade']
-                tipo = form.cleaned_data['tipo']
+                tipo = TipoEquipamento.objects.get(nome=form.cleaned_data['tipo'])
                 image = form.cleaned_data['imagem']
                 if image is None:
                     image = 'documents/1111/sem_foto.jpg'
@@ -92,15 +92,15 @@ def item_editar(request, pk):
     if get_usuario_logado(request).is_superuser:
         item = get_object_or_404(Item, pk=pk)
         if request.method == "POST":
-            form = ItemForm(request.POST, request.FILES, instance=item)
+            form = ItemFormEdit(request.POST, request.FILES, instance=item)
             if form.is_valid():
                 item = form.save(commit=False)
                 item.save()
                 return redirect('equipamentos')
         else:
-            form = ItemForm(instance=item)
-        return render(request, 'equipamentos/adicionar.html',
-                      {'form': form, 'user_logado': get_usuario_logado(request)})
+            form = ItemFormEdit(instance=item)
+            return render(request, 'equipamentos/editar.html',
+                          {'form': form, 'user_logado': get_usuario_logado(request)})
     else:
         messages.error(request, 'Acesso negado!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})

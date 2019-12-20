@@ -50,7 +50,7 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{% url 'equipamentos' %}">Equipamentos </a>
                                     {% if user_logado.is_superuser %}
-                                    <a class="dropdown-item" href="{% url 'adicionar_equipamento' %}">Adicionar</a>
+                                    <a class="dropdown-item" href="{% url 'adicionar_equipamento' %}">Adicionar Novo</a>
                                     <a class="dropdown-item" href="{% url 'itens_excluidos' %}">Excluidos</a>
                                     {% endif %}
                                 </div>
