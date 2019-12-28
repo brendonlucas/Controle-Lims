@@ -35,7 +35,7 @@
 
         <div id="inputOculto">
             <label for="codigo_tombamento"> Codigo de Tombamento - (Obrigatorio para itens Permanentes) </label>
-            <input class="form-control" type="text" name="codigo_tombamento" id="codigo_tombamento" maxlength="100">
+            <input class="form-control" type="text" name="codigo_tombamento" id="codigo_tombamento" maxlength="100" min="1">
             <br>
         </div>
 
@@ -53,9 +53,15 @@
         <div id="botao">
         <button class="btn btn-primary botaoEnviar" type="submit" value="OK"> Adicionar</button>
             </div>
-
-
     </form>
+
+    {% if messages %}
+    <ul style="background-color: #ff786e; padding: 5px">
+        {% for message in messages %}
+        <li class="{{ message.tags }}" style="display: inline">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <br>
     <br>
 
@@ -72,16 +78,6 @@ $(document).ready(function() {
     }
   });
 });
-
-
-
-
-
-
-
-
-
-
 </script>
 {% endblock %}
 

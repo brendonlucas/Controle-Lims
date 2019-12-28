@@ -29,3 +29,7 @@ class ItemFormEdit(ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField(label='Nome', max_length=16)
     password = forms.CharField(label='Senha', widget=forms.PasswordInput, max_length=10)
+
+
+class FormAddUnidade(forms.Form):
+    quantidade = forms.IntegerField(required=True)

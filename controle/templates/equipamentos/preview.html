@@ -1,4 +1,9 @@
 {% if item.quantidade > 0 %}
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<style>
+
+
+</style>
 <li class="media item-preview " style="width: 100%; max-width: 560px; min-width: 420px; "
     onMouseOver="this.style.backgroundColor='#f0f0f0'" onMouseOut="this.style.backgroundColor='#0000'">
     {% else %}
@@ -8,15 +13,9 @@
     <img src="{{ item.imagem.url }}" alt="{{ item.nome }}" class="mr-3" width="100">
     <div class="media-body">
         <h5 class="nome">{{item.nome}} </h5>
-
         <p class="price">Disponivel: {{ item.quantidade }} / Emprestados: {{ item.quantidade_emprestada }} <br>
             Descartados: 0
         </p>
-
-
-
-
-
         <a class="btn btn-sm btn-primary" href="{% url 'equipamento' item.id %}">Visualizar</a>
         {% if item.quantidade > 0 %}
         <a class="btn btn-sm btn-success" href="{% url 'solicitar_emprestimo' item.id %}">Pegar</a>
@@ -33,7 +32,20 @@
             <a class="dropdown-item" href="{% url 'excluir' item.id %}">Sim</a>
             <a class="dropdown-item" href="#">Não</a>
         </div>
-        <a class="btn btn-sm btn-info" href="">+</a>
+
+
+        <button class="btn btn-sm btn-info" onclick="var display = document.getElementById('{{item.id}}').style.display;
+        if (display == 'none')
+        document.getElementById('{{item.id}}').style.display = 'block';
+        else
+        document.getElementById('{{item.id}}').style.display = 'none';">+
+        </button>
+        <form action="{{item.id}}/add-unidades/" method="POST" id="{{item.id}}" style="display:none">
+            {% csrf_token %}
+            <label for="qtd">Quantidade a ser adicionada: </label>
+            <input class="form-control" id="qtd" name="quantidade" type="number" required  min="1">
+            <button type="submit" value="ok" class="btn btn-info"> Adicionar </button>
+        </form>
         {% endif %}
     </div>
 </li>

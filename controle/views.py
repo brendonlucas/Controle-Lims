@@ -23,10 +23,18 @@ def add_equipamento(request):
                 image = form.cleaned_data['imagem']
                 if image is None:
                     image = 'documents/1111/sem_foto.jpg'
-                new = Item(nome=nome, quantidade=qtd, tipo=tipo, imagem=image, quantidade_emprestada=0)
-                new.save()
-                return redirect('equipamentos')
+                if form.cleaned_data['codigo_tombamento'] == '' and form.cleaned_data['tipo'] == 'Permanente':
+                    messages.error(request, 'Item permanente exige um codigo de Tombamento!')
+                    return redirect('adicionar_equipamento')
 
+                new = Item(nome=nome, quantidade=qtd, tipo=tipo, imagem=image, quantidade_emprestada=0)
+                if form.cleaned_data['codigo_tombamento'] is not None:
+                    new.codigo_tombamento = form.cleaned_data['codigo_tombamento']
+                    new.save()
+                    return redirect('equipamentos')
+            else:
+                messages.error(request, 'Formulario imvalido!')
+                return redirect('adicionar_equipamento')
         elif request.method == 'GET':
             return render(request, 'equipamentos/adicionar.html',
                           {'form': form, 'user_logado': get_usuario_logado(request)})
@@ -116,3 +124,26 @@ def restaurar_item(request, item_id):
     else:
         messages.error(request, 'Acesso negado!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+
+@login_required
+def add_unidades(request, item_id):
+    if get_usuario_logado(request).is_superuser:
+        try:
+            item = Item.objects.get(id=item_id)
+        except Item.DoesNotExist:
+            messages.error(request, 'Equipamento não existe!')
+            return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+
+        if request.method == 'POST':
+            form = FormAddUnidade(request.POST)
+            if form.is_valid():
+                item.quantidade = item.quantidade + form.cleaned_data['quantidade']
+                item.save()
+                return redirect('equipamentos')
+
+
+    else:
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+
+
