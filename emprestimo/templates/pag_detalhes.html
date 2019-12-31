@@ -13,7 +13,7 @@
 <div class="page-header">
     <div class="btn-group float-right">
         {% if user_logado.is_superuser %}
-        {% if solicitacao.tipo.id == 1 %}
+        {% if solicitacao.tipo.id == 1 or solicitacao.tipo.id == 5%}
         <a class="btn btn-sm btn-primary" href="{% url 'aceita_solicitacao' solicitacao.id %}">Aceitar</a>
         <a class="btn btn-sm btn-danger" href="{% url 'rejeita_solicitacao' solicitacao.id %}">Rejeitar</a>
 

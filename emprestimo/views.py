@@ -4,7 +4,6 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-
 from emprestimo.forms import *
 from emprestimo.models import *
 
@@ -46,6 +45,8 @@ def solicitar_item(request, item_id):
 def exibe_solicitacoes(request):
     if get_usuario_logado(request).is_superuser:
         solicitacoes = Emprestimo.objects.filter(tipo=1).order_by('data_emprestimo')
+        solicitacoes = Emprestimo.objects.exclude(tipo=2).exclude(tipo=3).exclude(tipo=4).exclude(tipo=6).order_by(
+            'data_emprestimo')
         paginator = Paginator(solicitacoes, 8)
 
         page = request.GET.get('page')
@@ -61,18 +62,23 @@ def exibe_solicitacoes(request):
 def aceita_solicitacao(request, solicitacao_id):
     if get_usuario_logado(request).is_superuser:
         solicitacao = Emprestimo.objects.get(id=solicitacao_id)
-        solicitacao.tipo = TipoEstadoEmprestimo.objects.get(id=2)
         item = Item.objects.get(id=solicitacao.equipamento.id)
         qtd = item.quantidade
-        if qtd >= solicitacao.quantidade:
-            item.quantidade = qtd - solicitacao.quantidade
-            item.quantidade_emprestada = item.quantidade_emprestada + solicitacao.quantidade
-            item.save()
+        if solicitacao.tipo.id != 5:
+            if qtd >= solicitacao.quantidade:
+                solicitacao.tipo = TipoEstadoEmprestimo.objects.get(id=2)
+                item.quantidade = qtd - solicitacao.quantidade
+                item.quantidade_emprestada = item.quantidade_emprestada + solicitacao.quantidade
+                item.save()
+                solicitacao.save()
+                return redirect('exibir_solicitacoes')
+            else:
+                messages.error(request, 'A quantidade de itens do pedido é maior que a disponivel:')
+                return redirect('pag_falha')
+        elif solicitacao.tipo.id == 5:
+            solicitacao.tipo = TipoEstadoEmprestimo.objects.get(id=6)
             solicitacao.save()
             return redirect('exibir_solicitacoes')
-        else:
-            messages.error(request, 'A quantidade de itens do pedido é maior que a disponivel:')
-            return redirect('pag_falha')
     else:
         messages.error(request, 'Acesso negado!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
@@ -120,7 +126,6 @@ def exibir_emprestimos(request):
                    'user_logado': get_usuario_logado(request)})
 
 
-
 @login_required
 def exibir_detalhes_solicitacao(request, solicitacao_id):
     try:
@@ -130,7 +135,7 @@ def exibir_detalhes_solicitacao(request, solicitacao_id):
         messages.error(request, 'Não encontrado!!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
-    if solicitacao.tipo.id == 1:
+    if solicitacao.tipo.id == 1 or solicitacao.tipo.id == 5:
         return render(request, 'pag_detalhes.html',
                       {'user_logado': get_usuario_logado(request), 'solicitacao': solicitacao})
     else:
@@ -166,6 +171,17 @@ def fazer_devolucao_normal(request, emprestimo_id):
         emprestimo.data_devolucao = date.today()
         emprestimo.tipo_id = 4
         emprestimo.save()
+        lista_reserva = Emprestimo.objects.filter(tipo=6).order_by('id')
+        if len(lista_reserva) > 0:
+            for i in range(len(lista_reserva)):
+                reserva = lista_reserva[i]
+                if equipamento.quantidade >= reserva.quantidade:
+                    equipamento.quantidade = equipamento.quantidade - reserva.quantidade
+                    equipamento.quantidade_emprestada = equipamento.quantidade_emprestada + reserva.quantidade
+                    reserva.tipo = TipoEstadoEmprestimo.objects.get(id=2)
+                    equipamento.save()
+                    reserva.save()
+
         return redirect('emprestimos')
     else:
         messages.error(request, 'Acesso negado!')
@@ -219,37 +235,25 @@ def exibir_emprestimos_finalizados(request):
 
 @login_required
 def reservar_equipamento(request, item_id):
-    if get_usuario_logado(request).is_superuser:
-        form = FormQuantidade()
-        item = Item.objects.get(id=item_id)
-        if request.method == 'POST':
-            form = FormQuantidade(request.POST, request.FILES)
-            if form.is_valid():
-                qtd = form.cleaned_data['quantidade']
-                descricao = form.cleaned_data['descricao']
-                usuario = Usuario.objects.get(user=get_usuario_logado(request).id)
-                if qtd <= item.quantidade:
-                    tipo = TipoEstadoEmprestimo.objects.get(id=2)
-                    item.quantidade = item.quantidade - qtd
-                    item.quantidade_emprestada = item.quantidade_emprestada + qtd
+    form = FormQuantidade()
+    item = Item.objects.get(id=item_id)
+    if request.method == 'POST':
+        form = FormQuantidade(request.POST, request.FILES)
+        if form.is_valid():
+            qtd = form.cleaned_data['quantidade']
+            descricao = form.cleaned_data['descricao']
+            usuario = Usuario.objects.get(user=get_usuario_logado(request).id)
+            tipo = TipoEstadoEmprestimo.objects.get(id=5)
 
-                    data_atual = date.today()
-                    emprestimo = Emprestimo(equipamento=item, solicitante=usuario, data_emprestimo=data_atual,
-                                            tipo=tipo,
-                                            descricao=descricao, quantidade=qtd)
-                    emprestimo.save()
-                    item.save()
-                    return redirect('equipamentos')
-                else:
-                    messages.error(request, 'Quantidade maior que a disponivel')
-                    return redirect('solicitar_emprestimo', item_id)
-            else:
-                messages.error(request, 'Prencha todos os campos!')
-                return redirect('solicitar_emprestimo', item_id)
+            data_atual = date.today()
+            emprestimo = Emprestimo(equipamento=item, solicitante=usuario, data_emprestimo=data_atual,
+                                    tipo=tipo, descricao=descricao, quantidade=qtd)
+            emprestimo.save()
+            return redirect('equipamentos')
+        else:
+            messages.error(request, 'Prencha todos os campos!')
+            return redirect('solicitar_emprestimo', item_id)
 
-        elif request.method == 'GET':
-            return render(request, 'pag_emprestimo.html',
-                          {'form': form, 'user_logado': get_usuario_logado(request), 'item': item})
-    else:
-        messages.error(request, 'Acesso negado!')
-        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+    elif request.method == 'GET':
+        return render(request, 'pag_emprestimo.html',
+                      {'form': form, 'user_logado': get_usuario_logado(request), 'item': item})

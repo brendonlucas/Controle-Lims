@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import *
 from django.shortcuts import render, redirect, get_object_or_404
 from controle.forms import *
 from controle.models import *
+from emprestimo.models import TipoEstadoEmprestimo, Emprestimo
 
 
 def get_usuario_logado(request):
@@ -139,9 +140,20 @@ def add_unidades(request, item_id):
             if form.is_valid():
                 item.quantidade = item.quantidade + form.cleaned_data['quantidade']
                 item.save()
+                lista_reserva = Emprestimo.objects.filter(tipo=6).order_by('id')
+                if len(lista_reserva) > 0:
+                    for i in range(len(lista_reserva)):
+                        reserva = lista_reserva[i]
+                        if item.quantidade >= reserva.quantidade:
+                            item.quantidade = item.quantidade - reserva.quantidade
+                            item.quantidade_emprestada = item.quantidade_emprestada + reserva.quantidade
+                            reserva.tipo = TipoEstadoEmprestimo.objects.get(id=2)
+                            item.save()
+                            reserva.save()
                 return redirect('equipamentos')
-
-
+            else:
+                messages.error(request, 'Valor invalido!')
+                return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
     else:
         messages.error(request, 'Acesso negado!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})

@@ -28,6 +28,7 @@
             <th>Nome</th>
             <th>Item</th>
             <th>Quantidade</th>
+            <th>Tipo</th>
             <th>Data Pedido</th>
             <th>Ação</th>
             <th>Ação</th>
@@ -35,12 +36,17 @@
         </tr>
 
         {% for emprestimo in emprestimos %}
-        {% if emprestimo.tipo_id == 1 %}
+        {% if emprestimo.tipo_id == 1 or emprestimo.tipo_id == 5 %}
         <tr>
             <td><a href="{% url 'exibe_um_usuario' emprestimo.solicitante.id %}">
                 {{emprestimo.solicitante.user.first_name }} {{emprestimo.solicitante.user.last_name}} </a></td>
             <td>{{emprestimo.equipamento.nome}}</td>
             <td>{{emprestimo.quantidade}}</td>
+            {% if emprestimo.tipo_id == 1 %}
+            <td> Emprestimo </td>
+            {% else %}
+            <td> Reserva </td>
+            {% endif %}
             <td>{{emprestimo.data_emprestimo}}</td>
             <td><a class="btn btn-sm btn-primary" href="{% url 'exibir_detalhes_solicitacao' emprestimo.id %}">Visualizar</a>
             </td>

@@ -19,9 +19,10 @@
         <a class="btn btn-sm btn-primary" href="{% url 'equipamento' item.id %}">Visualizar</a>
         {% if item.quantidade > 0 %}
         <a class="btn btn-sm btn-success" href="{% url 'solicitar_emprestimo' item.id %}">Pegar</a>
-        {% if user_logado.is_superuser %}
-        <a class="btn btn-sm btn-info" href="{% url 'reservar_equipamento' item.id %}">Reservar</a>
+
         {% endif %}
+        {% if item.quantidade == 0 %}
+        <a class="btn btn-sm btn-info" href="{% url 'reservar_equipamento' item.id %}">Reservar</a>
         {% endif %}
         {% if user_logado.is_superuser %}
         <a class="btn btn-sm btn-light" href="{% url 'editar_equipamento' pk=item.id %}">Editar</a>

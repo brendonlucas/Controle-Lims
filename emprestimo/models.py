@@ -11,6 +11,8 @@ class TipoEstadoEmprestimo(models.Model):
     # t = TipoEstadoEmprestimo(nome='Aceito', descricao='Pedido foi aceito')
     # t = TipoEstadoEmprestimo(nome='Rejeitado', descricao='Pedido está rejeitado')
     # t = TipoEstadoEmprestimo(nome='Finalizado', descricao='Emprestimo está finalizado')
+    # t = TipoEstadoEmprestimo(nome='Reserva', descricao='Pedido no estado de Reserva')
+    # t = TipoEstadoEmprestimo(nome='Reserva Aceita', descricao='Pedido no estado de Reserva Aceita')
 
 
 class Emprestimo(models.Model):
