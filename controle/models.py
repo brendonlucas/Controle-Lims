@@ -15,7 +15,7 @@ class Item(models.Model):
     quantidade = models.IntegerField()
     quantidade_emprestada = models.IntegerField(default=0)
     quantidade_descartada = models.IntegerField(default=0)
-    codigo_tombamento = models.CharField(max_length=100, null=True)
+    codigo_tombamento = models.CharField(max_length=100, null=True, default=None)
     tipo = models.ForeignKey(TipoEquipamento, on_delete=models.CASCADE)
     imagem = models.FileField(upload_to='documents/%Y/%m/%d', default='documents/1111/sem_foto.jpg')
     excluido = models.BooleanField(default=False)

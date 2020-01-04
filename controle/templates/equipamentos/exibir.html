@@ -22,10 +22,26 @@
 <table class="table">
     <tr>
         <td>
-            Quantidade:
+            Quantidade disponivel:
         </td>
         <td>
             {{item.quantidade}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Quantidade emprestada:
+        </td>
+        <td>
+            {{item.quantidade_emprestada}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Quantidade descartada:
+        </td>
+        <td>
+            {{item.quantidade_descartada}}
         </td>
     </tr>
     <tr>
@@ -36,6 +52,18 @@
             {{item.tipo}}
         </td>
     </tr>
+    {% if item.codigo_tombamento != '' %}
+    <tr>
+        <td>
+            Código de tombamento:
+        </td>
+        <td>
+            {{item.codigo_tombamento}}
+        </td>
+    </tr>
+    {% endif %}
+
+
 </table>
 <br>
 <img style="width: 300px; height: 200px" src="{{ item.imagem.url }}" alt="Item">

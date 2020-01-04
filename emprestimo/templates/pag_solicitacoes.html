@@ -47,7 +47,7 @@
             {% else %}
             <td> Reserva </td>
             {% endif %}
-            <td>{{emprestimo.data_emprestimo}}</td>
+            <td>{{emprestimo.data_emprestimo| date:"d/m/Y"}}</td>
             <td><a class="btn btn-sm btn-primary" href="{% url 'exibir_detalhes_solicitacao' emprestimo.id %}">Visualizar</a>
             </td>
             <td><a class="btn btn-sm btn-primary" href="{% url 'aceita_solicitacao' emprestimo.id %}">Aceitar</a></td>

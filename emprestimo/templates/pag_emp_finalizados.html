@@ -37,8 +37,8 @@
         </a></td>
         <td><a href="{% url 'equipamento' emprestimo.equipamento.id %}">{{emprestimo.equipamento.nome}}</a></td>
         <td>{{emprestimo.quantidade}}</td>
-        <td>{{emprestimo.data_emprestimo}}</td>
-        <td>{{emprestimo.data_devolucao}}</td>
+        <td>{{emprestimo.data_emprestimo| date:"d/m/Y"}}</td>
+        <td>{{emprestimo.data_devolucao| date:"d/m/Y"}}</td>
     </tr>
     {%endfor%}
 </table>

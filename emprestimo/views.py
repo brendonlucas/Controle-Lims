@@ -33,7 +33,7 @@ def solicitar_item(request, item_id):
                 messages.error(request, 'Quantidade maior que a disponivel')
                 return redirect('solicitar_emprestimo', item_id)
         else:
-            messages.error(request, 'Prencha todos os campos!')
+            messages.error(request, 'Prencha todos os campos corretamente')
             return redirect('solicitar_emprestimo', item_id)
 
     elif request.method == 'GET':
@@ -147,7 +147,6 @@ def exibir_detalhes_solicitacao(request, solicitacao_id):
 def exibir_detalhes(request, emprestimo_id):
     try:
         solicitacao = Emprestimo.objects.get(id=emprestimo_id)
-
     except Emprestimo.DoesNotExist:
         messages.error(request, 'Não encontrado!!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
@@ -163,8 +162,14 @@ def exibir_detalhes(request, emprestimo_id):
 @login_required
 def fazer_devolucao_normal(request, emprestimo_id):
     if get_usuario_logado(request).is_superuser:
-        emprestimo = Emprestimo.objects.get(id=emprestimo_id)
-        equipamento = Item.objects.get(id=emprestimo.equipamento.id)
+        try:
+            emprestimo = Emprestimo.objects.get(id=emprestimo_id)
+            equipamento = Item.objects.get(id=emprestimo.equipamento.id)
+
+        except Emprestimo.DoesNotExist:
+            messages.error(request, 'Emprestimo não encontrado')
+            return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+
         equipamento.quantidade = equipamento.quantidade + emprestimo.quantidade
         equipamento.quantidade_emprestada = equipamento.quantidade_emprestada - emprestimo.quantidade
         equipamento.save()
@@ -191,26 +196,52 @@ def fazer_devolucao_normal(request, emprestimo_id):
 @login_required
 def fazer_devolucao_parcial(request, emprestimo_id):
     if get_usuario_logado(request).is_superuser:
-        form = FormQuantidade()
-        emprestimo = Emprestimo.objects.get(id=emprestimo_id)
+        try:
+            emprestimo = Emprestimo.objects.get(id=emprestimo_id)
+            equipamento = Item.objects.get(id=emprestimo.equipamento.id)
+
+        except Emprestimo.DoesNotExist:
+            messages.error(request, 'Emprestimo não encontrado')
+            return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+
+        form = FormQuantidadeDevolucao()
         if request.method == 'GET':
             return render(request, 'pag_devolucao_parcial.html',
                           {'form': form, 'user_logado': get_usuario_logado(request), 'emprestimo': emprestimo})
-        elif request.method == 'POST':
-            form = FormQuantidade(request.POST)
-            if form.is_valid():
-                equipamento = Item.objects.get(id=emprestimo.equipamento.id)
-                qtd = form.cleaned_data['quantidade']
 
+        elif request.method == 'POST':
+            form = FormQuantidadeDevolucao(request.POST)
+            if form.is_valid():
+                qtd = form.cleaned_data['quantidade']
+                quantidade_defeituoso = form.cleaned_data['quantidade_defeituoso']
                 descricao = form.cleaned_data['descricao']
+
+                if quantidade_defeituoso + qtd > emprestimo.quantidade or quantidade_defeituoso + qtd < emprestimo.quantidade:
+                    messages.error(request, 'Quantidades Invalidas!')
+                    return redirect('item_devolvido_parcial', emprestimo_id)
+
                 if qtd <= emprestimo.quantidade:
                     equipamento.quantidade = equipamento.quantidade + qtd
                     equipamento.quantidade_emprestada = equipamento.quantidade_emprestada - emprestimo.quantidade
-                    equipamento.save()
+                    equipamento.quantidade_descartada = equipamento.quantidade_descartada + quantidade_defeituoso
+
                     emprestimo.mensagem_devolucao = descricao
                     emprestimo.data_devolucao = date.today()
                     emprestimo.tipo_id = 4
                     emprestimo.save()
+                    equipamento.save()
+
+                    lista_reserva = Emprestimo.objects.filter(tipo=6).order_by('id')
+                    if len(lista_reserva) > 0:
+                        for i in range(len(lista_reserva)):
+                            reserva = lista_reserva[i]
+                            if equipamento.quantidade >= reserva.quantidade:
+                                equipamento.quantidade = equipamento.quantidade - reserva.quantidade
+                                equipamento.quantidade_emprestada = equipamento.quantidade_emprestada + reserva.quantidade
+                                reserva.tipo = TipoEstadoEmprestimo.objects.get(id=2)
+                                equipamento.save()
+                                reserva.save()
+
                     return redirect('emprestimos')
                 else:
                     messages.error(request, 'Quantidade maior que a disponivel no pedido')

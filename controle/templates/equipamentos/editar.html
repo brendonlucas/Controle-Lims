@@ -6,7 +6,9 @@
     <form action="." method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p}}
-        <button class="btn btn-primary" type="submit" value="OK"> Adicionar</button>
+        <div style="text-align: center">
+            <button class="btn btn-lg btn-primary" type="submit" value="OK"> Confirmar</button>
+        </div>
     </form>
 </div>
 {% endblock %}

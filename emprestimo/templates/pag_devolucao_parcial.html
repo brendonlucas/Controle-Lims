@@ -1,21 +1,26 @@
 {% extends 'base.html' %}
 {% block 'content' %}
 
-<h4 style="text-align: center"> Devolução parcial é quando alguns dos equipamentos solicitados não é retornado por algum motivo. </h4>
+<h4 style="text-align: center"> Devolução parcial é quando alguns dos equipamentos solicitados é retornado com problema por algum
+    motivo. </h4>
 <hr>
 <div style="position: relative; float: left; width: 500px">
     <p> Quantidade disponivel no emprestimo: <b style="font-size: 20px;">{{ emprestimo.quantidade }}</b></p>
     <form method="post" action=".">
         {% csrf_token %}
-        <label for="qtd_item"> Quantidade:</label><br>
-        <input class="form-control" id="qtd_item" type="number" name="quantidade" required minlength="1"
+        <label for="qtd_item"> Quantidade normal:</label><br>
+        <input class="form-control" id="qtd_item" type="number" name="quantidade" required min="1" max="{{ emprestimo.quantidade }}"
+               style="max-width: 400px"><br>
+
+        <label for="qtd_item_defeituoso"> Quantidade Defeituoso:</label><br>
+        <input class="form-control" id="qtd_item_defeituoso" type="number" name="quantidade_defeituoso"  required min="1" max="{{ emprestimo.quantidade }}"
                style="max-width: 400px"><br>
 
         <label for="txt-area"> Descrição:</label><br>
         <textarea class="form-control" id="txt-area" name="descricao" maxlength="255" minlength="10"
                   style="min-width: 20px; max-width: 400px; max-height: 100px; min-height: 100px"
                   required> </textarea><br>
-        <button class="btn btn-success" type="submit"> Enviar</button>
+        <button class="btn btn-lg btn-success" type="submit"> Enviar</button>
     </form>
     {% if messages %}
     <ul style="background-color: #ff786e; padding: 5px">
@@ -24,6 +29,8 @@
         {% endfor %}
     </ul>
     {% endif %}
+    <br>
+<br>
 </div>
 
 <div style="position: relative; float: left; margin:20px ">

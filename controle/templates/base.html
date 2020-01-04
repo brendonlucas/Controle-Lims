@@ -26,6 +26,7 @@
 
 
     </style>
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
 </head>
 <body>
 <header class="page-header">
@@ -64,7 +65,7 @@
                             </div>
                             {% if user_logado.is_superuser %}
                             <a class="nav-item nav-link" href="{% url 'exibir_solicitacoes' %}">Solicitações </a>
-                            <a class="nav-item nav-link" href="{% url 'exibir_usuarios' %}">Usuarios </a>
+                            <a class="nav-item nav-link" href="{% url 'exibir_usuarios' %}">Usuários </a>
                             <a class="nav-item nav-link" href="{% url 'painel_admin' %}">Painel </a>
                             {% endif %}
                         </div>

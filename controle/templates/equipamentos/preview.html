@@ -14,7 +14,7 @@
     <div class="media-body">
         <h5 class="nome">{{item.nome}} </h5>
         <p class="price">Disponivel: {{ item.quantidade }} / Emprestados: {{ item.quantidade_emprestada }} <br>
-            Descartados: 0
+            Descartados: {{ item.quantidade_descartada }}
         </p>
         <a class="btn btn-sm btn-primary" href="{% url 'equipamento' item.id %}">Visualizar</a>
         {% if item.quantidade > 0 %}
