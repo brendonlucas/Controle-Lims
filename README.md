@@ -8,7 +8,9 @@ from emprestimo.models import *
 TipoEstadoEmprestimo(nome='Solicitacao', descricao='Pedido no estado de solicitação').save()
 TipoEstadoEmprestimo(nome='Aceito', descricao='Pedido foi aceito').save()
 TipoEstadoEmprestimo(nome='Rejeitado', descricao='Pedido está rejeitado').save()
-TipoEstadoEmprestimo(nome='Finalizado', descricao='Emprestimo está finalizado').save()</code></pre>
+TipoEstadoEmprestimo(nome='Finalizado', descricao='Emprestimo está finalizado').save()
+TipoEstadoEmprestimo(nome='Reserva', descricao='Pedido no estado de Reserva').save()
+TipoEstadoEmprestimo(nome='Reserva Aceita', descricao='Pedido no estado de Reserva Aceita').save()</code></pre>
     
 OBS: Devem ser criados nesta mesma ordem, para evitar falhas.
 
