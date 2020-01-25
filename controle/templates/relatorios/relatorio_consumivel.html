@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+<div class="#" style="text-align: center;">
+    <br>
+    <div class="list-inline-item" style=" background-color: lightgray; width: 600px; border-radius:5px;">
+        <h4 style="font-weight: bold; text-align: center; margin: 5px;"> Relatorio Permanentes</h4>
+        <hr>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Disponiveis</th>
+                <th scope="col">Emprestados</th>
+                <th scope="col">Descartados</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for item in itens %}
+            <tr>
+
+                <th scope="row">{{ item.id }}</th>
+                <td><a href="{% url 'equipamento' item.id %}"> {{ item.nome }} </a></td>
+                <td>{{ item.quantidade }}</td>
+                <td>{{ item.quantidade_emprestada }}</td>
+                <td>{{ item.quantidade_descartada }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+{% endblock %}

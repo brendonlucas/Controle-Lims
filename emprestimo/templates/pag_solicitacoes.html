@@ -40,7 +40,7 @@
         <tr>
             <td><a href="{% url 'exibe_um_usuario' emprestimo.solicitante.id %}">
                 {{emprestimo.solicitante.user.first_name }} {{emprestimo.solicitante.user.last_name}} </a></td>
-            <td>{{emprestimo.equipamento.nome}}</td>
+            <td> <a href="{% url 'equipamento' emprestimo.equipamento.id %}"> {{emprestimo.equipamento.nome}} </a> </td>
             <td>{{emprestimo.quantidade}}</td>
             {% if emprestimo.tipo_id == 1 %}
             <td> Emprestimo </td>
@@ -59,7 +59,7 @@
         {%endfor%}
     </table>
     {% else %}
-    <p style="font-size: 30px; font-weight: bold; text-align:center">Sem solicitações <br> :( </p>
+    <p style="font-size: 30px; font-weight: bold; text-align:center">Sem solicitações <br> :) </p>
     {% endif %}
 </div>
 

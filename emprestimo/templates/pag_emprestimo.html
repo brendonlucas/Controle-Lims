@@ -6,7 +6,7 @@
     <form method="post" action=".">
         {% csrf_token %}
         <label for="qtd_item"> Quantidade desejada:</label><br>
-        <input class="form-control" id="qtd_item" type="number" name="quantidade" required min="1" max="{{ item.quantidade }}"
+        <input class="form-control" id="qtd_item" type="number" name="quantidade" required min="1"
                style="max-width: 400px"><br>
         <label for="txt-area"> Descrição da finalidade de uso:</label><br>
         <textarea class="form-control" id="txt-area" name="descricao" maxlength="255" minlength="10"

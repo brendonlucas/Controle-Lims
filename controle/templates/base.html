@@ -26,7 +26,7 @@
 
 
     </style>
-    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Circle-icons-computer.svg/1024px-Circle-icons-computer.svg.png" type="image/x-icon">
 </head>
 <body>
 <header class="page-header">
@@ -52,7 +52,7 @@
                                     <a class="dropdown-item" href="{% url 'equipamentos' %}">Equipamentos </a>
                                     {% if user_logado.is_superuser %}
                                     <a class="dropdown-item" href="{% url 'adicionar_equipamento' %}">Adicionar Novo</a>
-                                    <a class="dropdown-item" href="{% url 'itens_excluidos' %}">Excluidos</a>
+                                    <a class="dropdown-item" href="{% url 'itens_excluidos' %}">Bloqueados</a>
                                     {% endif %}
                                 </div>
                             </div>

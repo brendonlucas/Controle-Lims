@@ -127,6 +127,7 @@ def restaurar_item(request, item_id):
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 
+@login_required
 def mudar_status(request, item_id):
     if get_usuario_logado(request).is_superuser:
         try:
@@ -189,3 +190,24 @@ def add_unidades(request, item_id):
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 
+@login_required
+def relatorio_consumiveis(request):
+    if get_usuario_logado(request).is_superuser:
+        itens = Item.objects.filter(tipo_id=1)
+        return render(request, 'relatorios/relatorio_consumivel.html',
+                      {'itens': itens, 'user_logado': get_usuario_logado(request)})
+    else:
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+
+
+@login_required
+def relatorio_permanentes(request):
+    if get_usuario_logado(request).is_superuser:
+        itens = Item.objects.filter(tipo_id=2)
+        return render(request, 'relatorios/relatorio_permanente.html',
+                      {'itens': itens, 'user_logado': get_usuario_logado(request)})
+
+    else:
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})

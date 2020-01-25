@@ -19,6 +19,9 @@ urlpatterns = [
     path('painel_administracao/', views.opcoes_admin, name='painel_admin'),
     path('registrar/', RegistrarUsuarioView.as_view(), name="adicionar_usuario"),
     path('registrar_administrador/', RegistrarUsuarioAdminView.as_view(), name="adicionar_admin"),
+    path('relatorio-consumiveis/', views.relatorio_consumiveis, name="relatorio_consumiveis"),
+    path('relatorio-permanentes/', views.relatorio_permanentes, name="relatorio_permanentes"),
+
     path('login/', v.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', v.LogoutView.as_view(template_name='login.html'), name="logout"),
 
