@@ -19,6 +19,7 @@ class Item(models.Model):
     tipo = models.ForeignKey(TipoEquipamento, on_delete=models.CASCADE)
     imagem = models.FileField(upload_to='documents/%Y/%m/%d', default='documents/1111/sem_foto.jpg')
     excluido = models.BooleanField(default=False)
+    em_operacao = models.BooleanField(default=1, null=True)
 
 
 class TipoUsuario(models.Model):

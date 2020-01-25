@@ -126,6 +126,36 @@ def restaurar_item(request, item_id):
         messages.error(request, 'Acesso negado!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
+
+def mudar_status(request, item_id):
+    if get_usuario_logado(request).is_superuser:
+        try:
+            item = Item.objects.get(id=item_id)
+        except Item.DoesNotExist:
+            messages.error(request, 'Equipamento não existe!')
+            return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+
+        if request.method == 'POST':
+            form = FormMudarStatus(request.POST)
+            # print('sdasdasda', form.cleaned_data['status'])
+            if form.is_valid():
+                print('sdasdasda', form.cleaned_data['status'])
+                if form.cleaned_data['status'] == 'Em Funcionamento':
+                    item.em_operacao = True
+                    item.save()
+                elif form.cleaned_data['status'] == 'Com Problema':
+                    item.em_operacao = False
+                    item.save()
+
+                return redirect('equipamentos')
+            else:
+                messages.error(request, 'Valor invalido!')
+                return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+    else:
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+
+
 @login_required
 def add_unidades(request, item_id):
     if get_usuario_logado(request).is_superuser:

@@ -2,7 +2,7 @@
 {% block 'content' %}
 <div class="page-header">
     <div class="btn-group float-right">
-        {% if item.quantidade > 0 %}
+        {% if item.quantidade > 0 and item.excluido == 0 and item.tipo.id == 1 %}
         <a class="btn btn-sm btn-success" href="{% url 'solicitar_emprestimo' item.id %}">Pegar</a>
         {% endif %}
         {% if user_logado.is_superuser %}
@@ -28,6 +28,7 @@
             {{item.quantidade}}
         </td>
     </tr>
+    {% if item.tipo.id == 1 %}
     <tr>
         <td>
             Quantidade emprestada:
@@ -52,6 +53,7 @@
             {{item.tipo}}
         </td>
     </tr>
+    {% endif %}
     {% if item.codigo_tombamento != '' %}
     <tr>
         <td>

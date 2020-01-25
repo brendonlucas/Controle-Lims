@@ -14,6 +14,7 @@ urlpatterns = [
     path('equipamento/<int:item_id>/Restaurar/', views.restaurar_item, name='restaurar_item'),
     path('equipamento/excluidos/', views.exibe_excluidos, name='itens_excluidos'),
     path('equipamento/<int:item_id>/add-unidades/', views.add_unidades, name='add_unidades'),
+    path('equipamento/<int:item_id>/mudar-status/', views.mudar_status, name='mudar_status'),
 
     path('painel_administracao/', views.opcoes_admin, name='painel_admin'),
     path('registrar/', RegistrarUsuarioView.as_view(), name="adicionar_usuario"),

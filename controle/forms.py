@@ -33,3 +33,7 @@ class LoginForm(forms.Form):
 
 class FormAddUnidade(forms.Form):
     quantidade = forms.IntegerField(required=True)
+
+
+class FormMudarStatus(forms.Form):
+    status = forms.CharField(required=True)
