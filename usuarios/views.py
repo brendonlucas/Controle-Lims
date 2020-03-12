@@ -8,7 +8,6 @@ from django.views.generic.base import View
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.hashers import make_password, check_password
 
-from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from controle.models import *
@@ -37,14 +36,14 @@ class RegistrarUsuarioView(View):
             if form.is_valid():
                 dados_form = form.cleaned_data
                 usuario = User.objects.create_user(username=dados_form['nome'], email=dados_form['email'],
-                                                   password=dados_form['senha'], first_name=dados_form['first_name'],
+                                                   password=dados_form['senha'],
+                                                   first_name=dados_form['first_name'],
                                                    last_name=dados_form['last_name'])
-
                 tipo = TipoUsuario.objects.get(id=1)
                 usuario_dados = Usuario(telefone=dados_form['telefone'], user=usuario, tipo=tipo)
-
                 usuario_dados.save()
                 return redirect('root')
+
             return render(request, self.template_name, {'form': form, 'user_logado': get_usuario_logado(request)})
 
 
@@ -145,12 +144,12 @@ def exibir_ajuda(request):
 
 
 def handler404(request, exception, template_name="page_404.html"):
-    response = render_to_response("page_404.html")
+    response = render("page_404.html")
     response.status_code = 404
     return response
 
 
 def handler500(request, *args, **argv):
-    response = render_to_response("page_404.html")
+    response = render("page_404.html")
     response.status_code = 500
     return response

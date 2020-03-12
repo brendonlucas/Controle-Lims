@@ -14,13 +14,15 @@ class ItemForm(forms.Form):
 class ItemFormEdit(ModelForm):
     imagem = forms.FileField(label='Imagem', required=False)
 
+
     class Meta:
         model = Item
-        fields = ['nome', 'quantidade', 'tipo', 'imagem']
+        fields = ['nome', 'quantidade', 'codigo_tombamento', 'tipo', 'imagem']
 
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
             'quantidade': forms.NumberInput(attrs={'class': 'form-control'}),
+            'codigo_tombamento': forms.TextInput(attrs={'class': 'form-control', 'required': False}),
             'tipo': forms.Select(attrs={'class': 'form-control'}),
             'imagem': forms.FileInput(attrs={'class': 'form-control'}),
         }

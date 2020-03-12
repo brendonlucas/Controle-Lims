@@ -2,16 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0a845b8-77f1-4301-9d0b-f0a6d8da5335" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/controle/templates/relatorios/relatorio_consumivel.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controle/templates/relatorios/relatorio_permanente.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controle/templates/equipamentos/backup.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/exibir.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/exibir.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/listar.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/listar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/preview.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/preview.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/templates/opcoes_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/opcoes_admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/templates/add_usuario.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/templates/add_usuario.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/templates/my_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/templates/my_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/views.py" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,8 +50,14 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ToolWindowStructure.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -70,18 +81,6 @@
       <recent name="C:\Users\Brendon\Controle-Lims\usuarios\templates" />
       <recent name="C:\Users\Brendon\Controle-Lims\controle\templates\equipamentos\temp_removidos" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration name="sige" type="Python.DjangoServer" factoryName="Django server">
@@ -174,6 +173,8 @@
       <workItem from="1574116725346" duration="7604000" />
       <workItem from="1574133888643" duration="2437000" />
       <workItem from="1574212220038" duration="3000" />
+      <workItem from="1583979711031" duration="808000" />
+      <workItem from="1583983928609" duration="14869000" />
     </task>
     <servers />
   </component>
@@ -204,5 +205,31 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1322" height="205" key="GridCell.Tab.0.bottom" timestamp="1583990243136">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1322" height="205" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583990243136" />
+    <state width="1322" height="205" key="GridCell.Tab.0.center" timestamp="1583990243136">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1322" height="205" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1583990243136" />
+    <state width="1322" height="205" key="GridCell.Tab.0.left" timestamp="1583990243136">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1322" height="205" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1583990243135" />
+    <state width="1322" height="205" key="GridCell.Tab.0.right" timestamp="1583990243136">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1322" height="205" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1583990243136" />
+    <state x="184" y="0" key="SettingsEditor" timestamp="1583980424441">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1583980424441" />
+    <state x="384" y="186" key="com.intellij.ide.util.TipDialog" timestamp="1583979724323">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="384" y="186" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1583979724323" />
   </component>
 </project>

@@ -1,15 +1,22 @@
 {% extends 'base.html' %}
 {% block 'content' %}
-<div class="#">
-    <h4 style="font-weight: bold"> Opções do Docente:</h4>
-    <a style="margin: 5px; width: 100%" class="btn btn-lg btn-primary" href="{% url 'adicionar_usuario' %}"> Adicionar
-        Usuario </a>
-    <a style="margin: 5px; width: 100% " class="btn btn-lg btn-primary" href="{% url 'adicionar_admin' %}"> Adicionar
-        Administrador </a>
-    <a style="margin: 5px; width: 100%" class="btn btn-lg btn-primary" href="{% url 'adicionar_equipamento' %}">
-        Adicionar Novo Equipamento </a>
-    <a style="margin: 5px; width: 100%" class="btn btn-lg btn-primary" href="{% url 'relatorio_consumiveis' %}">Relatório Consumiveis </a>
-    <a style="margin: 5px; width: 100%" class="btn btn-lg btn-primary" href="{% url 'relatorio_permanentes' %}">Relatório Permanentes </a>
-</div>
+    <div class="#">
+        <h4 style="font-weight: bold"> Opções do Administrador:</h4>
+        <a style="margin: 5px; width: 100%" class="btn btn-lg btn-primary" href="{% url 'adicionar_usuario' %}">
+            Adicionar
+            Usuario </a>
+        <a style="margin: 5px; width: 100% " class="btn btn-lg btn-primary" href="{% url 'adicionar_admin' %}">
+            Adicionar
+            Administrador </a>
+        <a style="margin: 5px; width: 100%" class="btn btn-lg btn-primary" href="{% url 'adicionar_equipamento' %}">
+            Adicionar Novo Equipamento </a>
+        <a style="margin: 5px; width: 100%" class="btn btn-lg btn-primary" href="{% url 'relatorio_consumiveis' %}">Relatório
+            Consumiveis </a>
+        <a style="margin: 5px; width: 100%" class="btn btn-lg btn-primary" href="{% url 'relatorio_permanentes' %}">Relatório
+            Permanentes </a>
+        <a style="margin: 5px; width: 100%" class="btn btn-lg btn-warning" href="#">Bloquear
+            Emprestimos</a>
+
+    </div>
 
 {% endblock %}

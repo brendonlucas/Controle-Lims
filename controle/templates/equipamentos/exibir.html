@@ -1,73 +1,87 @@
 {% extends 'base.html' %}
 {% block 'content' %}
-<div class="page-header">
-    <div class="btn-group float-right">
-        {% if item.quantidade > 0 and item.excluido == 0 and item.tipo.id == 1 %}
-        <a class="btn btn-sm btn-success" href="{% url 'solicitar_emprestimo' item.id %}">Pegar</a>
-        {% endif %}
-        {% if user_logado.is_superuser %}
-        <a class="btn btn-sm btn-light" href="{% url 'editar_equipamento' pk=item.id %}">Editar</a>
-        <a class="btn btn-sm btn-danger" href="" role="button" id="dropdownMenuLink"
-           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Excluir</a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="{% url 'excluir' item.id %}">Sim</a>
-            <a class="dropdown-item" href="#">Não</a>
+    <div class="page-header">
+        <br>
+        <div class="btn-group float-right">
+            {% if item.quantidade > 0 and item.excluido == 0 and item.tipo.id == 1 or user_logado.is_superuser %}
+                <a class="btn btn-sm btn-success" href="{% url 'solicitar_emprestimo' item.id %}">Pegar</a>
+            {% endif %}
+            {% if user_logado.is_superuser %}
+                <a class="btn btn-sm btn-light" href="{% url 'editar_equipamento' pk=item.id %}">Editar</a>
+            {% endif %}
         </div>
+        <span>Código: {{ item.id }}</span>
+        <h2>{{ item.nome }}</h2>
+    </div>
+    <table class="table">
+        <tr>
+            <td>
+                Quantidade disponivel:
+            </td>
+            <td>
+                {{ item.quantidade }}
+            </td>
+        </tr>
+
+        {% if item.tipo.id == 1 %}
+            <tr>
+                <td>
+                    Quantidade emprestada:
+                </td>
+                <td>
+                    {{ item.quantidade_emprestada }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Quantidade descartada:
+                </td>
+                <td>
+                    {{ item.quantidade_descartada }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Tipo:
+                </td>
+                <td>
+                    {{ item.tipo }}
+                </td>
+            </tr>
+        {% endif %}
+        {% if item.tipo.nome == "Permanente" %}
+            <tr>
+                <td>
+                    Status:
+                </td>
+
+                <td>
+                    {% if item.em_operacao %}
+                        Sem problema
+                    {% else %}
+                        Com problema
+                    {% endif %}
+
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    Código de tombamento:
+                </td>
+                <td>
+                    {% if item.codigo_tombamento == '' %}
+                        Sem Tombamento
+                    {% else %}
+                        {{ item.codigo_tombamento }}
+                    {% endif %}
+                </td>
+            </tr>
         {% endif %}
 
-    </div>
-    <span>Código: {{item.id}}</span>
-    <h2>{{item.nome}}</h2>
-</div>
-<table class="table">
-    <tr>
-        <td>
-            Quantidade disponivel:
-        </td>
-        <td>
-            {{item.quantidade}}
-        </td>
-    </tr>
-    {% if item.tipo.id == 1 %}
-    <tr>
-        <td>
-            Quantidade emprestada:
-        </td>
-        <td>
-            {{item.quantidade_emprestada}}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Quantidade descartada:
-        </td>
-        <td>
-            {{item.quantidade_descartada}}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Tipo:
-        </td>
-        <td>
-            {{item.tipo}}
-        </td>
-    </tr>
-    {% endif %}
-    {% if item.codigo_tombamento != '' %}
-    <tr>
-        <td>
-            Código de tombamento:
-        </td>
-        <td>
-            {{item.codigo_tombamento}}
-        </td>
-    </tr>
-    {% endif %}
 
-
-</table>
-<br>
-<img style="width: 300px; height: 200px" src="{{ item.imagem.url }}" alt="Item">
+    </table>
+    <br>
+    <img style="width: 300px; height: 200px" src="{{ item.imagem.url }}" alt="Item">
 
 {% endblock %}

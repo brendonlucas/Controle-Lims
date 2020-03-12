@@ -8,10 +8,12 @@ class RegistrarUsuarioForm(forms.Form):
     last_name = forms.CharField(required=True)
     email = forms.EmailField(required=True)
     senha = forms.CharField(required=True)
+    confirmar_senha = forms.CharField(required=True)
     telefone = forms.IntegerField(required=True)
 
     def is_valid(self):
         valid = True
+
         if not super(RegistrarUsuarioForm, self).is_valid():
             self.adiciona_erro('Por favor, verifique os dados informados')
             valid = False
@@ -20,6 +22,12 @@ class RegistrarUsuarioForm(forms.Form):
         if user_exists:
             self.adiciona_erro('Usuário já existente.')
             valid = False
+
+        if self.data['senha'] != self.data['confirmar_senha']:
+            print(self.data['senha'],  self.data['confirmar_senha'])
+            self.adiciona_erro('As senhas não conferem!')
+            valid = False
+
         return valid
 
     def adiciona_erro(self, message):

@@ -24,9 +24,7 @@ def add_equipamento(request):
                 image = form.cleaned_data['imagem']
                 if image is None:
                     image = 'documents/1111/sem_foto.jpg'
-                if form.cleaned_data['codigo_tombamento'] == '' and form.cleaned_data['tipo'] == 'Permanente':
-                    messages.error(request, 'Item permanente exige um codigo de Tombamento!')
-                    return redirect('adicionar_equipamento')
+                
 
                 new = Item(nome=nome, quantidade=qtd, tipo=tipo, imagem=image, quantidade_emprestada=0)
                 if form.cleaned_data['codigo_tombamento'] is not None:
@@ -106,6 +104,8 @@ def item_editar(request, pk):
                 item = form.save(commit=False)
                 item.save()
                 return redirect('equipamentos')
+            else:
+                return redirect('editar_equipamento', pk)
         else:
             form = ItemFormEdit(instance=item)
             return render(request, 'equipamentos/editar.html',

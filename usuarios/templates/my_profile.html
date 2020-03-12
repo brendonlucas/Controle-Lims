@@ -1,63 +1,88 @@
 {% extends 'base.html' %}
 {% block 'content' %}
-<style>
-    table {
-        border-collapse: collapse;
-         width: 100%;
-    }
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
 
-    th, td {
-          text-align: left;
-          padding: 8px;
-    }
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
 
-    tr:nth-child(even){
-        background-color: #f2f2f2
-    }
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
 
-    th {
-        background-color: #3276B1;
-        color: white;
-    }
+        th {
+            background-color: #3276B1;
+            color: white;
+        }
 
 
-</style>
-<br>
-<p style="font-size: 30px;"> Seus Pedidos </p>
-<hr>
-<div style=" ">
-    {% if emprestimos %}
-    <table style="min-width: 700px">
-        <tr>
-            <th>Nome</th>
-            <th>Item</th>
-            <th>Quantidade</th>
-            <th>Data Pedido</th>
-            <th>Data Devolução</th>
-            <th>Situação</th>
-            <th>Ação</th>
-        </tr>
-        {% for emprestimo in emprestimos %}
-        <tr>
-            <td><a href="{% url 'exibe_um_usuario' emprestimo.solicitante.id %}">
-                {{emprestimo.solicitante.user.first_name }} {{emprestimo.solicitante.user.last_name}} </a></td>
-            <td><a href="{% url 'equipamento' emprestimo.equipamento.id %}">{{emprestimo.equipamento.nome}}</a></td>
-            <td>{{emprestimo.quantidade}}</td>
-            <td>{{emprestimo.data_emprestimo| date:"d/m/Y"}}</td>
-            <td>{% if emprestimo.data_devolucao == none %}
-                Aguardando...
-                {% else %}
-                {{emprestimo.data_devolucao| date:"d/m/Y"}}
-                {% endif %}
-            </td>
-            <td>{{emprestimo.tipo.nome}}</td>
-            <td><a class="btn btn-sm btn-primary" href="{% url 'exibir_detalhes_emprestimo' emprestimo.id %}">Visualizar</a>
-            </td>
-        </tr>
-        {%endfor%}
-    </table>
-    {% else %}
-    <p style="font-size: 20px; font-weight: bold; text-align:center">Você não fez solicitações <br> :( </p>
-    {% endif %}
-</div>
+    </style>
+    <br>
+    <p style="font-size: 30px;"> Seus Pedidos </p>
+    <hr>
+    <div style=" ">
+        {% if emprestimos %}
+            <table style="min-width: 700px">
+                <tr>
+                    <th>Nome</th>
+                    <th>Item</th>
+                    <th>Quantidade</th>
+                    <th>Data Pedido</th>
+                    <th>Data Devolução</th>
+                    <th>Situação</th>
+                    <th>Ação</th>
+                </tr>
+                {% for emprestimo in emprestimos %}
+                    <tr>
+                        <td><a href="{% url 'exibe_um_usuario' emprestimo.solicitante.id %}">
+                            {{ emprestimo.solicitante.user.first_name }} {{ emprestimo.solicitante.user.last_name }} </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'equipamento' emprestimo.equipamento.id %}">{{ emprestimo.equipamento.nome }}</a>
+                        </td>
+                        <td>{{ emprestimo.quantidade }}</td>
+                        <td>{{ emprestimo.data_emprestimo| date:"d/m/Y" }}</td>
+                        <td>{% if emprestimo.data_devolucao == none %}
+                            Aguardando...
+                        {% else %}
+                            {{ emprestimo.data_devolucao| date:"d/m/Y" }}
+                        {% endif %}
+                        </td>
+                        <td>{{ emprestimo.tipo.nome }}</td>
+                        <td><a class="btn btn-sm btn-primary"
+                               href="{% url 'exibir_detalhes_emprestimo' emprestimo.id %}">Visualizar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p style="font-size: 20px; font-weight: bold; text-align:center">Você não fez solicitações <br> :( </p>
+        {% endif %}
+
+
+    </div>
+
+
 {% endblock %}
+
+<!--
+ <div class="row">
+            <div class="col-sm-3">
+                <div class="card">
+                    <h5 class="card-header">Arduino</h5>
+                    <div class="card-body">
+                        <h6 class="card-text">Data: 25/30/1999</h6>
+                        <h6 class="card-text">Data Devolução: 25/30/1999</h6>
+                        <p class="card-text">Quandidade: 5</p>
+                        <a href="#" class="btn btn-sm btn-primary">Visualizar</a>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+-->
