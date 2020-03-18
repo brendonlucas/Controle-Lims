@@ -3,12 +3,8 @@
 <li><h2>Tipos de Emprestimos </h2></li>
 <pre><code>
 from emprestimo.models import *
-TipoEstadoEmprestimo(nome='Solicitacao', descricao='Pedido no estado de solicitação').save()
-TipoEstadoEmprestimo(nome='Aceito', descricao='Pedido foi aceito').save()
-TipoEstadoEmprestimo(nome='Rejeitado', descricao='Pedido está rejeitado').save()
-TipoEstadoEmprestimo(nome='Finalizado', descricao='Emprestimo está finalizado').save()
-TipoEstadoEmprestimo(nome='Reserva', descricao='Pedido no estado de Reserva').save()
-TipoEstadoEmprestimo(nome='Reserva Aceita', descricao='Pedido no estado de Reserva Aceita').save()</code></pre>
+TipoEstadoEmprestimo(nome='Emprestado', descricao='O Emprestimo foi realizado').save()
+TipoEstadoEmprestimo(nome='Devolvido', descricao='O Emprestimo foi finalizado').save()</code></pre>
     
 OBS: Devem ser criados nesta mesma ordem, para evitar falhas.
 
