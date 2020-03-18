@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import *
+from django.db.models.functions import Lower
 from django.shortcuts import render, redirect, get_object_or_404
 from controle.forms import *
 from controle.models import *
@@ -9,6 +10,10 @@ from emprestimo.models import TipoEstadoEmprestimo, Emprestimo
 
 def get_usuario_logado(request):
     return request.user
+
+
+def get_qtd_notificacoes():
+    return Emprestimo.objects.filter(visualisado=0).count()
 
 
 @login_required
@@ -24,7 +29,6 @@ def add_equipamento(request):
                 image = form.cleaned_data['imagem']
                 if image is None:
                     image = 'documents/1111/sem_foto.jpg'
-                
 
                 new = Item(nome=nome, quantidade=qtd, tipo=tipo, imagem=image, quantidade_emprestada=0)
                 if form.cleaned_data['codigo_tombamento'] is not None:
@@ -35,31 +39,19 @@ def add_equipamento(request):
                 messages.error(request, 'Formulario imvalido!')
                 return redirect('adicionar_equipamento')
         elif request.method == 'GET':
-            return render(request, 'equipamentos/adicionar.html',
-                          {'form': form, 'user_logado': get_usuario_logado(request)})
+            return render(request, 'equipamentos/adicionar.html', {'form': form,
+                                                                   'user_logado': get_usuario_logado(request),
+                                                                   'qtd_notificacoes': get_qtd_notificacoes()})
     else:
         messages.error(request, 'Acesso negado!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 
 @login_required
-def exibir_equipamentos(request):
-    itens = Item.objects.filter(excluido=False).exclude(quantidade=0)
-    itens2 = Item.objects.filter(quantidade=0).exclude(excluido=True)
-
-    itens = itens.union(itens2, all=True)
-
-    paginator = Paginator(itens, 8)
-    page = request.GET.get('page')
-    itens = paginator.get_page(page)
-    return render(request, 'equipamentos/listar.html',
-                  {'itens': itens, 'user_logado': get_usuario_logado(request)})
-
-
-@login_required
 def opcoes_admin(request):
     if get_usuario_logado(request).is_superuser:
-        return render(request, 'opcoes_admin.html', {'user_logado': get_usuario_logado(request)})
+        return render(request, 'opcoes_admin.html', {'user_logado': get_usuario_logado(request),
+                                                     'qtd_notificacoes': get_qtd_notificacoes()})
     else:
         messages.error(request, 'Acesso negado!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
@@ -68,9 +60,25 @@ def opcoes_admin(request):
 @login_required
 def exibir_um_equipamento(request, item_id):
     item = Item.objects.get(id=item_id)
-    return render(request, 'equipamentos/exibir.html', {'item': item, 'user_logado': get_usuario_logado(request)})
+    return render(request, 'equipamentos/exibir.html', {'item': item, 'user_logado': get_usuario_logado(request),
+                                                        'qtd_notificacoes': get_qtd_notificacoes()})
 
 
+@login_required
+def exibir_equipamentos(request):
+    itens = Item.objects.filter(excluido=False).exclude(quantidade=0)
+    itens2 = Item.objects.filter(quantidade=0).exclude(excluido=True)
+
+    itens = itens.union(itens2, all=True).order_by('nome')
+
+    paginator = Paginator(itens, 8)
+    page = request.GET.get('page')
+    itens = paginator.get_page(page)
+    return render(request, 'equipamentos/listar.html',
+                  {'itens': itens, 'user_logado': get_usuario_logado(request),
+                   'qtd_notificacoes': get_qtd_notificacoes()})
+
+"""
 @login_required
 def excluir_item(request, item_id):
     if get_usuario_logado(request).is_superuser:
@@ -82,6 +90,8 @@ def excluir_item(request, item_id):
         messages.error(request, 'Acesso negado!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
+
+"""
 
 @login_required
 def exibe_excluidos(request):

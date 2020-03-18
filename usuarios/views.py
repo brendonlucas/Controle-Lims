@@ -19,13 +19,18 @@ def get_usuario_logado(request):
     return request.user
 
 
+def get_qtd_notificacoes():
+    return Emprestimo.objects.filter(visualisado=0).count()
+
+
 @method_decorator(login_required, name='dispatch')
 class RegistrarUsuarioView(View):
     template_name = 'add_usuario.html'
 
     def get(self, request):
         if get_usuario_logado(request).is_superuser:
-            return render(request, self.template_name, {'user_logado': get_usuario_logado(request)})
+            return render(request, self.template_name, {'user_logado': get_usuario_logado(request),
+                                                        'qtd_notificacoes': get_qtd_notificacoes()})
         else:
             messages.error(request, 'Acesso negado!')
             return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
@@ -44,7 +49,8 @@ class RegistrarUsuarioView(View):
                 usuario_dados.save()
                 return redirect('root')
 
-            return render(request, self.template_name, {'form': form, 'user_logado': get_usuario_logado(request)})
+            return render(request, self.template_name, {'form': form, 'user_logado': get_usuario_logado(request),
+                                                        'qtd_notificacoes': get_qtd_notificacoes()})
 
 
 @method_decorator(login_required, name='dispatch')
@@ -53,7 +59,8 @@ class RegistrarUsuarioAdminView(View):
 
     def get(self, request):
         if get_usuario_logado(request).is_superuser:
-            return render(request, self.template_name, {'user_logado': get_usuario_logado(request)})
+            return render(request, self.template_name, {'user_logado': get_usuario_logado(request),
+                                                        'qtd_notificacoes': get_qtd_notificacoes()})
         else:
             messages.error(request, 'Acesso negado!')
             return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
@@ -72,7 +79,8 @@ class RegistrarUsuarioAdminView(View):
 
             usuario_dados.save()
             return redirect('root')
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form,
+                                                    'qtd_notificacoes': get_qtd_notificacoes()})
 
 
 @login_required
@@ -83,7 +91,8 @@ def exibir_usuarios(request):
         page = request.GET.get('page')
         usuarios = paginator.get_page(page)
         return render(request, 'exibir_usuarios.html',
-                      {'user_logado': get_usuario_logado(request), 'usuarios': usuarios})
+                      {'user_logado': get_usuario_logado(request), 'usuarios': usuarios,
+                       'qtd_notificacoes': get_qtd_notificacoes()})
     else:
         messages.error(request, 'Acesso negado!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
@@ -97,15 +106,17 @@ def exibir_um_usuario(request, usuario_id):
     page = request.GET.get('page')
     emprestimos = paginator.get_page(page)
     return render(request, 'exibir.html', {'emprestimos': emprestimos, 'usuario': usuario,
-                                           'user_logado': get_usuario_logado(request)})
+                                           'user_logado': get_usuario_logado(request),
+                                           'qtd_notificacoes': get_qtd_notificacoes()})
 
 
 @login_required
 def exibir_perfil(request):
     user_profile = Usuario.objects.get(user=get_usuario_logado(request).id)
     emprestimo = Emprestimo.objects.filter(solicitante=user_profile.id)
-    return render(request, 'my_profile.html',
-                  {'emprestimos': emprestimo, 'user_logado': get_usuario_logado(request), 'user_profile': user_profile})
+    return render(request, 'my_profile.html', {'emprestimos': emprestimo, 'user_logado': get_usuario_logado(request),
+                                               'user_profile': user_profile,
+                                               'qtd_notificacoes': get_qtd_notificacoes()})
 
 
 @method_decorator(login_required, name='dispatch')
@@ -113,7 +124,8 @@ class TrocarSenhaUserView(View):
     template_name = 'alterar_senha.html'
 
     def get(self, request):
-        return render(request, self.template_name, {'user_logado': get_usuario_logado(request)})
+        return render(request, self.template_name, {'user_logado': get_usuario_logado(request),
+                                                    'qtd_notificacoes': get_qtd_notificacoes()})
 
     def post(self, request):
         form = TrocarSenhaUsuarioForm(request.POST)
@@ -135,12 +147,14 @@ class TrocarSenhaUserView(View):
             else:
                 messages.error(request, 'Username incorreto!')
                 redirect('mudar_senha')
-        return render(request, self.template_name, {'form': form, 'user_logado': get_usuario_logado(request)})
+        return render(request, self.template_name, {'form': form, 'user_logado': get_usuario_logado(request),
+                                                    'qtd_notificacoes': get_qtd_notificacoes()})
 
 
 @login_required
 def exibir_ajuda(request):
-    return render(request, 'pag_ajuda.html', {'user_logado': get_usuario_logado(request)})
+    return render(request, 'pag_ajuda.html', {'user_logado': get_usuario_logado(request),
+                                              'qtd_notificacoes': get_qtd_notificacoes()})
 
 
 def handler404(request, exception, template_name="page_404.html"):

@@ -1,6 +1,5 @@
-{% if item.quantidade > 0 %}
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <style>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+ <style>
         [data-tooltip] {
             position: relative;
 
@@ -24,19 +23,31 @@
             display: block;
         }
 
+        .animate-hover {
+            position: relative;
+            top: 0;
+            transition: all .2s ease-in-out
+        }
+
+        .animate-hover:hover {
+            top: -9px;
+            box-shadow: 0 4px 3px #999
+        }
 
     </style>
-    <div class="card w-100" onMouseOver="this.style.backgroundColor='#f0f0f0'"
+{% if item.quantidade > 0 %}
+
+    <div class="card w-100 animate-hover" onMouseOver="this.style.backgroundColor='#f0f0f0'"
          onMouseOut="this.style.backgroundColor='#0000'">
 {% else %}
-    <div class="card w-100" onMouseOver="this.style.backgroundColor='#ffe8ed'"
-         onMouseOut="this.style.backgroundColor='#f0f0f0'">
+    <div class="card w-100 animate-hover" onMouseOver="this.style.backgroundColor='#ffe8ed'"
+         onMouseOut="this.style.backgroundColor='#0000'">
 {% endif %}
 
 <h5 class="card-header">{{ item.nome }} </h5>
 <div class="card-body">
 
-    <img src="{{ item.imagem.url }}" alt="{{ item.nome }}" class="mr-3" width="100">
+    <img src="{{ item.imagem.url }}" alt="{{ item.nome }}" class="mr-3" width="125">
     <div class="float-right col-lg-6">
         <div>
             {% if item.tipo.id == 1 %}
@@ -50,29 +61,24 @@
                     {% else %}
                         <span style="font-weight: bold"> Com Problema </span>
                     {% endif %}
-
                 </p>
-
             {% endif %}
         </div>
-
         <div class="">
             <a class="btn btn-sm btn-primary" href="{% url 'equipamento' item.id %}">Visualizar</a>
-
-            {% if item.quantidade > 0 and item.tipo.id == 1 or user_logado.is_superuser %}
+            {% if item.quantidade > 0 and item.tipo.id == 1 or user_logado.is_superuser and item.quantidade > 0 %}
                 <a class="btn btn-sm btn-success" href="{% url 'solicitar_emprestimo' item.id %}">Pegar</a>
             {% endif %}
-
+            <!--
             {% if item.quantidade == 0 and item.tipo.id == 1 %}
                 <a class="btn btn-sm btn-info" href="{% url 'reservar_equipamento' item.id %}">Reservar</a>
             {% endif %}
-
+            -->
             {% if user_logado.is_superuser %}
                 <a class="btn btn-sm btn-light" href="{% url 'editar_equipamento' pk=item.id %}">Editar</a>
-
                 <button class="btn btn-sm btn-info"
                         onclick="var display = document.getElementById('{{ item.id }}').style.display;
-                                if (display == 'none')
+                                if (display === 'none')
                                 document.getElementById('{{ item.id }}').style.display = 'block';
                                 else
                                 document.getElementById('{{ item.id }}').style.display = 'none';">+
@@ -85,8 +91,6 @@
                         <button type="submit" value="ok" class="btn btn-info"> Adicionar</button>
                     </div>
                 </form>
-
-
             {% endif %}
             {% if item.tipo.id == 2 and user_logado.is_superuser %}
                 <button class="btn btn-sm btn-success"
@@ -97,7 +101,6 @@
                                 document.getElementById('{{ item.id }}00').style.display = 'none';"> Modificar status
                 </button>
             {% endif %}
-
             <form action="{{ item.id }}/mudar-status/" method="POST" id="{{ item.id }}00" style="display:none">
                 {% csrf_token %}
                 <label for="qtd">Modificar status do Item: </label>
@@ -110,9 +113,7 @@
                 </div>
             </form>
         </div>
-
     </div>
-
 </div>
 </div>
 

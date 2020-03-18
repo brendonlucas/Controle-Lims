@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -8,25 +7,36 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
-  #sidebar {
-    background: #f2f2f2;
-  }
+        #sidebar {
+            background: #f2f2f2;
+        }
 
-  .item-preview {
-    box-shadow: rgba(0, 0, 0, .2) 1px 2px 2px;
-    margin: 1em;
-    padding: .8em;
-  }
+        .item-preview {
+            box-shadow: rgba(0, 0, 0, .2) 1px 2px 2px;
+            margin: 1em;
+            padding: .8em;
+        }
 
-  .subnav {
-    margin-left: 1em;
-    border-left: 1px solid gray;
-  }
+        .subnav {
+            margin-left: 1em;
+            border-left: 1px solid gray;
+        }
 
+        .animate-hover {
+            position: relative;
+            top: 0;
+            transition: all .2s ease-in-out
+        }
 
+        .animate-hover:hover {
+            top: -9px;
+            box-shadow: 0 4px 3px #999
+        }
 
     </style>
-    <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Circle-icons-computer.svg/1024px-Circle-icons-computer.svg.png" type="image/x-icon">
+    <link rel="shortcut icon"
+          href="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Circle-icons-computer.svg/1024px-Circle-icons-computer.svg.png"
+          type="image/x-icon">
 </head>
 <body>
 <header class="page-header">
@@ -34,13 +44,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <img src="http://lims.ifpi.edu.br/images/logo.png" alt="some text" width=200 height=80>
+                    <img src="/media/logo/logo.png" alt="some text" width=200 height=80>
                 </div>
             </div>
         </div>
         <br>
-        <div class="row">
-            <div class="col-12">
+        <div style="width: 100%">
+            <div>
                 <nav class="navbar navbar-expand-sm navbar-light bg-light">
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span></button>
@@ -51,8 +61,9 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{% url 'equipamentos' %}">Equipamentos </a>
                                     {% if user_logado.is_superuser %}
-                                    <a class="dropdown-item" href="{% url 'adicionar_equipamento' %}">Adicionar Novo</a>
-                                    <a class="dropdown-item" href="{% url 'itens_excluidos' %}">Bloqueados</a>
+                                        <a class="dropdown-item" href="{% url 'adicionar_equipamento' %}">Adicionar
+                                            Novo</a>
+                                        <a class="dropdown-item" href="{% url 'itens_excluidos' %}">Bloqueados</a>
                                     {% endif %}
                                 </div>
                             </div>
@@ -64,16 +75,21 @@
                                 </div>
                             </div>
                             {% if user_logado.is_superuser %}
-                            <a class="nav-item nav-link" href="{% url 'exibir_solicitacoes' %}">Solicitações </a>
-                            <a class="nav-item nav-link" href="{% url 'exibir_usuarios' %}">Usuários </a>
-                            <a class="nav-item nav-link" href="{% url 'painel_admin' %}">Painel </a>
+                                <a class="nav-item nav-link" href="{% url 'exibir_usuarios' %}">Usuários </a>
+                                <a class="nav-item nav-link" href="{% url 'painel_admin' %}">Painel </a>
                             {% endif %}
                         </div>
-                        <div class="navbar-nav dropdown ml-auto">
+
+                        <div class="navbar-nav ml-auto">
+                            {% if user_logado.is_superuser %}
+                                <a class="nav-item nav-link" href="{% url 'exibir_notificacoes' %}"> Notificações
+                                    <span style="color: red">{{ qtd_notificacoes }} </span>
+                                </a>
+                            {% endif %}
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                 {{ user_logado.username }}</a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="{% url 'exibe_meu_perfil' %}">Meu perfil</a>
+                                <!--<a class="dropdown-item" href="{% url 'exibe_meu_perfil' %}">Meu perfil</a>-->
                                 <a class="dropdown-item" href="{% url 'mudar_senha' %}">Trocar senha</a>
                                 <a class="dropdown-item" href="{% url 'exibir_ajuda' %}">Ajuda</a>
                                 <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
@@ -86,12 +102,10 @@
     </div>
 </header>
 <div class="container-fluid">
-    <div class="">
-        <div class="" style=" ">
-            {% block 'content' %}
-            {% endblock %}
-        </div>
-    </div>
+
+    {% block 'content' %}
+    {% endblock %}
+
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

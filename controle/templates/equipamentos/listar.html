@@ -1,23 +1,27 @@
 {% extends 'base.html' %}
 {% block 'content' %}
+
     <br>
     {% if itens %}
         <div class="row">
             {% for item in itens %}
-
                 {% if item.quantidade > 0 %}
                     <div class="col-sm-6">
-                    {% include 'equipamentos/preview.html' with item=item %}
-                    <br>
-                    </div>
-
-                {% else %}
-                    <div class="col-sm-6">
                         {% include 'equipamentos/preview.html' with item=item %}
-                    <br>
+                        <br>
                     </div>
                 {% endif %}
             {% endfor %}
+
+            {% for item in itens %}
+                {% if item.quantidade <= 0 %}
+                    <div class="col-sm-6">
+                        {% include 'equipamentos/preview.html' with item=item %}
+                        <br>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
         </div>
 
 

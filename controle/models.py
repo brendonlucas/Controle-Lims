@@ -41,6 +41,7 @@ class Usuario(models.Model):
 
 # from emprestimo.models import *
 # from controle.models import *
+
 # t = TipoUsuario(nome='Normal', descricao='Usuario com acesso limitado').save()
 # t = TipoUsuario(nome='Administrador', descricao='Usuario com acesso total ao sistema').save()
 
@@ -51,3 +52,6 @@ class Usuario(models.Model):
 # t = TipoEstadoEmprestimo(nome='Aceito', descricao='Pedido foi aceito').save()
 # t = TipoEstadoEmprestimo(nome='Rejeitado', descricao='Pedido está rejeitado').save()
 # t = TipoEstadoEmprestimo(nome='Finalizado', descricao='Emprestimo está finalizado').save()
+
+# t = TipoEstadoEmprestimo(nome='Emprestado', descricao='O Emprestimo foi realizado').save()
+# t = TipoEstadoEmprestimo(nome='Devolvido', descricao='O Emprestimo foi finalizado').save()

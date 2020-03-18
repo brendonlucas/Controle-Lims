@@ -2,6 +2,16 @@
 {% block 'content' %}
     <div class="#">
         <h4 style="font-weight: bold"> Opções do Administrador:</h4>
+        <button style="margin: 5px; width: 100%" class="btn btn-lg btn-primary" onclick="exibir()">
+            Todos os Emprestimos
+        </button>
+
+        <div class="btn-group-lg" id="tipos" style="display:none; width: 100%; text-align: center">
+            <a style="margin: 5px; " class="btn btn-lg btn-warning" href="#"> Emprestimos Ativos </a>
+            <a style="margin: 5px; " class="btn btn-lg btn-success" href="#"> Emprestimos Finalizados </a>
+        </div>
+
+
         <a style="margin: 5px; width: 100%" class="btn btn-lg btn-primary" href="{% url 'adicionar_usuario' %}">
             Adicionar
             Usuario </a>
@@ -14,9 +24,42 @@
             Consumiveis </a>
         <a style="margin: 5px; width: 100%" class="btn btn-lg btn-primary" href="{% url 'relatorio_permanentes' %}">Relatório
             Permanentes </a>
-        <a style="margin: 5px; width: 100%" class="btn btn-lg btn-warning" href="#">Bloquear
-            Emprestimos</a>
-
+        <a type="button" style="margin: 5px; width: 100%" class="btn btn-lg btn-warning" data-toggle="modal"
+           data-target="#confirm">Bloquear Emprestimos</a>
     </div>
 
+    <div class="modal fade" id="confirm" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p> QUER REALMENTE FAZER ISSO??</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" type="button" class="btn btn-danger" id="delete">Confirmar</a>
+                    <button type="button" data-dismiss="modal" class="btn btn-warning">Cancelar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function exibir() {
+            var display = document.getElementById("tipos").style.display;
+            if (display === 'none')
+                document.getElementById("tipos").style.display = 'block';
+            else
+                document.getElementById("tipos").style.display = 'none';
+        }
+    </script>
+
+
 {% endblock %}
+
+
+
+
+
+
+
+

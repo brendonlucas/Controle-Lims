@@ -12,47 +12,31 @@ def get_usuario_logado(request):
     return request.user
 
 
+def get_qtd_notificacoes():
+    return Emprestimo.objects.filter(visualisado=0).count()
+
+
 @login_required
-def solicitar_item(request, item_id):
-    form = FormQuantidade()
-    item = Item.objects.get(id=item_id)
-    if request.method == 'POST':
-        form = FormQuantidade(request.POST, request.FILES)
-        if form.is_valid():
-            qtd = form.cleaned_data['quantidade']
-            descricao = form.cleaned_data['descricao']
-            usuario = Usuario.objects.get(user=get_usuario_logado(request).id)
-            if qtd <= item.quantidade:
-                tipo = TipoEstadoEmprestimo.objects.get(id=1)
-                data_atual = date.today()
-                emprestimo = Emprestimo(equipamento=item, solicitante=usuario, data_emprestimo=data_atual, tipo=tipo,
-                                        descricao=descricao, quantidade=qtd)
-                emprestimo.save()
-                return redirect('equipamentos')
-            else:
-                messages.error(request, 'Quantidade maior que a disponivel')
-                return redirect('solicitar_emprestimo', item_id)
-        else:
-            messages.error(request, 'Prencha todos os campos corretamente')
-            return redirect('solicitar_emprestimo', item_id)
-
-    elif request.method == 'GET':
-        return render(request, 'pag_emprestimo.html',
-                      {'form': form, 'user_logado': get_usuario_logado(request), 'item': item})
+def confirmar_visualizacao(request, emprestimo_id):
+    if get_usuario_logado(request).is_superuser:
+        emprestimo = Emprestimo.objects.get(id=emprestimo_id)
+        emprestimo.visualisado = True
+        emprestimo.save()
+        return redirect('exibir_notificacoes')
 
 
+"""
 @login_required
 def exibe_solicitacoes(request):
     if get_usuario_logado(request).is_superuser:
-        solicitacoes = Emprestimo.objects.filter(tipo=1).order_by('data_emprestimo')
-        solicitacoes = Emprestimo.objects.exclude(tipo=2).exclude(tipo=3).exclude(tipo=4).exclude(tipo=6).order_by(
-            'data_emprestimo')
-        paginator = Paginator(solicitacoes, 8)
+        solicitacoes = Emprestimo.objects.filter(visualisado=0).order_by('data_emprestimo')
 
+        paginator = Paginator(solicitacoes, 8)
         page = request.GET.get('page')
         solicitacoes = paginator.get_page(page)
         return render(request, 'pag_solicitacoes.html', {'emprestimos': solicitacoes,
-                                                         'user_logado': get_usuario_logado(request)})
+                                                         'user_logado': get_usuario_logado(request),
+                                                         'qtd_notificacoes': get_qtd_notificacoes()})
     else:
         messages.error(request, 'Acesso negado!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
@@ -64,6 +48,7 @@ def aceita_solicitacao(request, solicitacao_id):
         solicitacao = Emprestimo.objects.get(id=solicitacao_id)
         item = Item.objects.get(id=solicitacao.equipamento.id)
         qtd = item.quantidade
+
         if solicitacao.tipo.id != 5:
             if qtd >= solicitacao.quantidade:
                 solicitacao.tipo = TipoEstadoEmprestimo.objects.get(id=2)
@@ -84,6 +69,23 @@ def aceita_solicitacao(request, solicitacao_id):
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 
+@login_required
+def exibir_detalhes_solicitacao(request, solicitacao_id):
+    try:
+        solicitacao = Emprestimo.objects.get(id=solicitacao_id)
+
+    except Emprestimo.DoesNotExist:
+        messages.error(request, 'Não encontrado!!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+
+    if solicitacao.tipo.id == 1 or solicitacao.tipo.id == 5:
+        return render(request, 'pag_detalhes.html',
+                      {'user_logado': get_usuario_logado(request), 'solicitacao': solicitacao})
+    else:
+        messages.error(request, 'Não encontrado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+        
+        
 @login_required
 def rejeita_solicitacao(request, solicitacao_id):
     if get_usuario_logado(request).is_superuser:
@@ -108,15 +110,8 @@ def rejeita_solicitacao(request, solicitacao_id):
     else:
         messages.error(request, 'Acesso negado!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
-
-
 @login_required
-def pag_falha(request):
-    return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
-
-
-@login_required
-def exibir_emprestimos(request):
+def exibir_emprestimos_2(request):
     emprestimos_ativos = Emprestimo.objects.filter(tipo=2).order_by('-data_emprestimo')
     paginator = Paginator(emprestimos_ativos, 8)
     page = request.GET.get('page')
@@ -124,23 +119,93 @@ def exibir_emprestimos(request):
     return render(request, 'emprestimos.html',
                   {'emprestimos': emprestimos_ativos,
                    'user_logado': get_usuario_logado(request)})
+"""
+
+
+# nova_funcao
+@login_required
+def exibe_notificacoes_emprestimos(request):
+    #print(Item.objects.filter(nome__contains="Ardu"))
+    if get_usuario_logado(request).is_superuser:
+        solicitacoes = Emprestimo.objects.filter(visualisado=0).order_by('data_emprestimo')
+        paginator = Paginator(solicitacoes, 8)
+        page = request.GET.get('page')
+        solicitacoes = paginator.get_page(page)
+        return render(request, 'pag_solicitacoes.html', {'emprestimos': solicitacoes,
+                                                         'user_logado': get_usuario_logado(request),
+                                                         'qtd_notificacoes': get_qtd_notificacoes()})
+    else:
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 
 @login_required
-def exibir_detalhes_solicitacao(request, solicitacao_id):
-    try:
-        solicitacao = Emprestimo.objects.get(id=solicitacao_id)
+def solicitar_item(request, item_id):
+    form = FormQuantidade()
+    item = Item.objects.get(id=item_id)
+    if request.method == 'POST':
+        form = FormQuantidade(request.POST, request.FILES)
+        if form.is_valid():
+            qtd = form.cleaned_data['quantidade']
+            descricao = form.cleaned_data['descricao']
+            usuario = Usuario.objects.get(user=get_usuario_logado(request).id)
+            if qtd <= item.quantidade:
+                tipo = TipoEstadoEmprestimo.objects.get(id=1)
+                data_atual = date.today()
+                emprestimo = Emprestimo(equipamento=item, solicitante=usuario, data_emprestimo=data_atual, tipo=tipo,
+                                        descricao=descricao, quantidade=qtd)
+                item.quantidade = item.quantidade - qtd
+                item.quantidade_emprestada = item.quantidade_emprestada + qtd
+                item.save()
+                emprestimo.save()
+                return redirect('equipamentos')
+            else:
+                messages.error(request, 'Quantidade maior que a disponivel')
+                return redirect('solicitar_emprestimo', item_id)
+        else:
+            messages.error(request, 'Prencha todos os campos corretamente')
+            return redirect('solicitar_emprestimo', item_id)
 
-    except Emprestimo.DoesNotExist:
-        messages.error(request, 'Não encontrado!!')
-        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+    elif request.method == 'GET':
+        return render(request, 'pag_emprestimo.html',
+                      {'form': form, 'user_logado': get_usuario_logado(request), 'item': item,
+                       'qtd_notificacoes': get_qtd_notificacoes()})
 
-    if solicitacao.tipo.id == 1 or solicitacao.tipo.id == 5:
-        return render(request, 'pag_detalhes.html',
-                      {'user_logado': get_usuario_logado(request), 'solicitacao': solicitacao})
-    else:
-        messages.error(request, 'Não encontrado!')
-        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+
+@login_required
+def exibir_emprestimos(request):
+    usuario_logado = Usuario.objects.get(user=get_usuario_logado(request).id)
+    emprestimos_ativos = Emprestimo.objects.filter(tipo=1).filter(solicitante=usuario_logado.id).order_by(
+        '-data_emprestimo')
+    paginator = Paginator(emprestimos_ativos, 8)
+    page = request.GET.get('page')
+    emprestimos_ativos = paginator.get_page(page)
+    return render(request, 'emprestimos.html', {'emprestimos': emprestimos_ativos,
+                                                'user_logado': get_usuario_logado(request),
+                                                'qtd_notificacoes': get_qtd_notificacoes()})
+
+@login_required
+def exibir_emprestimos_finalizados(request):
+    usuario_logado = Usuario.objects.get(user=get_usuario_logado(request).id)
+    emprestimos_finalizados = Emprestimo.objects.filter(tipo=2).filter(solicitante=usuario_logado.id).order_by(
+        '-data_emprestimo')
+    paginator = Paginator(emprestimos_finalizados, 8)
+    page = request.GET.get('page')
+    emprestimos_ativos = paginator.get_page(page)
+    return render(request, 'emprestimos.html', {'emprestimos': emprestimos_ativos,
+                                                'user_logado': get_usuario_logado(request),
+                                                'qtd_notificacoes': get_qtd_notificacoes()})
+
+
+
+
+
+def exibir_todos_emporestimos_ativos():
+    pass
+
+
+def exibir_todos_emporestimos_finalizados():
+    pass
 
 
 @login_required
@@ -151,12 +216,9 @@ def exibir_detalhes(request, emprestimo_id):
         messages.error(request, 'Não encontrado!!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
-    if solicitacao.tipo.id != 1:
-        return render(request, 'pag_detalhes.html',
-                      {'user_logado': get_usuario_logado(request), 'solicitacao': solicitacao})
-    else:
-        messages.error(request, 'Não encontrado!')
-        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+    return render(request, 'pag_detalhes.html', {'user_logado': get_usuario_logado(request),
+                                                 'solicitacao': solicitacao,
+                                                 'qtd_notificacoes': get_qtd_notificacoes()})
 
 
 @login_required
@@ -174,8 +236,9 @@ def fazer_devolucao_normal(request, emprestimo_id):
         equipamento.quantidade_emprestada = equipamento.quantidade_emprestada - emprestimo.quantidade
         equipamento.save()
         emprestimo.data_devolucao = date.today()
-        emprestimo.tipo_id = 4
+        emprestimo.tipo_id = 2
         emprestimo.save()
+
         lista_reserva = Emprestimo.objects.filter(tipo=6).order_by('id')
         if len(lista_reserva) > 0:
             for i in range(len(lista_reserva)):
@@ -216,7 +279,8 @@ def fazer_devolucao_parcial(request, emprestimo_id):
                 quantidade_defeituoso = form.cleaned_data['quantidade_defeituoso']
                 descricao = form.cleaned_data['descricao']
 
-                if quantidade_defeituoso + qtd > emprestimo.quantidade or quantidade_defeituoso + qtd < emprestimo.quantidade:
+                if quantidade_defeituoso + qtd > emprestimo.quantidade or \
+                        quantidade_defeituoso + qtd < emprestimo.quantidade:
                     messages.error(request, 'Quantidades Invalidas!')
                     return redirect('item_devolvido_parcial', emprestimo_id)
 
@@ -227,7 +291,7 @@ def fazer_devolucao_parcial(request, emprestimo_id):
 
                     emprestimo.mensagem_devolucao = descricao
                     emprestimo.data_devolucao = date.today()
-                    emprestimo.tipo_id = 4
+                    emprestimo.tipo_id = 2
                     emprestimo.save()
                     equipamento.save()
 
@@ -254,14 +318,7 @@ def fazer_devolucao_parcial(request, emprestimo_id):
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 
-@login_required
-def exibir_emprestimos_finalizados(request):
-    emprestimos_finalizados = Emprestimo.objects.filter(tipo=4).order_by('-data_devolucao')
-    paginator = Paginator(emprestimos_finalizados, 8)
-    page = request.GET.get('page')
-    emprestimos_finalizados = paginator.get_page(page)
-    return render(request, 'pag_emp_finalizados.html',
-                  {'emprestimos': emprestimos_finalizados, 'user_logado': get_usuario_logado(request)})
+
 
 
 @login_required
@@ -288,3 +345,9 @@ def reservar_equipamento(request, item_id):
     elif request.method == 'GET':
         return render(request, 'pag_emprestimo.html',
                       {'form': form, 'user_logado': get_usuario_logado(request), 'item': item})
+
+
+@login_required
+def pag_falha(request):
+    return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request),
+                                              'qtd_notificacoes': get_qtd_notificacoes()})
