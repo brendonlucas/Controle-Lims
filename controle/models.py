@@ -39,6 +39,10 @@ class Usuario(models.Model):
     def email(self):
         return self.user.email
 
+    @property
+    def full_name(self):
+        return self.user.first_name + " " + self.user.last_name
+
 # from emprestimo.models import *
 # from controle.models import *
 

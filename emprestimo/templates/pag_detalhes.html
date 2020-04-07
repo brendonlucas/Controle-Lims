@@ -1,49 +1,61 @@
 {% extends 'base.html' %}
 {% block 'content' %}
-<style>
-    .box-info{
-        padding: 10px;
-        border-radius: 10px;
-        background-color: #e3e3e3;
-    }
+    <style>
+        .box-info {
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #e3e3e3;
+        }
 
 
+    </style>
+    <div class="page-header">
+        <span>Código: {{ solicitacao.id }}</span>
+        <h2>{{ solicitacao.solicitante.user.first_name }} {{ solicitacao.solicitante.user.last_name }}</h2>
+    </div>
+    <table class="table">
+        <tr>
+            <td>Equipamento:</td>
+            <td>{{ solicitacao.equipamento.nome }}</td>
+        </tr>
+        <tr>
+            <td>Quantidade:</td>
+            <td>{{ solicitacao.quantidade }}</td>
+        </tr>
+        <tr>
+            <td>Data do emprestimo:</td>
+            <td>{{ solicitacao.data_emprestimo| date:"d/m/Y" }}</td>
+        </tr>
+        <tr>
+            <td>Data da devolução:</td>
+            {% if  solicitacao.data_devolucao == none %}
+                <td> Aguardando... </td>
+            {% else %}
+                <td>{{ solicitacao.data_devolucao| date:"d/m/Y" }}</td>
+            {% endif %}
+        </tr>
+    </table>
 
-</style>
-<div class="page-header">
-    <span>Código: {{solicitacao.id}}</span>
-    <h2>{{solicitacao.solicitante.user.first_name}} {{solicitacao.solicitante.user.last_name}}</h2>
-</div>
-<table class="table">
-    <tr>
-        <td>Equipamento:</td>
-        <td>{{solicitacao.equipamento.nome}}</td>
-    </tr>
-    <tr>
-        <td>Quantidade:</td>
-        <td>{{solicitacao.quantidade}}</td>
-    </tr>
-</table>
-<hr>
-<div class="box-info">
-    <h5> Descrição:</h5>
-    <h6> {{ solicitacao.descricao }}</h6>
-</div>
-<br>
+    <hr>
+    <div class="box-info">
+        <h5> Descrição:</h5>
+        <h6> {{ solicitacao.descricao }}</h6>
+    </div>
+    <br>
 
-{% if solicitacao.mensagem_rejeitado != none %}
-<div class="box-info">
-    <h5> Mensagem Rejeitada:</h5>
-    <h6> {{ solicitacao.mensagem_rejeitado }}</h6>
-</div>
-<br>
-{% endif %}
+    {% if solicitacao.mensagem_rejeitado != none %}
+        <div class="box-info">
+            <h5> Mensagem Rejeitada:</h5>
+            <h6> {{ solicitacao.mensagem_rejeitado }}</h6>
+        </div>
+        <br>
+    {% endif %}
 
-{% if solicitacao.mensagem_devolucao != none %}
-<div class="box-info">
-    <h5> Mensagem De Devolução Parcial:</h5>
-    <h6> {{ solicitacao.mensagem_devolucao }}</h6>
-</div>
-{% endif %}
+    {% if solicitacao.mensagem_devolucao != none %}
+        <div class="box-info">
+            <h5> Mensagem De Devolução Parcial:</h5>
+            <h6> {{ solicitacao.mensagem_devolucao }}</h6>
+        </div>
+    {% endif %}
 
 {% endblock %}

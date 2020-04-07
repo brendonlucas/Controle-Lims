@@ -84,4 +84,22 @@
     <br>
     <img style="width: 300px; height: 200px" src="{{ item.imagem.url }}" alt="Item">
 
+    <div class="row">
+        {% for emprestimo in emprestimos %}
+            <div class="col-sm-3">
+                <div class="card animate-hover">
+                    <h5 class="card-header"><strong> {{ emprestimo.solicitante.full_name}}</strong>
+                    </h5>
+                    <div class="card-body">
+                        <h6 class="card-text"> {{ emprestimo.data_emprestimo| date:"d/m/Y" }}</h6>
+                        <p class="card-text">Quandidade: {{ emprestimo.quantidade }}</p>
+                        <a href="{%  url 'exibir_detalhes_emprestimo' emprestimo.id %}" class="btn btn-sm btn-primary">Visualizar</a>
+                    </div>
+                </div>
+                <br>
+            </div>
+        {% endfor %}
+    </div>
+
+
 {% endblock %}

@@ -60,7 +60,9 @@ def opcoes_admin(request):
 @login_required
 def exibir_um_equipamento(request, item_id):
     item = Item.objects.get(id=item_id)
+    emprestimos = Emprestimo.objects.filter(equipamento=item_id).filter(tipo=1)
     return render(request, 'equipamentos/exibir.html', {'item': item, 'user_logado': get_usuario_logado(request),
+                                                        'emprestimos': emprestimos,
                                                         'qtd_notificacoes': get_qtd_notificacoes()})
 
 

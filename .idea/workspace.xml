@@ -4,19 +4,9 @@
     <list default="true" id="b0a845b8-77f1-4301-9d0b-f0a6d8da5335" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/emprestimos.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/emprestimos.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/listar.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/listar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/preview.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/preview.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/opcoes_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/opcoes_admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/exibir.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/exibir.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_detalhes.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_detalhes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_solicitacoes.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_solicitacoes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emprestimo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +183,8 @@
       <workItem from="1583983928609" duration="15917000" />
       <workItem from="1584460141438" duration="16615000" />
       <workItem from="1584485563692" duration="525000" />
-      <workItem from="1584499683451" duration="12515000" />
+      <workItem from="1584499683451" duration="13264000" />
+      <workItem from="1586273577838" duration="2393000" />
     </task>
     <servers />
   </component>
@@ -221,22 +212,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1584478683359" />
-    <state width="1322" height="205" key="GridCell.Tab.0.bottom" timestamp="1584505890936">
+    <state width="1322" height="205" key="GridCell.Tab.0.bottom" timestamp="1586273703158">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="205" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1584505890936" />
-    <state width="1322" height="205" key="GridCell.Tab.0.center" timestamp="1584505890936">
+    <state width="1322" height="205" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586273703158" />
+    <state width="1322" height="205" key="GridCell.Tab.0.center" timestamp="1586273703158">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="205" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1584505890936" />
-    <state width="1322" height="205" key="GridCell.Tab.0.left" timestamp="1584505890936">
+    <state width="1322" height="205" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1586273703158" />
+    <state width="1322" height="205" key="GridCell.Tab.0.left" timestamp="1586273703157">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="205" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1584505890936" />
-    <state width="1322" height="205" key="GridCell.Tab.0.right" timestamp="1584505890936">
+    <state width="1322" height="205" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1586273703157" />
+    <state width="1322" height="205" key="GridCell.Tab.0.right" timestamp="1586273703158">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="205" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1584505890936" />
+    <state width="1322" height="205" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1586273703158" />
     <state x="184" y="0" key="SettingsEditor" timestamp="1583980424441">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
