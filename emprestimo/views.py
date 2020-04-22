@@ -25,6 +25,28 @@ def confirmar_visualizacao(request, emprestimo_id):
         return redirect('exibir_notificacoes')
 
 
+def emprestimos_ativos(request):
+    lista_emprestimos_ativos = Emprestimo.objects.filter(tipo=1).order_by('-data_emprestimo')
+
+    paginator = Paginator(lista_emprestimos_ativos, 8)
+    page = request.GET.get('page')
+    lista_emprestimos_ativos = paginator.get_page(page)
+    return render(request, 'pag_todos_os_emprestimos.html', {'emprestimos': lista_emprestimos_ativos,
+                                                             'user_logado': get_usuario_logado(request),
+                                                             'qtd_notificacoes': get_qtd_notificacoes()})
+
+
+def emprestimos_finalizados(request):
+    lista_emprestimos_finalizados = Emprestimo.objects.filter(tipo=2).order_by('-data_emprestimo')
+
+    paginator = Paginator(lista_emprestimos_finalizados, 8)
+    page = request.GET.get('page')
+    lista_emprestimos_finalizados = paginator.get_page(page)
+    return render(request, 'pag_todos_os_emprestimos.html', {'emprestimos': lista_emprestimos_finalizados,
+                                                             'user_logado': get_usuario_logado(request),
+                                                             'qtd_notificacoes': get_qtd_notificacoes()})
+
+
 """
 @login_required
 def exibe_solicitacoes(request):
@@ -125,7 +147,7 @@ def exibir_emprestimos_2(request):
 # nova_funcao
 @login_required
 def exibe_notificacoes_emprestimos(request):
-    #print(Item.objects.filter(nome__contains="Ardu"))
+    # print(Item.objects.filter(nome__contains="Ardu"))
     if get_usuario_logado(request).is_superuser:
         solicitacoes = Emprestimo.objects.filter(visualisado=0).order_by('data_emprestimo')
         paginator = Paginator(solicitacoes, 8)
@@ -184,6 +206,7 @@ def exibir_emprestimos(request):
                                                 'user_logado': get_usuario_logado(request),
                                                 'qtd_notificacoes': get_qtd_notificacoes()})
 
+
 @login_required
 def exibir_emprestimos_finalizados(request):
     usuario_logado = Usuario.objects.get(user=get_usuario_logado(request).id)
@@ -195,9 +218,6 @@ def exibir_emprestimos_finalizados(request):
     return render(request, 'emprestimos.html', {'emprestimos': emprestimos_ativos,
                                                 'user_logado': get_usuario_logado(request),
                                                 'qtd_notificacoes': get_qtd_notificacoes()})
-
-
-
 
 
 def exibir_todos_emporestimos_ativos():
@@ -316,9 +336,6 @@ def fazer_devolucao_parcial(request, emprestimo_id):
     else:
         messages.error(request, 'Acesso negado!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
-
-
-
 
 
 @login_required

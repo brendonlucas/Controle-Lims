@@ -1,9 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="b0a845b8-77f1-4301-9d0b-f0a6d8da5335" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/emprestimo/templates/pag_todos_os_emprestimos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sige.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sige.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/exibir.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/exibir.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/templates/opcoes_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/opcoes_admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emprestimo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emprestimo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,12 +82,12 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="sqlite" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ToolWindowStructure.ShowToolbar" value="false" />
@@ -181,12 +209,13 @@
       <workItem from="1584460141438" duration="16615000" />
       <workItem from="1584485563692" duration="525000" />
       <workItem from="1584499683451" duration="13264000" />
-      <workItem from="1586273577838" duration="3821000" />
+      <workItem from="1586273577838" duration="4309000" />
+      <workItem from="1587528026489" duration="2456000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
@@ -196,35 +225,34 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="275" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584478683359">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1584478683359" />
-    <state width="1322" height="205" key="GridCell.Tab.0.bottom" timestamp="1586273703158">
+    <state width="1322" height="174" key="GridCell.Tab.0.bottom" timestamp="1587529916716">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="205" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586273703158" />
-    <state width="1322" height="205" key="GridCell.Tab.0.center" timestamp="1586273703158">
+    <state width="1322" height="174" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587529916716" />
+    <state width="1322" height="174" key="GridCell.Tab.0.center" timestamp="1587529916716">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="205" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1586273703158" />
-    <state width="1322" height="205" key="GridCell.Tab.0.left" timestamp="1586273703157">
+    <state width="1322" height="174" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587529916716" />
+    <state width="1322" height="174" key="GridCell.Tab.0.left" timestamp="1587529916716">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="205" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1586273703157" />
-    <state width="1322" height="205" key="GridCell.Tab.0.right" timestamp="1586273703158">
+    <state width="1322" height="174" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587529916716" />
+    <state width="1322" height="174" key="GridCell.Tab.0.right" timestamp="1587529916716">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="205" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1586273703158" />
+    <state width="1322" height="174" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587529916716" />
     <state x="184" y="0" key="SettingsEditor" timestamp="1583980424441">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -7,8 +7,10 @@
         </button>
 
         <div class="btn-group-lg" id="tipos" style="display:none; width: 100%; text-align: center">
-            <a style="margin: 5px; " class="btn btn-lg btn-warning" href="#"> Emprestimos Ativos </a>
-            <a style="margin: 5px; " class="btn btn-lg btn-success" href="#"> Emprestimos Finalizados </a>
+            <a style="margin: 5px; " class="btn btn-lg btn-warning" href="{% url 'todos_emprestimos_ativos' %}">
+                Emprestimos Ativos </a>
+            <a style="margin: 5px; " class="btn btn-lg btn-success" href="{% url 'todos_emprestimos_finalizados' %}">
+                Emprestimos Finalizados </a>
         </div>
 
 
