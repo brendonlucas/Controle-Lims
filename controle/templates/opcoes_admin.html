@@ -27,7 +27,13 @@
         <a style="margin: 5px; width: 100%" class="btn btn-lg btn-primary" href="{% url 'relatorio_permanentes' %}">Relatório
             Permanentes </a>
         <a type="button" style="margin: 5px; width: 100%" class="btn btn-lg btn-warning" data-toggle="modal"
-           data-target="#confirm">Bloquear Emprestimos</a>
+           data-target="#confirm">
+            {% if emprestimo_ativo %}
+                Bloquear Emprestimos
+            {% else %}
+                Desbloquear Emprestimos
+            {% endif %}
+            </a>
     </div>
 
     <div class="modal fade" id="confirm" role="dialog">
@@ -37,11 +43,10 @@
                     <p> QUER REALMENTE FAZER ISSO??</p>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" type="button" class="btn btn-danger" id="delete">Confirmar</a>
+                    <a href="{% url 'bloquear_emprestimos' %}" type="button" class="btn btn-danger" id="delete">Confirmar</a>
                     <button type="button" data-dismiss="modal" class="btn btn-warning">Cancelar</button>
                 </div>
             </div>
-
         </div>
     </div>
 

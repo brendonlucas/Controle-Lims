@@ -20,6 +20,7 @@ class Item(models.Model):
     imagem = models.FileField(upload_to='documents/%Y/%m/%d', default='documents/1111/sem_foto.jpg')
     excluido = models.BooleanField(default=False)
     em_operacao = models.BooleanField(default=1, null=True)
+    bloqueado = models.BooleanField(default=False, null=True)
 
 
 class TipoUsuario(models.Model):
@@ -42,6 +43,11 @@ class Usuario(models.Model):
     @property
     def full_name(self):
         return self.user.first_name + " " + self.user.last_name
+
+
+class Controle(models.Model):
+    emprestimo_ativo = models.BooleanField(default=1)
+
 
 # from emprestimo.models import *
 # from controle.models import *

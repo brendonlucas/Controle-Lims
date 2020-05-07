@@ -15,6 +15,7 @@ urlpatterns = [
     path('equipamento/<int:item_id>/mudar-status/', views.mudar_status, name='mudar_status'),
 
     path('painel_administracao/', views.opcoes_admin, name='painel_admin'),
+    path('painel_administracao/bloquear_emprestimos', views.bloquear_emprestimos, name='bloquear_emprestimos'),
     path('relatorio-consumiveis/', views.relatorio_consumiveis, name="relatorio_consumiveis"),
     path('relatorio-permanentes/', views.relatorio_permanentes, name="relatorio_permanentes"),
 

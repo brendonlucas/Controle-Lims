@@ -6,8 +6,6 @@
         {% csrf_token %}
         <label for="id_email">Email: </label>
         <input class="form-control" type="email" minlength="5" id="id_email" name="email" placeholder="Email@email.com *" required autofocus> <br>
-        <label for="id_nome">Username:</label>
-        <input class="form-control" minlength="5" type="text" id="id_nome" name="nome" placeholder="Nome *" required><br>
         <label for="id_first_name">Primeiro nome: </label>
         <input class="form-control" minlength="3" type="text" id="id_first_name" name="first_name" placeholder="Primeiro nome *" required><br>
         <label for="id_last_name">Sobrenome: </label>
@@ -15,6 +13,8 @@
         <label for="id_telefone">Telefone: </label>
         <input class="form-control" minlength="5" id="id_telefone" name="telefone" type="number" placeholder="Telefone *"
                required><br>
+        <label for="id_nome">Username:</label>
+        <input class="form-control" minlength="5" type="text" id="id_nome" name="nome" placeholder="username *" required><br>
         <label for="id_senha">Senha: </label>
         <input class="form-control" minlength="5" type="password" id="id_senha" name="senha" placeholder="Senha *" required><br>
         <label for="id_confirmar_senha">Confirmar Senha: </label>

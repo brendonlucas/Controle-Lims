@@ -16,6 +16,10 @@ def get_qtd_notificacoes():
     return Emprestimo.objects.filter(visualisado=0).count()
 
 
+def get_emprestimo_ativo():
+    return Controle.objects.get(id=1).emprestimo_ativo
+
+
 @login_required
 def add_equipamento(request):
     if get_usuario_logado(request).is_superuser:
@@ -51,7 +55,8 @@ def add_equipamento(request):
 def opcoes_admin(request):
     if get_usuario_logado(request).is_superuser:
         return render(request, 'opcoes_admin.html', {'user_logado': get_usuario_logado(request),
-                                                     'qtd_notificacoes': get_qtd_notificacoes()})
+                                                     'qtd_notificacoes': get_qtd_notificacoes(),
+                                                     'emprestimo_ativo': get_emprestimo_ativo()})
     else:
         messages.error(request, 'Acesso negado!')
         return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
@@ -63,7 +68,8 @@ def exibir_um_equipamento(request, item_id):
     emprestimos = Emprestimo.objects.filter(equipamento=item_id).filter(tipo=1)
     return render(request, 'equipamentos/exibir.html', {'item': item, 'user_logado': get_usuario_logado(request),
                                                         'emprestimos': emprestimos,
-                                                        'qtd_notificacoes': get_qtd_notificacoes()})
+                                                        'qtd_notificacoes': get_qtd_notificacoes(),
+                                                        'emprestimo_ativo': get_emprestimo_ativo()})
 
 
 @login_required
@@ -78,7 +84,29 @@ def exibir_equipamentos(request):
     itens = paginator.get_page(page)
     return render(request, 'equipamentos/listar.html',
                   {'itens': itens, 'user_logado': get_usuario_logado(request),
-                   'qtd_notificacoes': get_qtd_notificacoes()})
+                   'qtd_notificacoes': get_qtd_notificacoes(),
+                   'emprestimo_ativo': get_emprestimo_ativo()})
+
+
+@login_required
+def bloquear_emprestimos(request):
+    if get_usuario_logado(request).is_superuser:
+        controle = Controle.objects.get(id=1)
+        if controle.emprestimo_ativo:
+            controle.emprestimo_ativo = False
+        else:
+            controle.emprestimo_ativo = True
+        controle.save()
+
+        # equipamentos = Item.objects.all()
+        # for equipamento in equipamentos:
+        #   equipamento.bloqueado = True
+        #   equipamento.save()
+
+        return redirect("painel_admin")
+    else:
+        messages.error(request, 'Acesso negado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
 
 """
 @login_required
@@ -94,6 +122,7 @@ def excluir_item(request, item_id):
 
 
 """
+
 
 @login_required
 def exibe_excluidos(request):
