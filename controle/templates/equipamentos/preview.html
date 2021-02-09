@@ -1,5 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
- <style>
+<style>
         [data-tooltip] {
             position: relative;
 
@@ -34,87 +34,167 @@
             box-shadow: 0 4px 3px #999
         }
 
-    </style>
+
+</style>
 {% if item.quantidade > 0 %}
 
-    <div class="card w-100 animate-hover" onMouseOver="this.style.backgroundColor='#f0f0f0'"
-         onMouseOut="this.style.backgroundColor='#0000'">
-{% else %}
+<div class="card w-100 animate-hover" onMouseOver="this.style.backgroundColor='#f0f0f0'"
+     onMouseOut="this.style.backgroundColor='#0000'">
+    {% else %}
     <div class="card w-100 animate-hover" onMouseOver="this.style.backgroundColor='#ffe8ed'"
          onMouseOut="this.style.backgroundColor='#0000'">
-{% endif %}
+        {% endif %}
 
-<h5 class="card-header">{{ item.nome }} </h5>
-<div class="card-body">
-
-    <img src="{{ item.imagem.url }}" alt="{{ item.nome }}" class="mr-3" width="125">
-    <div class="float-right col-lg-6">
-        <div>
-            {% if item.tipo.id == 1 %}
-                <p class="price ">Disponivel: {{ item.quantidade }} / Emprestados: {{ item.quantidade_emprestada }} <br>
-                    Descartados: {{ item.quantidade_descartada }}
-                </p>
-            {% else %}
-                <p class="price">Quantidade: {{ item.quantidade }} <br> Status:
-                    {% if item.em_operacao == 1 %}
-                        <span style="font-weight: bold"> Em Funcionamento </span>
-                    {% else %}
-                        <span style="font-weight: bold"> Com Problema </span>
-                    {% endif %}
-                </p>
-            {% endif %}
-        </div>
-        <div class="">
-            <a class="btn btn-sm btn-primary" href="{% url 'equipamento' item.id %}">Visualizar</a>
-            {% if emprestimo_ativo and item.quantidade > 0 and item.tipo.id == 1 or emprestimo_ativo and user_logado.is_superuser and item.quantidade > 0 %}
-                <a class="btn btn-sm btn-success" href="{% url 'solicitar_emprestimo' item.id %}">Pegar</a>
-            {% endif %}
-            <!--
-            {% if item.quantidade == 0 and item.tipo.id == 1 %}
-                <a class="btn btn-sm btn-info" href="{% url 'reservar_equipamento' item.id %}">Reservar</a>
-            {% endif %}
-            -->
+        <div class="card-header" style="display:inline;">
+            <h5 style="float:left;">{{ item.nome }} </h5>
             {% if user_logado.is_superuser %}
-                <a class="btn btn-sm btn-light" href="{% url 'editar_equipamento' pk=item.id %}">Editar</a>
-                <button class="btn btn-sm btn-info"
-                        onclick="var display = document.getElementById('{{ item.id }}').style.display;
+            <div class="btn-group" style="float:right;">
+                <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                    </svg>
+                </button>
+
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#" type="button" data-toggle="modal" data-target="#u{{item.id}}">Adicionar unidade</a>
+                    <a class="dropdown-item" href="{% url 'editar_equipamento' pk=item.id %}" >Editar</a>
+                    {% if item.tipo.id == 2 and user_logado.is_superuser %}
+                    <a class="dropdown-item" href="#" type="button" data-toggle="modal" data-target="#s{{item.id}}">Modificar Status</a>
+                    {% endif %}
+                </div>
+            </div>
+
+        {% endif %}
+        </div>
+
+
+        <div class="card-body">
+            <img src="{{ item.imagem.url }}" alt="{{ item.nome }}" class="mr-3" width="125">
+            <div class="float-right col-lg-6">
+                <div>
+                    {% if item.tipo.id == 1 %}
+                    <p class="price ">Disponivel: {{ item.quantidade }} / Emprestados: {{ item.quantidade_emprestada }}
+                        <br>
+                        Descartados: {{ item.quantidade_descartada }}
+                    </p>
+                    {% else %}
+                    <p class="price">Quantidade: {{ item.quantidade }} <br> Status:
+                        {% if item.em_operacao == 1 %}
+                        <span style="font-weight: bold"> Em Funcionamento </span>
+                        {% else %}
+                        <span style="font-weight: bold"> Com Problema </span>
+                        {% endif %}
+                    </p>
+                    {% endif %}
+                </div>
+                <div class="">
+                    <a class="btn btn-sm btn-primary" href="{% url 'equipamento' item.id %}">Visualizar</a>
+                    {% if emprestimo_ativo and item.quantidade > 0 and item.tipo.id == 1 or emprestimo_ativo and user_logado.is_superuser and item.quantidade > 0 %}
+                    <a class="btn btn-sm btn-success" href="{% url 'solicitar_emprestimo' item.id %}">Pegar</a>
+                    {% endif %}
+
+                    <!--
+                    {% if user_logado.is_superuser %}
+                    <a class="btn btn-sm btn-light" href="{% url 'editar_equipamento' pk=item.id %}">Editar</a>
+                    <button class="btn btn-sm btn-info"
+                            onclick="var display = document.getElementById('{{ item.id }}').style.display;
                                 if (display === 'none')
                                 document.getElementById('{{ item.id }}').style.display = 'block';
                                 else
                                 document.getElementById('{{ item.id }}').style.display = 'none';">+
-                </button>
-                <form action="{{ item.id }}/add-unidades/" method="POST" id="{{ item.id }}" style="display:none">
-                    {% csrf_token %}
-                    <label for="qtd">Quantidade a ser adicionada: </label>
-                    <input class="form-control" id="qtd" name="quantidade" type="number" required min="1">
-                    <div style="text-align: center; margin: 10px;">
-                        <button type="submit" value="ok" class="btn btn-info"> Adicionar</button>
-                    </div>
-                </form>
-            {% endif %}
-            {% if item.tipo.id == 2 and user_logado.is_superuser %}
-                <button class="btn btn-sm btn-success"
-                        onclick="var display = document.getElementById('{{ item.id }}00').style.display;
+                    </button>
+
+
+                    <form action="{{ item.id }}/add-unidades/" method="POST" id="a{{ item.id }}" style="display:none">
+                        {% csrf_token %}
+                        <label for="qtds">Quantidade a ser adicionada: </label>
+                        <input class="form-control" id="qtds" name="quantidade" type="number" required min="1">
+                        <div style="text-align: center; margin: 10px;">
+                            <button type="submit" value="ok" class="btn btn-info"> Adicionar</button>
+                        </div>
+                    </form>
+
+                    {% endif %}
+                    {% if item.tipo.id == 2 and user_logado.is_superuser %}
+                    <button class="btn btn-sm btn-success"
+                            onclick="var display = document.getElementById('{{ item.id }}00').style.display;
                                 if (display == 'none')
                                 document.getElementById('{{ item.id }}00').style.display = 'block';
                                 else
                                 document.getElementById('{{ item.id }}00').style.display = 'none';"> Modificar status
-                </button>
-            {% endif %}
-            <form action="{{ item.id }}/mudar-status/" method="POST" id="{{ item.id }}00" style="display:none">
-                {% csrf_token %}
-                <label for="qtd">Modificar status do Item: </label>
-                <select class="form-control" name="status" id="status">
-                    <option>Em Funcionamento</option>
-                    <option>Com Problema</option>
-                </select>
-                <div style="text-align: center; margin: 10px;">
-                    <button type="submit" value="ok" class="btn btn-info"> Confirmar</button>
+                    </button>
+                    {% endif %}
+
+                    <form action="{{ item.id }}/mudar-status/" method="POST" id="{{ item.id }}00" style="display:none">
+                        {% csrf_token %}
+                        <label for="qtd">Modificar status do Item: </label>
+                        <select class="form-control" name="status" id="status">
+                            <option>Em Funcionamento</option>
+                            <option>Com Problema</option>
+                        </select>
+                        <div style="text-align: center; margin: 10px;">
+                            <button type="submit" value="ok" class="btn btn-info"> Confirmar</button>
+                        </div>
+                    </form>
+                    -->
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
-</div>
 
+
+
+    {% if user_logado.is_authenticated %}
+    <div class="modal fade" id="s{{item.id}}" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h5 style="color:black"> Declarar Vencedor </h5>
+                    <br>
+
+                    <form action="{{ item.id }}/mudar-status/" method="POST" id="st{{ item.id }}">
+                        {% csrf_token %}
+                        <label for="statusT">Modificar status do Item: </label>
+                        <select class="form-control" name="status" id="statusT">
+                            <option>Em Funcionamento</option>
+                            <option>Com Problema</option>
+                        </select>
+                        <div style="text-align: center; margin: 10px;">
+                            <button type="submit" value="ok" class="btn btn-info"> Confirmar</button>
+                        </div>
+                    </form>
+
+                    <br><br>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-warning">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="modal fade" id="u{{item.id}}" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h5 style="color:black"> Adicionar Unidades </h5>
+                    <br>
+
+                    <form action="{{ item.id }}/add-unidades/" method="POST" id="{{ item.id }}" style="">
+                        {% csrf_token %}
+                        <label for="qtd">Quantidade a ser adicionada: </label>
+                        <input class="form-control" id="qtd" name="quantidade" type="number" required min="1">
+
+                    <br><br>
+                    <div class="modal-footer">
+                        <button type="submit" value="ok" class="btn btn-info"> Adicionar</button>
+                        <button type="button" data-dismiss="modal" class="btn btn-warning">Cancelar</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 

@@ -26,13 +26,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0a845b8-77f1-4301-9d0b-f0a6d8da5335" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sige.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sige.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/templates/equipamentos/preview.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/equipamentos/preview.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/templates/opcoes_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/controle/templates/opcoes_admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/templates/add_usuario.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/templates/add_usuario.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emprestimo/templates/pag_emprestimo.html" beforeDir="false" afterPath="$PROJECT_DIR$/emprestimo/templates/pag_emprestimo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,9 +91,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="ToolWindowStructure.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../copa_pokemon" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -215,7 +216,8 @@
       <workItem from="1587784764656" duration="637000" />
       <workItem from="1588178575262" duration="127000" />
       <workItem from="1588347714940" duration="596000" />
-      <workItem from="1588809762754" duration="2540000" />
+      <workItem from="1588809762754" duration="2978000" />
+      <workItem from="1593791230502" duration="9000" />
     </task>
     <servers />
   </component>
@@ -238,37 +240,13 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="275" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584478683359">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="463" y="124" key="FileChooserDialogImpl" timestamp="1612803514072">
+      <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="275" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1584478683359" />
-    <state width="1322" height="174" key="GridCell.Tab.0.bottom" timestamp="1588812208880">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1612803514072" />
+    <state x="184" y="14" key="SettingsEditor" timestamp="1612803039964">
+      <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1322" height="174" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1588812208880" />
-    <state width="1322" height="174" key="GridCell.Tab.0.center" timestamp="1588812208880">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1322" height="174" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1588812208880" />
-    <state width="1322" height="174" key="GridCell.Tab.0.left" timestamp="1588812208880">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1322" height="174" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1588812208880" />
-    <state width="1322" height="174" key="GridCell.Tab.0.right" timestamp="1588812208880">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1322" height="174" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1588812208880" />
-    <state x="184" y="0" key="SettingsEditor" timestamp="1583980424441">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="184" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1583980424441" />
-    <state x="384" y="186" key="com.intellij.ide.util.TipDialog" timestamp="1583979724323">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="384" y="186" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1583979724323" />
-    <state x="339" y="6" width="672" height="676" key="search.everywhere.popup" timestamp="1587535959861">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="339" y="6" width="672" height="676" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1587535959861" />
+    <state x="184" y="14" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1612803039964" />
   </component>
 </project>

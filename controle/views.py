@@ -64,7 +64,12 @@ def opcoes_admin(request):
 
 @login_required
 def exibir_um_equipamento(request, item_id):
-    item = Item.objects.get(id=item_id)
+    try:
+        item = Item.objects.get(id=item_id)
+    except Item.DoesNotExist:
+        messages.error(request, 'Item não encontrado!')
+        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+
     emprestimos = Emprestimo.objects.filter(equipamento=item_id).filter(tipo=1)
     return render(request, 'equipamentos/exibir.html', {'item': item, 'user_logado': get_usuario_logado(request),
                                                         'emprestimos': emprestimos,
@@ -106,21 +111,23 @@ def bloquear_emprestimos(request):
         return redirect("painel_admin")
     else:
         messages.error(request, 'Acesso negado!')
-        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+        return render(request, 'pag_falha.html',
+                      {'user_logado': get_usuario_logado(request), 'qtd_notificacoes': get_qtd_notificacoes()})
+
 
 """
-@login_required
-def excluir_item(request, item_id):
-    if get_usuario_logado(request).is_superuser:
-        item = Item.objects.get(id=item_id)
-        item.excluido = True
-        item.save()
-        return redirect('equipamentos')
-    else:
-        messages.error(request, 'Acesso negado!')
-        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
-
-
+        @login_required
+        def excluir_item(request, item_id):
+            if get_usuario_logado(request).is_superuser:
+                item = Item.objects.get(id=item_id)
+                item.excluido = True
+                item.save()
+                return redirect('equipamentos')
+            else:
+                messages.error(request, 'Acesso negado!')
+                return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+        
+        
 """
 
 
@@ -129,10 +136,12 @@ def exibe_excluidos(request):
     if get_usuario_logado(request).is_superuser:
         itens = Item.objects.filter(excluido=True)
         return render(request, 'equipamentos/temp_removidos/excluidos.html',
-                      {'user_logado': get_usuario_logado(request), 'itens': itens})
+                      {'user_logado': get_usuario_logado(request), 'itens': itens,
+                       'qtd_notificacoes': get_qtd_notificacoes()})
     else:
         messages.error(request, 'Acesso negado!')
-        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+        return render(request, 'pag_falha.html',
+                      {'user_logado': get_usuario_logado(request), 'qtd_notificacoes': get_qtd_notificacoes()})
 
 
 @login_required
@@ -150,10 +159,12 @@ def item_editar(request, pk):
         else:
             form = ItemFormEdit(instance=item)
             return render(request, 'equipamentos/editar.html',
-                          {'form': form, 'user_logado': get_usuario_logado(request)})
+                          {'form': form, 'user_logado': get_usuario_logado(request),
+                           'qtd_notificacoes': get_qtd_notificacoes()})
     else:
         messages.error(request, 'Acesso negado!')
-        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+        return render(request, 'pag_falha.html',
+                      {'user_logado': get_usuario_logado(request), 'qtd_notificacoes': get_qtd_notificacoes()})
 
 
 @login_required
@@ -165,7 +176,8 @@ def restaurar_item(request, item_id):
         return redirect('itens_excluidos')
     else:
         messages.error(request, 'Acesso negado!')
-        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+        return render(request, 'pag_falha.html',
+                      {'user_logado': get_usuario_logado(request), 'qtd_notificacoes': get_qtd_notificacoes()})
 
 
 @login_required
@@ -175,7 +187,8 @@ def mudar_status(request, item_id):
             item = Item.objects.get(id=item_id)
         except Item.DoesNotExist:
             messages.error(request, 'Equipamento não existe!')
-            return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+            return render(request, 'pag_falha.html',
+                          {'user_logado': get_usuario_logado(request), 'qtd_notificacoes': get_qtd_notificacoes()})
 
         if request.method == 'POST':
             form = FormMudarStatus(request.POST)
@@ -192,10 +205,13 @@ def mudar_status(request, item_id):
                 return redirect('equipamentos')
             else:
                 messages.error(request, 'Valor invalido!')
-                return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+                return render(request, 'pag_falha.html',
+                              {'user_logado': get_usuario_logado(request),
+                               'qtd_notificacoes': get_qtd_notificacoes()})
     else:
         messages.error(request, 'Acesso negado!')
-        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+        return render(request, 'pag_falha.html',
+                      {'user_logado': get_usuario_logado(request), 'qtd_notificacoes': get_qtd_notificacoes()})
 
 
 @login_required
@@ -205,7 +221,8 @@ def add_unidades(request, item_id):
             item = Item.objects.get(id=item_id)
         except Item.DoesNotExist:
             messages.error(request, 'Equipamento não existe!')
-            return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+            return render(request, 'pag_falha.html',
+                          {'user_logado': get_usuario_logado(request), 'qtd_notificacoes': get_qtd_notificacoes()})
 
         if request.method == 'POST':
             form = FormAddUnidade(request.POST)
@@ -225,10 +242,13 @@ def add_unidades(request, item_id):
                 return redirect('equipamentos')
             else:
                 messages.error(request, 'Valor invalido!')
-                return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+                return render(request, 'pag_falha.html',
+                              {'user_logado': get_usuario_logado(request),
+                               'qtd_notificacoes': get_qtd_notificacoes()})
     else:
         messages.error(request, 'Acesso negado!')
-        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+        return render(request, 'pag_falha.html',
+                      {'user_logado': get_usuario_logado(request), 'qtd_notificacoes': get_qtd_notificacoes()})
 
 
 @login_required
@@ -236,10 +256,12 @@ def relatorio_consumiveis(request):
     if get_usuario_logado(request).is_superuser:
         itens = Item.objects.filter(tipo_id=1)
         return render(request, 'relatorios/relatorio_consumivel.html',
-                      {'itens': itens, 'user_logado': get_usuario_logado(request)})
+                      {'itens': itens, 'user_logado': get_usuario_logado(request),
+                       'qtd_notificacoes': get_qtd_notificacoes()})
     else:
         messages.error(request, 'Acesso negado!')
-        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+        return render(request, 'pag_falha.html',
+                      {'user_logado': get_usuario_logado(request), 'qtd_notificacoes': get_qtd_notificacoes()})
 
 
 @login_required
@@ -247,8 +269,10 @@ def relatorio_permanentes(request):
     if get_usuario_logado(request).is_superuser:
         itens = Item.objects.filter(tipo_id=2)
         return render(request, 'relatorios/relatorio_permanente.html',
-                      {'itens': itens, 'user_logado': get_usuario_logado(request)})
+                      {'itens': itens, 'user_logado': get_usuario_logado(request),
+                       'qtd_notificacoes': get_qtd_notificacoes()})
 
     else:
         messages.error(request, 'Acesso negado!')
-        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+        return render(request, 'pag_falha.html',
+                      {'user_logado': get_usuario_logado(request), 'qtd_notificacoes': get_qtd_notificacoes()})

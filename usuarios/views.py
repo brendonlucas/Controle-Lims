@@ -33,7 +33,8 @@ class RegistrarUsuarioView(View):
                                                         'qtd_notificacoes': get_qtd_notificacoes()})
         else:
             messages.error(request, 'Acesso negado!')
-            return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+            return render(request, 'pag_falha.html',
+                          {'user_logado': get_usuario_logado(request), 'qtd_notificacoes': get_qtd_notificacoes()})
 
     def post(self, request):
         if get_usuario_logado(request).is_superuser:
@@ -63,7 +64,8 @@ class RegistrarUsuarioAdminView(View):
                                                         'qtd_notificacoes': get_qtd_notificacoes()})
         else:
             messages.error(request, 'Acesso negado!')
-            return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+            return render(request, 'pag_falha.html',
+                          {'user_logado': get_usuario_logado(request), 'qtd_notificacoes': get_qtd_notificacoes()})
 
     def post(self, request):
         form = RegistrarUsuarioForm(request.POST)
@@ -95,11 +97,19 @@ def exibir_usuarios(request):
                        'qtd_notificacoes': get_qtd_notificacoes()})
     else:
         messages.error(request, 'Acesso negado!')
-        return render(request, 'pag_falha.html', {'user_logado': get_usuario_logado(request)})
+        return render(request, 'pag_falha.html',
+                      {'user_logado': get_usuario_logado(request), 'qtd_notificacoes': get_qtd_notificacoes()})
 
 
 @login_required
 def exibir_um_usuario(request, usuario_id):
+    try:
+        usuario = Item.objects.get(id=usuario_id)
+    except Item.DoesNotExist:
+        messages.error(request, 'Usuario não encontrado!')
+        return render(request, 'pag_falha.html',
+                      {'user_logado': get_usuario_logado(request), 'qtd_notificacoes': get_qtd_notificacoes()})
+
     usuario = Usuario.objects.get(id=usuario_id)
     emprestimos = Emprestimo.objects.filter(solicitante=usuario_id).exclude(tipo=1).order_by('-data_emprestimo')
     paginator = Paginator(emprestimos, 8)
